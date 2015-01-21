@@ -18,3 +18,10 @@ class Dealer_hand:
 
     def __init__(self, x, y):
         cards = [x, y]
+
+    def dealer_actions():
+        #if < 17 == hit
+        #elif > 17 and < 22 == stay
+        #else:  bust
+
+        pass

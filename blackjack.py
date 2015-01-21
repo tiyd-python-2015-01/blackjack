@@ -17,8 +17,5 @@ Dealer_hand.cards.append(dealt_cards[3])
     # dealer gets 1 that is face down
 
 
-print(Player_hand)
-print(Dealer_hand)
-#print(dealt_cards)
-
-#print(live_deck)
+print(Player_hand.cards)
+print(Dealer_hand.cards)

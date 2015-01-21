@@ -19,5 +19,13 @@ class Player_hand:
     def __init__(self, x, y):
         cards = [x, y]
 
-    def __str__(self):
-        return self.cards
+    def player_card_count():
+        #sums players cards
+
+    def player_actions():
+        #hit
+        #stay
+        #double down
+        #split
+        #if >= 22 == bust
+        return pass
