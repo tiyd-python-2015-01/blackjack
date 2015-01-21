@@ -1,9 +1,11 @@
 from card import Card
 """Test functions for the card class"""
 
+
 def test_construction():
     new_card = Card("2", "clubs")
     assert new_card
+
 
 def test_card_attributes():
     new_card_A = Card("A", "clubs")
@@ -61,6 +63,7 @@ def test_card_attributes():
     assert new_card_J.value == 10
     assert new_card_Q.value == 10
     assert new_card_K.value == 10
+
 
 def test_swap_ace():
     new_card = Card("A", "hearts")
