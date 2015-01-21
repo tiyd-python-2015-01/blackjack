@@ -1,4 +1,3 @@
-import random
 
 
 SUITS = ('Spade', 'Hearts', 'Diamonds', 'Clubs')

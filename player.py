@@ -8,3 +8,4 @@ class Player:
     Collaborators:
 
     * Holds a hand of cards
+    """
