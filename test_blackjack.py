@@ -1,5 +1,6 @@
 import Deck as dk
 import Card
+import Shoe
 
 def test_deck_creation():
     test_deck = dk.Deck()
@@ -9,3 +10,7 @@ def test_deck_creation():
 def test_card_creation():
     test_card = Card.Card
     assert str(Card.Card("Jack", "Diamonds")) == "Jack of Diamonds"
+
+def test_shuffle():
+    test_deck = Shoe.Shoe()
+    assert len(test_deck.shuffle_shoe) == 52

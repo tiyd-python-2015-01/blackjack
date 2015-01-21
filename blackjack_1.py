@@ -2,57 +2,19 @@
 import random
 
 
-class Hand:
-    """Hand will know which cards it has, the value of those cards.
-       It will receive two cards to start, then more depending on player
-       action."""
-
-    def __init__(self, Card):
-
-        self.value = get_rank(Card)
-        values = {"1" : 1, "2" : 2,"3" : 3, "4" : 4, "5" : 5, "6" : 6,
-                  "7" : 7, "8" : 8, "9": 9, "10" : 10, "J" : 10, "Q" : 10,
-                  "K" : 10, "A" : 1]
-
-        hand_value = sum(self.value(Card))
 
 
-
-class Deck:
-    """The deck will collect all 52 cards. It will be able to shuffle"""
-    def __init__(self, Card):
-
-        self.ranks = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J",
-                      "Q", "K", "A"]
-        self.suits = ["Hearts", "Spades", "Clubs", "Diamonds"]
-
-        deck = [Card(name, suit) for rank in self.ranks for suit in self.suits]
-        return deck
-        print deck
-
-
-
-class Card:
-    """Has a rank and a suit. Aces have no value until drawn into a hand"""
-    def __init__(self, suit, rank):
-
-
-        self.rank = rank
-        self.suit = suit
-
-    def get_suit():
-        return self.suit
-
-    def get_rank():
-        return self.rank
-
-
-
-
-class Shoe:
-    """Collects decks. Shuffles. Deals cards to hands"""
-    def __init__(self):
-
-
-    def shoe_shuffle():
-            random.shuffle(self?)
+[(1, "S"), (1, "H"), (1, "D"), (1, "C"),
+                  (2, "S"), (2, "H"), (2, "D"), (2, "C"),
+                  (4, "S"), (4, "H"), (4, "D"), (4, "C"),
+                  (3, "S"), (3, "H"), (3, "D"), (3, "C"),
+                  (5, "S"), (5, "H"), (5, "D"), (5, "C"),
+                  (6, "S"), (6, "H"), (6, "D"), (6, "C"),
+                  (7, "S"), (7, "H"), (7, "D"), (7, "C"),
+                  (8, "S"), (8, "H"), (8, "D"), (8, "C"),
+                  (9, "S"), (9, "H"), (9, "D"), (9, "C"),
+                  (10, "S"), (10, "H"), (10, "D"), (10, "C"),
+                  ("J", "S"), ("J", "H"), ("J", "D"), ("J", "C"),
+                  ("Q", "S"), ("Q", "H"), ("Q", "D"), ("Q", "C"),
+                  ("K", "S"), ("K", "H"), ("K", "D"), ("K", "C"),
+                  ("A", "S"), ("A", "H"), ("A", "D"), ("A", "C")]
