@@ -12,6 +12,5 @@ class Deck:
                       "Q", "K", "A"]
         self.suits = ["Hearts", "Spades", "Clubs", "Diamonds"]
 
-        deck = [Card(name, suit) for rank in self.ranks for suit in self.suits]
+        deck = [Card(rank, suit) for rank in self.ranks for suit in self.suits]
         return deck
-        print deck
