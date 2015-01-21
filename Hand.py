@@ -10,9 +10,14 @@ class Hand:
 
     def __init__(self, Card):
 
-        self.value = get_rank(Card)
-        values = {"1" : 1, "2" : 2,"3" : 3, "4" : 4, "5" : 5, "6" : 6,
+        self.rank = get_rank(Card)
+        self.values = {"1" : 1, "2" : 2,"3" : 3, "4" : 4, "5" : 5, "6" : 6,
                   "7" : 7, "8" : 8, "9": 9, "10" : 10, "J" : 10, "Q" : 10,
                   "K" : 10, "A" : 1]
 
         hand_value = sum(self.value(Card))
+
+    def hand_value(self):
+        current_hand_value for value in self.values.values()
+        if current_hand_value > 21 and "A" in Hand:
+            current_hand_value -= 10  
