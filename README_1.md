@@ -25,7 +25,7 @@ After completing this assignment, you should be able to:
 
 * A Git repo called blackjack containing at least:
   * a `README.md` file explaining your design.
-  * a `lib/blackjack` directory with a file for each of your classes, with
+  * a `blackjack` directory with a file for each of your classes, with
     their responsibilities and collaborators described in a comment
   * a completed Card and Deck class
   * tests for Cards and Decks
@@ -47,7 +47,7 @@ After that, go through your steps and find all the actors -- that is, nouns
 that take actions. Create class-responsibility-collaborator (CRC) cards for
 each and then create empty classes for each of them with the responsibilities
 and collaborators at the top as a comment. Here is an example that you might
-find in `lib/blackjack/card.py`:
+find in `blackjack/card.py`:
 
 ```py
 class Card:
