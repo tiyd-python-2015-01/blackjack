@@ -21,6 +21,7 @@ class Player_hand:
 
     def player_card_count():
         #sums players cards
+        return True
 
     def player_actions():
         #hit
@@ -28,4 +29,4 @@ class Player_hand:
         #double down
         #split
         #if >= 22 == bust
-        return pass
+        return True

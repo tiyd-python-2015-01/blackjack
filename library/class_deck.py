@@ -34,6 +34,5 @@ class Deck:
         return dealt_cards, shuffled_deck
 
 
-# print(Deck.shuffle_deck())
 #print(Deck.deal_cards(2, Deck.shuffle_deck(), 2))
 #Dealer gets 1st card down. Rest are face up.

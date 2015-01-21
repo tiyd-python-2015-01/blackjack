@@ -25,3 +25,5 @@ class Card:
 
     def __init__(self):
         return self.card_list
+
+    print(card_list)
