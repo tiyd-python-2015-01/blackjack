@@ -16,11 +16,17 @@ Human_Player
         -Stores Hand    -Plays according to user input
     Collaborators
         -Hand   -Player     -Game
+
+Hand
+    Responsibilites:
+        -Store list of cards in hand
+    Collaborators
+        -Player         -Card       -Game
 """
 
 
 class Player:
-    def __init__(self, name):
+    def __init__(self, name="Kai"):
         self.name = name
         self.cards = []
         self.potential_values = []

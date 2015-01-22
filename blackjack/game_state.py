@@ -14,7 +14,7 @@ import carddeckshoe
 
 class Game_State:
     def __init__(self):
-        pass
+        self.cards = []
 
     def add_card(new_card):
         cards.append(new_card)
