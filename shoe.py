@@ -22,6 +22,7 @@ class Shoe:
 
     def shuffle(self):
         shuffle(self.cards)
+        return self.cards
 
     def __str__(self):
         shoe_list = [str(card) for card in self.cards]
