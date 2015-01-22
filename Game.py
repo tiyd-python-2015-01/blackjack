@@ -4,6 +4,7 @@ class Game:
     Responsibilities:
 
     * Check for winner
+    * Handles betting and bankroll
     * Resets the game
 
     Collaborators

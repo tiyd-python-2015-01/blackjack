@@ -1,22 +1,23 @@
-class Card:
-    """A playing card.
+from collections import namedtuple
 
-    Responsibilities:
+"""A playing card.
 
-    * Has a rank and suit
+Responsibilities:
 
-    Collaborators:
+* Has a rank and suit
 
-    * Collected into a Deck
-    * Collected into a Hand for each player and a Hand for the dealer.
-    """
+Collaborators:
 
-    def __init__(self, rank, suit):
-        self.rank = rank
-        self.suit = suit
+* Collected into a Deck
+* Collected into a Hand for each player and a Hand for the dealer.
+"""
+
+class Card(namedtuple('card', ['rank', 'suit'])):
+
+    __memory__ = () #assure instance is stored as a tuple in memory
 
     def __str__(self):
-        return "{} of {}".format(self.rank, self.suit)
+        return "{}{}".format(self.rank, self.suit)
 
     def __repr__(self):
-        return self.__str__
+        return self.__str__()
