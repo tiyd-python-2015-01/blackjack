@@ -42,7 +42,7 @@ class Player_hand:
         if count >= 22:
             return 'bust'
         elif count == 21:
-            return 'win'
+            return '21'
         else:
             return 'hit', 'stay'
         # double down

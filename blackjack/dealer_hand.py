@@ -14,14 +14,33 @@ class Dealer_hand:
     * Receives Card from Deck
     * Sends results to Game_manager class"""
 
-    cards = []
+    def __init__(self, cards):
+        self.cards = cards
 
-    def __init__(self, x, y):
-        cards = [x, y]
+    def __str__(self):
+        return "The dealer has {}".format(self.cards)
 
-    def dealer_actions():
-        #if < 17 == hit
-        #elif > 17 and < 22 == stay
-        #else:  bust
+    def dealer_card_count(self, cards):
+        count = 0
+        for card in cards:
+            if card.rank in (2, 3, 4, 5, 6, 7, 8, 9, 10):
+                count += card.rank
+            elif card.rank in ('King', 'Queen', 'Jack'):
+                count += 10
+        for left_card in cards:
+            if left_card.rank == 'Ace':
+                if count >= 11:
+                    count += 1
+                else:
+                    count += 11
+        return count
 
-        pass
+    def dealer_actions(self, count):
+        if count >= 22:
+            return 'bust'
+        elif count == 21:
+            return '21'
+        elif count >= 17 and count <= 21:
+            return 'stay'
+        else:
+            return 'hit'

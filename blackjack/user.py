@@ -21,3 +21,6 @@ class User:
     * Game_manager class sends user double bet if wins. """
 
 # Account for a push occurring
+
+    def __init__(self):
+        self.chip_count = 500

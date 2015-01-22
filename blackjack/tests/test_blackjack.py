@@ -38,9 +38,24 @@ def test_player_card_count():
     fresh_deck = Deck()
     new_cards = Player_hand([fresh_deck.deal_card(), fresh_deck.deal_card()])
     assert new_cards.player_card_count(new_cards.cards) >= 2
+    assert new_cards.player_card_count(new_cards.cards) <= 22
+
+def test_player_additional_cards_hit():
+    fresh_deck = Deck()
+    new_cards = Player_hand([fresh_deck.deal_card(), fresh_deck.deal_card()])
+    next_card = Player_hand(fresh_deck.deal_card())
+    new_cards.cards.append(next_card.cards)
+    assert len(new_cards.cards) == 3
 
 def test_player_options():
     new_cards = Player_hand([])
     assert new_cards.player_actions(25) == 'bust'
-    assert new_cards.player_actions(21) == 'win'
+    assert new_cards.player_actions(21) == '21'
     assert new_cards.player_actions(20) == ('hit', 'stay')
+
+def test_dealer_options():
+    new_cards = Dealer_hand([])
+    assert new_cards.dealer_actions(25) == 'bust'
+    assert new_cards.dealer_actions(21) == '21'
+    assert new_cards.dealer_actions(17) == 'stay'
+    assert new_cards.dealer_actions(5) == 'hit'
