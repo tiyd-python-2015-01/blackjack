@@ -1,6 +1,6 @@
-import player as plyr
+from blackjack.player import Player
 
 
 def test_create_player():
-    player = plyr.Player("Batman")
+    player = Player("Batman")
     assert player.name == "Batman"

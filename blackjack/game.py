@@ -11,19 +11,25 @@ Game
         -Interface
         -Players
 """
-import interface, game_state, player, carddeckshoe
+
+from .interface import Interface
+from .game_state import Game_State
+from .player import Player
+from .carddeckshoe import Card
+from .carddeckshoe import Deck
+from .carddeckshoe import Shoe
+
 
 class Game:
 
     def __init__(self):
-        self.user = player.Player()
-        self.dealer = player.Player()
-        self.shoe = carddeckshoe.Shoe()
+        self.user = Player()
+        self.dealer = Player()
+        self.gamestate = Game_State()
 
     def game_loop():
         return True
 
 
 if __name__ == '__main__':
-
-    blackjack = Game()
+    pass

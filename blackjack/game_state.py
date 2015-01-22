@@ -9,12 +9,16 @@ Game_State
 """
 
 
-import carddeckshoe
+from .carddeckshoe import Card
+from .carddeckshoe import Deck
+from .carddeckshoe import Shoe
 
 
 class Game_State:
+
     def __init__(self):
-        self.cards = []
+        self.cards_on_table = []
+        self.shoe = Shoe()
 
     def add_card(new_card):
         cards.append(new_card)

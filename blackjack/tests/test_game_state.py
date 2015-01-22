@@ -1,6 +1,8 @@
-import game_state as gs
+from blackjack.game import Game
+from blackjack.game_state import Game_State
 
 
 def test_create_game_state():
-    state = gs.Game_State()
-    assert state.cards == []
+    state = Game_State()
+    assert state.cards_on_table == []
+    assert len(state.shoe.cards) == 52
