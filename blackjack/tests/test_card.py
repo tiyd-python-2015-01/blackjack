@@ -1,5 +1,5 @@
-import card
+from card import Card
 
 def test_card_init():
-    new_card = card("Diamonds", 4)
+    new_card = Card("Diamonds", 4)
     assert str(new_card) == "D4"

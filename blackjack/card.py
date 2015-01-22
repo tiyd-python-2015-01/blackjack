@@ -13,19 +13,19 @@ class Card:
     Cards are also put into hands.
     """
     def __init__(self, suit, rank):
-        suit = suit
-        rank = rank
+        self.suit = suit
+        self.rank = str(rank)
 
 
     def rank_print(self):
-        if rank == "Jack":
+        if self.rank == "Jack":
             return "J"
-        elif rank == "Queen":
+        elif self.rank == "Queen":
             return "Q"
-        elif rank == "King":
+        elif self.rank == "King":
             return "K"
         else:
-            return rank
+            return self.rank
 
 
     def __str__(self):

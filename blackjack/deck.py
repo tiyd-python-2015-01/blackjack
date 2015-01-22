@@ -11,5 +11,10 @@ class Deck:
     A deck will be reconstituted and shuffled by the game before each round of
     play.
     A deck holds cards.
-    A deck sends cards to various hands. 
+    A deck sends cards to various hands.
     """
+    def __init__(self):
+        suits = ["Clubs", "Diamonds", "Spades", "Hearts"]
+        ranks = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack",
+                 "Queen", "King"]
+        self.cards = []
