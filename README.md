@@ -55,8 +55,6 @@ To Do:
     objects created
 + - Add a method to remove a card from the card list and return the value
 + - Add a method to reshuffle the deck of cards
-* - Add a randomly placed flag between the last 35-52 cards to indicate
-    the deck should be reshuffled when using more than one deck.
 
 
 +/ <Player>:  The player class object will contain the amount of money the
@@ -100,9 +98,9 @@ series of Boolean values with default values that will activate or deactivate
 certain rule variations.
 
 To Do:
-* - Add basic list of class attributes, starting with number of decks
-* - Add in common rule variations.  No hit on soft 17 and Late/Early surrender
-/ - Add in advanced rule variations
++ - Add basic list of class attributes, starting with number of decks
++ - Add in common rule variations.  No hit on soft 17 and Late/Early surrender
++ - Add in advanced rule variations
 
 
 * <Game>:  The Game class will be the backbone of the game.  It will store
@@ -142,7 +140,7 @@ will be used for in-game card representations, menus and methods for
 receiving input from the user.
 
 To Do:
-* - Design main menu
++ - Design main menu
 * - Design options menu
 * - Add method for updating options based on user input from options menu
 * - Add method for displaying current hands for the dealer and player to
