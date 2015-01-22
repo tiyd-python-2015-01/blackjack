@@ -1,5 +1,5 @@
 ranks = ('King', 'Queen', 'Jack', 'Ace', 2, 3, 4, 5, 6, 7, 8, 9, 10)
-suits = ('Heart', 'Club', 'Spade', 'Diamond')
+suits = ('Hearts', 'Clubs', 'Spades', 'Diamonds')
 
 
 class Card:
