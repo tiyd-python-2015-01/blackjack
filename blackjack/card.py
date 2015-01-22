@@ -1,9 +1,14 @@
+suits = ["hearts", "spades", "clubs", "diamonds"]
+ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9",
+         "10", "J", "Q", "K"]
+
+
 class Card:
     """Playing card class.  Each instance represents a single playing card.
 
     Responsibilities:
 
-    * Each card has a string name attribute corresponding to it's value
+    * Each card has a string rank attribute corresponding to it's value
     * Each card has a suit attribute
     * Each card has a value determined by the private evaluate_card_value
       method
@@ -21,21 +26,24 @@ class Card:
              "clubs": "♧",
              "diamonds": "♢"}
 
-    def __init__(self, name, suit):
-        self.name = name
+    def __init__(self, rank, suit):
+        self.rank = rank
         self.suit = suit
         self.__evaluate_card_value__()
 
     def __str__(self):
-        return self.name + self.suits[self.suit]
+        return self.rank + self.suits[self.suit]
 
     def __repr__(self):
         return self.__str__()
 
+    def __eq__(self, other):
+        return self.rank == other.rank and self.suit == other.suit
+
     def __evaluate_card_value__(self):
-        if self.name.isdigit():
-            self.value = int(self.name)
-        elif self.name == "A":
+        if self.rank.isdigit():
+            self.value = int(self.rank)
+        elif self.rank == "A":
             self.value = 11
         else:
             self.value = 10

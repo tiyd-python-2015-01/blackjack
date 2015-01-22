@@ -1,5 +1,5 @@
 from random import shuffle
-from card import Card
+from card import Card, ranks, suits
 
 
 class Deck:
@@ -25,11 +25,9 @@ class Deck:
 
     def __init__(self, decks=1):
         self.decks = decks
-        suits = ["hearts", "spades", "clubs", "diamonds"]
-        names = ["A", "2", "3", "4", "5", "6", "7", "8", "9",
-                 "10", "J", "Q", "K"]
-        self.cards = [Card(name, suit) for suit in suits
-                      for name in names
+
+        self.cards = [Card(rank, suit) for suit in suits
+                      for rank in ranks
                       for deck in range(self.decks)]
         shuffle(self.cards)
 
@@ -37,7 +35,3 @@ class Deck:
         """Pops a single card from the end of the card list and returns
         it to the calling function"""
         return self.cards.pop()
-
-    def reshuffle(self):
-        """Reinitializes the deck"""
-        self.__init__()
