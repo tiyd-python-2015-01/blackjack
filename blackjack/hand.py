@@ -1,11 +1,26 @@
 class Hand:
+    """ Hand class contains the current cards in play for either the player
+    or dealer.  It has methods to return the total value of the cards held
+    as well as update the value of the Ace based on the current value of
+    the hand.
+
+    Responsibilities:
+    * Container for Card objects
+    * Reporting the combined value of all Card objects held
+    * Logic to ensure that Aces are counted as the correct value based on
+      the total value of the current hand.
+
+    Interactions:
+    * Hand objects are distributed to the player and the dealer.
+    * Hand objects receive card objects from the deck.
+    """
+
 
     def __init__(self, cards=[]):
         self.cards = cards
 
     def add_cards(self, card):
         self.cards.append(card)
-
 
     def get_ranks(self):
         card_rank_list = []
