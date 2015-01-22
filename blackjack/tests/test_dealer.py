@@ -18,3 +18,11 @@ def test_dealer_does_not_hit():
     dealer.hand = hand
 
     assert dealer.hit() == False
+
+def test_dealer_hits_soft_17():
+    hand = Hand([Card("6", "clubs"), Card("A", "hearts")])
+    dealer = Dealer(hit_soft_17=True)
+
+    dealer.hand = hand
+
+    assert dealer.hit() == True
