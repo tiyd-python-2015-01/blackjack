@@ -2,11 +2,6 @@ from card import Card
 """Test functions for the card class"""
 
 
-def test_construction():
-    new_card = Card("2", "clubs")
-    assert new_card
-
-
 def test_card_attributes():
     new_card_A = Card("A", "clubs")
     new_card_2 = Card("2", "hearts")
@@ -22,19 +17,19 @@ def test_card_attributes():
     new_card_Q = Card("Q", "diamonds")
     new_card_K = Card("K", "clubs")
 
-    assert new_card_A.name == "A"
-    assert new_card_2.name == "2"
-    assert new_card_3.name == "3"
-    assert new_card_4.name == "4"
-    assert new_card_5.name == "5"
-    assert new_card_6.name == "6"
-    assert new_card_7.name == "7"
-    assert new_card_8.name == "8"
-    assert new_card_9.name == "9"
-    assert new_card_10.name == "10"
-    assert new_card_J.name == "J"
-    assert new_card_Q.name == "Q"
-    assert new_card_K.name == "K"
+    assert new_card_A.rank == "A"
+    assert new_card_2.rank == "2"
+    assert new_card_3.rank == "3"
+    assert new_card_4.rank == "4"
+    assert new_card_5.rank == "5"
+    assert new_card_6.rank == "6"
+    assert new_card_7.rank == "7"
+    assert new_card_8.rank == "8"
+    assert new_card_9.rank == "9"
+    assert new_card_10.rank == "10"
+    assert new_card_J.rank == "J"
+    assert new_card_Q.rank == "Q"
+    assert new_card_K.rank == "K"
 
     assert new_card_A.suit == "clubs"
     assert new_card_2.suit == "hearts"
