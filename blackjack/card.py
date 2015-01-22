@@ -16,7 +16,6 @@ class Card:
         self.suit = suit
         self.rank = str(rank)
 
-
     def rank_print(self):
         if self.rank == "Jack":
             return "J"
@@ -25,12 +24,13 @@ class Card:
         elif self.rank == "King":
             return "K"
         else:
-            return self.rank
+            return str(self.rank)
 
+    def __eq__(self, other):
+        return self.suit == other.suit and self.rank == other.rank
 
     def __str__(self):
         return "{}{}".format(self.suit[0], self.rank_print())
 
-
     def __repr__(self):
-        return self.__str__
+        return self.__str__()

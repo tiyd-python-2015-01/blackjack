@@ -1,4 +1,6 @@
+import random
 import card
+
 
 class Deck:
     """A deck is a collection of cards, typically containing one of
@@ -20,3 +22,18 @@ class Deck:
         ranks = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack",
                  "Queen", "King"]
         self.cards = [card.Card(suit, rank) for suit in suits for rank in ranks]
+
+    def shuffle(self):
+        def random_key(throwaway_variable):
+            return random.random()
+
+        self.cards.sort(key=random_key)
+
+    def __eq__(self, other):
+        return self.cards == other.cards
+
+    def __len__(self):
+        return len(self.cards)
+
+    def draw(self):
+        return self.cards.pop()
