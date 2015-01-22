@@ -6,10 +6,15 @@ from blackjack.carddeckshoe import Shoe
 def test_create_card():
     card1 = Card(10, "Club")
     card2 = Card("King", "Diamond")
-    assert card1.face == 10
+    assert card1.rank == 10
     assert card1.suit == "Club"
-    assert card2.face == "King"
+    assert card2.rank == "King"
     assert card2.suit == "Diamond"
+
+def test_card_equality():
+    card1 = Card("King", "Diamond")
+    card2 = Card("King", "Diamond")
+    assert card1 == card2
 
 
 def test_create_deck():
@@ -19,7 +24,7 @@ def test_create_deck():
     assert isinstance(deck.cards[0], Card)
 
 
-def test_get_card():
+def test_get_card_from_deck():
     deck = Deck()
     assert isinstance(deck.get_card(), Card)
     assert len(deck.cards) == 51
@@ -34,10 +39,21 @@ def test_create_shoe():
     assert len(shoe.cards) == 156
     assert isinstance(shoe.cards[0], Card)
 
-
 def test_shuffle_shoe():
     shoe = Shoe()
     card = shoe.cards[0]
-    shoe.shuffle_shoe()
+    shoe.shuffle()
     assert shoe.cards[0] != card
     assert shoe.cards.index(card) >= 0
+
+def test_deal_hand():
+    shoe = Shoe()
+    hand = shoe.deal_hand()
+    assert len(hand) == 2
+    assert len(shoe.cards) == 50
+
+def test_get_card_from_shoe():
+    shoe = Shoe()
+    assert len(shoe.cards) == 52
+    shoe.get_card()
+    assert len(shoe.cards) == 51

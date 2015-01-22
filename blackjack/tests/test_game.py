@@ -8,5 +8,11 @@ from blackjack.game_state import Game_State
 
 def test_create_game():
     cardgame = Game()
-    assert isinstance(cardgame.user, Player)
-    assert isinstance(cardgame.gamestate, Game_State)
+    assert cardgame.user.cash == 100
+
+def test_deal_cards():
+    cardgame = Game()
+    cardgame.shoe = Shoe()
+    cardgame.deal_cards()
+    assert len(cardgame.user.cards) == 2
+    assert len(cardgame.dealer.cards) == 2

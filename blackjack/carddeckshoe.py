@@ -20,7 +20,7 @@ Card
 from random import shuffle, randint
 
 SUITS = ['Clubs', 'Diamonds', 'Spades', 'Hearts']
-FACES = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'King', 'Queen', 'Joker', 'Ace']
+rankS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'King', 'Queen', 'Joker', 'Ace']
 
 
 class Shoe:
@@ -28,25 +28,50 @@ class Shoe:
         self.decks = [Deck() for n in range(number_of_decks)]
         self.cards = [card for deck in self.decks for card in deck.cards]
 
-    def shuffle_shoe(self):
+    def shuffle(self):
         shuffle(self.cards)
+
+    def deal_hand(self):
+        hand = [self.cards.pop(), self.cards.pop()]
+        return hand
+
+    def get_card(self):
+        if len(self.cards) > 0:
+            return self.cards.pop()
+        else:
+            return 0
+
+    def __str__(self):
+        return str(self.cards)
 
 
 class Deck:
     def __init__(self):
-        self.cards = [Card(face, suit) for suit in SUITS for face in FACES]
+        self.cards = [Card(rank, suit) for suit in SUITS for rank in rankS]
 
     def get_card(self):
-        return self.cards.pop()
+        if len(self.cards) > 0:
+            return self.cards.pop()
+        else:
+            return 0
+
+    def __str__(self):
+        return str(self.cards)
 
 
 class Card:
-    def __init__(self, face, suit):
-        self.face = face
+    def __init__(self, rank, suit):
+        self.rank = rank
         self.suit = suit
 
     def __str__(self):
-        return "{} of {}".format(self.face, self.suit)
+        return "{} of {}".format(self.rank, self.suit)
 
     def __repr__(self):
         return self.__str__()
+
+    def __eq__(self,other_card):
+        if self.rank == other_card.rank and self.suit == other_card.suit:
+            return True
+        else:
+            return False
