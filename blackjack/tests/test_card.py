@@ -1,4 +1,4 @@
-from Card import *
+from card import *
 
 mycard = Card("J", "Diamonds")
 mycard1 = Card("A", "Diamonds")

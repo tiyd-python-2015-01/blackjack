@@ -1,5 +1,5 @@
 import random
-import Card
+import card
 
 
 class Deck:
@@ -21,9 +21,9 @@ class Deck:
 # Creates a single deck
 
     def __init__(self):
-        self.deck = [Card.Card(rank, suit)
-                     for rank in Card.ranks
-                     for suit in Card.suits]
+        self.deck = [card.Card(rank, suit)
+                     for rank in card.ranks
+                     for suit in card.suits]
 
     def get_length(self):
         return len(self.deck)
@@ -37,9 +37,8 @@ class Deck:
         return self.deck.pop(pos)
 
     def __repr__(self):
-        return str(sorted(self.deck))
-        deckstring = []
+        return "{}".format(self.deck)
 
     def __str__(self):
         """String representation of a deck."""
-        return "My deck has the following cards: {}".format(self.deck)
+        return "{}".format(self.deck)

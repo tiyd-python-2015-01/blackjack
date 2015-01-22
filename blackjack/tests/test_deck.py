@@ -1,5 +1,5 @@
-from Deck import *
-from Card import *
+from deck import *
+from card import *
 
 newdeck = Deck()
 
