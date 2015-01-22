@@ -123,7 +123,7 @@ To Do:
     Dealer based on currently selected rules. (Maybe in Blackjack class?)
 
 
-* <Run>:  The Blackjack class will be the driver script for the game.
+* <Run>:  The Run class will be the driver script for the game.
 It will control all of the program flow and interact with the Game and
 Interface Classes to start new hands, request menu displays, request output
 to the console from the Interface Class.  This file will contain the

@@ -15,7 +15,7 @@ class GameOptions:
 
     def __init__(self):
         self.number_of_decks = 1
-        self.hit_on_soft_17 = False
+        self.hit_soft_17 = False
         self.early_surrender = False
         self.resplitting = False
         self.resplit_aces = False
