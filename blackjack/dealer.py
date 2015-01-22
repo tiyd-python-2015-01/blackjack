@@ -12,11 +12,20 @@ class Dealer:
     * Provides feedback about Dealer actions to the Game class
     """
 
-    def __init__(self):
+    def __init__(self, hit_soft_17=False):
         self.hand = None
+        self.hit_soft_17 = hit_soft_17
 
     def hit(self):
-        if self.hand.get_value() < 17:
-            return True
+        if not self.hit_soft_17:
+            if self.hand.get_value() < 17:
+                return True
+            else:
+                return False
         else:
-            return False
+            if self.hand.get_value() < 17:
+                return True
+            elif self.hand.get_value() == 17 and "A" in self.hand.get_ranks():
+                return True
+            else:
+                return False
