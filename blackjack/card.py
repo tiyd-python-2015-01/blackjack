@@ -4,7 +4,8 @@ class Card:
     Responsibilities:
 
     * Has a rank and a suit.
-    * Has a point value. Aces point values depend on the Hand.
+    * Two cards with the same suit and rank should be equal to each other
+    * Cards should have readable representations
 
     Collaborators:
 
@@ -19,4 +20,4 @@ class Card:
         return "{} of {}".format(self.rank, self.suit)
 
     def __repr__(self):
-        return self.__str__
+        return self.__str__()

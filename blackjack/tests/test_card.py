@@ -1,4 +1,4 @@
-from card import Card
+from blackjack.card import Card
 
 def test_card():
     a_card = Card(2, "Spades")
