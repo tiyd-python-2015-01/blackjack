@@ -26,8 +26,8 @@ def test_deal_card_removes_it():
     assert len(deck) ==51
 
 def test_correct_card_dealing_to_player():
-    new_cards = Player_hand(['10 of Diamond', '5 of Club'])
-    assert new_cards.cards == ['10 of Diamond', '5 of Club']
+    new_cards = Player_hand(['10 of Diamonds', '5 of Clubs'])
+    assert new_cards.cards == ['10 of Diamonds', '5 of Clubs']
 
 def test_deal_player_cards():
     fresh_deck = Deck()
@@ -38,3 +38,9 @@ def test_player_card_count():
     fresh_deck = Deck()
     new_cards = Player_hand([fresh_deck.deal_card(), fresh_deck.deal_card()])
     assert new_cards.player_card_count(new_cards.cards) >= 2
+
+def test_player_options():
+    new_cards = Player_hand([])
+    assert new_cards.player_actions(25) == 'bust'
+    assert new_cards.player_actions(21) == 'win'
+    assert new_cards.player_actions(20) == ('hit', 'stay')

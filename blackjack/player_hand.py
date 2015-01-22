@@ -36,13 +36,14 @@ class Player_hand:
                     count += 1
                 else:
                     count += 11
-
         return count
 
-    def player_actions():
-        # hit
-        # stay
+    def player_actions(self, count):
+        if count >= 22:
+            return 'bust'
+        elif count == 21:
+            return 'win'
+        else:
+            return 'hit', 'stay'
         # double down
         # split
-        # if >= 22 == bust
-        return True
