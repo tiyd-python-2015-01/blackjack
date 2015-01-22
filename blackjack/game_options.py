@@ -24,5 +24,3 @@ class GameOptions:
         self.no_surrender = False
         self.double_9_10_11 = False
         self.double_9_10 = False
-        self.no_hole_card = False
-        self.no_hole_card_obo = False

@@ -28,7 +28,20 @@ class Game:
         self.deck = Deck(options.number_of_decks)
         self.player = Player(name)
         self.dealer = Dealer(options.hit_soft_17)
+        self.options = options
 
+    def can_split(self, hand):
+        if self.options.split_by_rank:
+            if hand.get_ranks()[0] == hand.get_ranks()[1]:
+                return True
+            else:
+                return False
+        else:
+            if hand.get_values()[0] == hand.get_values()[1]:
+                return True
+            else:
+                return False
+                
     def create_hands(self):
         dealer_cards = []
         player_cards = []
@@ -37,3 +50,21 @@ class Game:
             dealer_cards.append(self.deck.deal())
         self.player.hands.append(Hand(player_cards))
         self.dealer.hand = Hand(dealer_cards)
+
+    def check_bust(self, hand):
+        if hand.get_value() > 21:
+            return True
+        else:
+            return False
+
+    def check_push(self, hand1, hand2):
+        if hand1.get_value() == hand2.get_value():
+            return True
+        else:
+            return False
+
+    def compare_hands(self, player_hand, dealer_hand ):
+        if player_hand.get_value > dealer_hand.get_value:
+            return True
+        else:
+            return False
