@@ -1,3 +1,5 @@
+import card
+
 class Deck:
     """A deck is a collection of cards, typically containing one of
     each rank/suit combination.
@@ -17,4 +19,4 @@ class Deck:
         suits = ["Clubs", "Diamonds", "Spades", "Hearts"]
         ranks = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack",
                  "Queen", "King"]
-        self.cards = []
+        self.cards = [card.Card(suit, rank) for suit in suits for rank in ranks]

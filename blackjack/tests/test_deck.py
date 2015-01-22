@@ -1,4 +1,6 @@
 from deck import Deck
+from card import Card
 
-test_deck_init():
-    assert False
+def test_deck_init():
+    a_deck = Deck()
+    assert isinstance(a_deck.cards[0], Card)
