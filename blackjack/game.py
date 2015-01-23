@@ -33,12 +33,15 @@ class Game:
     def can_double(self, hand):
         """Checks to see if the option to double down is abailable to the
         player"""
-        if self.options.double_9_10_11:
-            return 9 <= hand.get_value() < 12 and len(hand.cards) == 2
-        elif self.options.double_9_10:
-            return 9 <= hand.get_value() < 11 and len(hand.cards) == 2
+        if self.options.no_double_after_split and len(self.player.hands) > 1:
+            return False
         else:
-            return len(hand.cards) == 2
+            if self.options.double_9_10_11:
+                return 9 <= hand.get_value() < 12 and len(hand.cards) == 2
+            elif self.options.double_9_10:
+                return 9 <= hand.get_value() < 11 and len(hand.cards) == 2
+            else:
+                return len(hand.cards) == 2
 
     def can_hit(self, hand):
         """Checks to see if the player has the option to hit.  Only not

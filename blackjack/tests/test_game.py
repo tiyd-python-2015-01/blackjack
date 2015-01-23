@@ -137,3 +137,14 @@ def test_hit_split_aces():
     assert not new_game.can_hit(hand1)
     new_game.player.hands.pop()
     assert new_game.can_hit(hand1)
+
+def test_no_double_after_split():
+    options = GameOptions()
+    new_game = Game(options, "Alan")
+    hand1 = Hand(10, [Card("A", "spades"), Card("6", "hearts")])
+    hand2 = Hand(10, [Card("A", "hearts"), Card("7", "spades")])
+    new_game.player.hands.append(hand1)
+    new_game.player.hands.append(hand2)
+    assert new_game.can_double(hand1)
+    new_game.options.no_double_after_split = True
+    assert not new_game.can_double(hand1)
