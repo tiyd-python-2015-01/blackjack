@@ -2,6 +2,8 @@ from blackjack.card import Card
 from blackjack.deck import Deck
 from blackjack.player_hand import Player_hand
 from blackjack.dealer_hand import Dealer_hand
+from blackjack.user import User
+
 
 
 def test_correct_card_output():
@@ -59,3 +61,11 @@ def test_dealer_options():
     assert new_cards.dealer_actions(21) == '21'
     assert new_cards.dealer_actions(17) == 'stay'
     assert new_cards.dealer_actions(5) == 'hit'
+
+def test_user_pot_generation():
+    user_chips = User()
+    assert user_chips.chip_count == 500
+
+def test_user_bet_removes_money():
+    user_chips = User()
+    assert user_chips.bet_chips(20) == 480
