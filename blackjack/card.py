@@ -17,10 +17,14 @@ class Card:
     Deck
     """
 
-
     def __init__(self, rank, suit):
         self.suit = suit
         self.rank = rank
+
+
+    def __eq__(self, other):
+            return self.rank == other.rank and self.suit == other.suit
+
 
 
     def __str__(self):

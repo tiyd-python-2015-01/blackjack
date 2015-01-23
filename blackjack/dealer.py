@@ -6,4 +6,10 @@ class Dealer:
 
     Collaborates with: Deck.
     """
-    __init__(self):
+    def __init__(self):
+        self.hand = Hand()
+        self.hidden_hand = Hand()
+
+    def reveal(self):
+        hidden_card = self.hidden_hand.pop()
+        self.hand.append(hidden_card)
