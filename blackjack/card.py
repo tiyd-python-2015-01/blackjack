@@ -29,7 +29,7 @@ class Card:
     def __init__(self, rank, suit):
         self.rank = rank
         self.suit = suit
-        self.__evaluate_card_value__()
+        self._evaluate_card_value()
 
     def __str__(self):
         return self.rank + self.suits[self.suit]
@@ -40,7 +40,7 @@ class Card:
     def __eq__(self, other):
         return self.rank == other.rank and self.suit == other.suit
 
-    def __evaluate_card_value__(self):
+    def _evaluate_card_value(self):
         if self.rank.isdigit():
             self.value = int(self.rank)
         elif self.rank == "A":

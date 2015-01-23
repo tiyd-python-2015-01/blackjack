@@ -30,41 +30,38 @@ class Game:
         self.dealer = Dealer(options.hit_soft_17)
         self.options = options
 
+    def can_double(self, hand):
+        if self.options.double_9_10_11:
+            return 9 <= hand.get_value() < 12 and len(hand.cards) == 2
+        elif self.options.double_9_10:
+            return 9 <= hand.get_value() < 11 and len(hand.cards) == 2
+        else:
+            return len(hand.cards) == 2
+
     def can_split(self, hand):
         if self.options.split_by_rank:
-            if hand.get_ranks()[0] == hand.get_ranks()[1]:
-                return True
-            else:
-                return False
+            return hand.get_ranks()[0] == hand.get_ranks()[1]
         else:
-            if hand.get_values()[0] == hand.get_values()[1]:
-                return True
-            else:
-                return False
-                
-    def create_hands(self):
+            return hand.get_values()[0] == hand.get_values()[1]
+
+    def can_surrender(self, player_hand, dealer_show_card):
+        return (not options.no_surrender and (len(player_hand.cards) == 2
+                and dealer.show_card.rank == "A"))
+
+    def create_hands(self, bet):
         dealer_cards = []
         player_cards = []
         for _ in range(2):
             player_cards.append(self.deck.deal())
             dealer_cards.append(self.deck.deal())
-        self.player.hands.append(Hand(player_cards))
-        self.dealer.hand = Hand(dealer_cards)
+        self.player.hands.append(Hand(bet, player_cards))
+        self.dealer.hand = Hand(0, dealer_cards)
 
     def check_bust(self, hand):
-        if hand.get_value() > 21:
-            return True
-        else:
-            return False
+        return hand.get_value() > 21
 
     def check_push(self, hand1, hand2):
-        if hand1.get_value() == hand2.get_value():
-            return True
-        else:
-            return False
+        return hand1.get_value() == hand2.get_value()
 
     def compare_hands(self, player_hand, dealer_hand ):
-        if player_hand.get_value > dealer_hand.get_value:
-            return True
-        else:
-            return False
+        return player_hand.get_value > dealer_hand.get_value

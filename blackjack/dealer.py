@@ -18,10 +18,7 @@ class Dealer:
 
     def hit(self):
         if not self.hit_soft_17:
-            if self.hand.get_value() < 17:
-                return True
-            else:
-                return False
+            return self.hand.get_value() < 17
         else:
             if self.hand.get_value() < 17:
                 return True

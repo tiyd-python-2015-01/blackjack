@@ -1,6 +1,17 @@
 class Interface:
+    """ Interface class will provide all of the methods of interacting with
+    the user.  It will contain all of the methods for displaying to the
+    console as well as receiving and checking input from the player.
+
+    Responsibilities:
+    * Outputting game information and menus to the player
+    * Receiving input from the player
+    """
+    
 
     def main_menu(self):
+        """ Displays the title, programmer info, and main menu for the game.
+        Takes user input and returns to the calling Game class"""
         title_text = ("\n"
         ".------..------..------..------..------."
         ".------..------..------..------.\n"
@@ -31,3 +42,6 @@ class Interface:
         print("♧ 2 - Set Game Options")
         print("♢ 3 - Quit")
         print("-----------------------")
+        selection = input("♤ ")
+
+        return selection

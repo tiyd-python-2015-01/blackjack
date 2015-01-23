@@ -22,5 +22,14 @@ class GameOptions:
         self.hit_split_aces = False
         self.split_by_rank = False
         self.no_surrender = False
+        self.no_double_after_split = False
         self.double_9_10_11 = False
         self.double_9_10 = False
+
+
+# Rules to implement:
+# Early Surrender - NOT DONE
+# Resplitting - NOT DONE
+# Resplitting Aces - NOT DONE
+# Hit Split Aces - NOT DONE
+# No Double After Split - NOT DONE
