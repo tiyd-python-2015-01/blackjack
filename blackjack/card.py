@@ -28,9 +28,9 @@ class Card:
 
     def get_value(self):
         if self.rank == "A":
-            return (1, 11)
+            return 1
         elif self.rank in ["J", "Q", "K"]:
-            return (10)
+            return 10
         else:
             return int(self.rank)
 

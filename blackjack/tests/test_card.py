@@ -11,6 +11,6 @@ def test_init():
 
 
 def test_getvalue():
-    assert mycard.get_value() == (10)
-    assert mycard1.get_value() == (1, 11)
-    assert mycard2.get_value() == (8)
+    assert mycard.get_value() == 10
+    assert mycard1.get_value() == 1
+    assert mycard2.get_value() == 8

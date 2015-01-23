@@ -8,7 +8,9 @@ myplayer = Player("Ana", 100)
 mycard1 = Card("A", "Diamonds")
 mycard2 = Card("8", "Diamonds")
 mycard3 = Card("9", "Hearts")
-myhand = Hand(mycard1, mycard2)
+myhand = Hand()
+myhand.add_card(mycard1)
+myhand.add_card(mycard2)
 
 
 def test_init():

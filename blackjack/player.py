@@ -1,3 +1,5 @@
+from hand import *
+
 class Player:
     """A player.
 
@@ -22,7 +24,10 @@ class Player:
         self.__name__ = name
         self.__status__ = ''
         self.__budget__ = budget
-        self.__hand__ = []
+        self.__hand__ = Hand()
+
+    def add_card(self,card):
+        self.__hand__.add_card(card)
 
     def updates_budget(self, change):
         self.__budget__ += change

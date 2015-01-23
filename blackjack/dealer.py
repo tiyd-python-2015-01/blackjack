@@ -1,4 +1,5 @@
 from deck import *
+from hand import *
 
 class Dealer:
     """A dealer for the game.
@@ -20,9 +21,16 @@ class Dealer:
         """
 
     def __init__(self):
-        self.__deck__ = Deck().deck_shuffle()
+        self.__deck__ = Deck().shuffle()
         self.__status__ = ''
-        self.__hand__ = []
+        self.__hand__ = Hand()
+
+    def deal(self):
+        return self.__deck__.deal()
+
+    def add_card(self,card):
+        self.__hand__.add_card(card)
+
 
     def updates_status(self, newstatus):
         self.__status__ = newstatus

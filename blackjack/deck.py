@@ -28,13 +28,19 @@ class Deck:
     def get_length(self):
         return len(self.deck)
 
-    def deck_shuffle(self):
+    def shuffle(self):
         random.shuffle(self.deck)
-        return self.deck
+        return self
 
     def deal(self):
         pos = random.randint(0, self.get_length())
         return self.deck.pop(pos)
+
+    def __eq__(self,other):
+        return self.deck == other.deck
+
+    def __ne__(self,other):
+        return not self.__eq__(other) 
 
     def __repr__(self):
         return "{}".format(self.deck)
