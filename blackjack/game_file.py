@@ -3,6 +3,7 @@ from blackjack.dealer_hand import DealerHand
 from blackjack.deck import Deck
 from blackjack.player_hand import PlayerHand
 from blackjack.user import User
+from blackjack.game_manager import GameManager
 import sys
 
 
@@ -21,48 +22,55 @@ def game_flow(player):
     fresh_deck = Deck()
     fresh_deck.shuffle_deck()
 
-    bet = user_pregame_steps(player.user_pregame_input(), player)
+    user_pregame_steps(player.user_pregame_input(), player)
 
     print("Let's deal the hand now.\n")
 
     # Initial deal to player
     new_cards = PlayerHand([fresh_deck.deal_card(), fresh_deck.deal_card()])
-    count = new_cards.player_card_count(new_cards.cards)
-    print('Player has {} --A total of {}'.format(new_cards, count))
+    new_cards.player_card_count(new_cards.cards)
+    print('Player has {} --A total of {}'.format(new_cards, new_cards.count))
 
     # Initial dealing to dealer (1 card for now only)
     dealer_cards = DealerHand([fresh_deck.deal_card()])
-    print(dealer_cards , 'and an unknown card\n')
+    print('Dealer has {} and an unknown card\n'.format(dealer_cards))
 
     while True:
         # Ask user what they wants to do
-        count = new_cards.player_card_count(new_cards.cards)
-        user_next_stage = new_cards.player_actions(count)
+        new_cards.player_card_count(new_cards.cards)
+        user_next_stage = new_cards.player_actions()
 
         if user_next_stage == 'bust':
             print("You lost\n", ("="*40))
             game_flow(player)
 
-        elif user_next_stage <= '21':
+        elif user_next_stage == '21':
             print("You won")
-            player.chip_count += (2 * bet)
+            player.chip_count += (2 * player.bet)
             game_flow(player)
 
         elif user_next_stage == 'choice':
             user_action = user_in_game_steps(player.user_in_game_input(),
                                              player)
             if user_action == 'hit':
-                #player hits, so they want this card
                 next_card = PlayerHand(fresh_deck.deal_card())
                 new_cards.cards.append(next_card.cards)
                 print('\nYou now have - ', new_cards.cards)
-                #below adds the new card to player's list of cards
 
             elif user_action == 'stay':
-                #Trigger dealer's turn
-                continue
-            else:
-                return True
+                dealer_next_card = DealerHand([fresh_deck.deal_card()])
+                dealer_cards.cards.extend(dealer_next_card.cards)
+
+                print("You've elected to stay. The dealer flipped their"
+                      " second card and it was a {}. The dealer now has"
+                      ":\n{}".format(dealer_next_card, dealer_cards))
+                gm = GameManager()
+                response = gm.dealer_flipping(dealer_cards,
+                                              fresh_deck,
+                                              player,
+                                              new_cards)
+                if response == 'gameflow':
+                    game_flow(player)
 
 
 
@@ -90,6 +98,8 @@ def user_pregame_steps(user_input, player):
 
     elif user_input == 'chips':
         print(player.chip_count)
+        player.user_pregame_input()
+        return 'chips'
 
     elif type(user_input) == int:
         print(("="*40) , "\nYou've bet {} chips "
@@ -112,12 +122,17 @@ def user_in_game_steps(user_input, player):
         sys.exit()
         return 'sys.exit()'
 
+    elif user_input == 'chips':
+        print(player.chip_count)
+        player.user_in_game_input()
+        return 'chips'
+
     elif user_input == 'hit':
         # Add in 'hit' functionality
         return 'hit'
     elif user_input == 'stay':
         # Add in 'stay' functionality
-        return 'something'
+        return 'stay'
 
 
 if __name__ == '__main__':

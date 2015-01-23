@@ -1,3 +1,5 @@
+from blackjack.card import Card
+
 class DealerHand:
     """Current card count.
 
@@ -14,33 +16,32 @@ class DealerHand:
     * Receives Card from Deck
     * Sends results to Game_manager class"""
 
-    def __init__(self, cards):
+    def __init__(self, cards, card_count = 0):
         self.cards = cards
+        self.card_count = card_count
 
     def __str__(self):
-        return "Dealer has {}".format(self.cards)
+        return "{}".format(self.cards)
 
     def dealer_card_count(self, cards):
-        count = 0
+        self.card_count = 0
         for card in cards:
             if card.rank in (2, 3, 4, 5, 6, 7, 8, 9, 10):
-                count += card.rank
+                self.card_count += card.rank
             elif card.rank in ('King', 'Queen', 'Jack'):
-                count += 10
+                self.card_count += 10
+            else:
+                self.card_count += 1
         for left_card in cards:
             if left_card.rank == 'Ace':
-                if count >= 11:
-                    count += 1
-                else:
-                    count += 11
-        return count
+                if self.card_count <= 11:
+                    self.card_count += 10
+        return self.card_count
 
-    def dealer_actions(self, count):
-        if count >= 22:
+    def dealer_actions(self):
+        if self.card_count >= 22:
             return 'bust'
-        elif count == 21:
-            return '21'
-        elif count >= 17 and count <= 21:
+        elif self.card_count >= 17 and self.card_count <= 21:
             return 'stay'
         else:
             return 'hit'

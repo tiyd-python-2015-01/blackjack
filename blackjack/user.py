@@ -14,11 +14,12 @@ class User:
     * Game_manager class sends user double bet if wins. """
 
 
-    def __init__(self):
+    def __init__(self, bet = 0):
         self.chip_count = 500
+        self.bet = bet
 
     def bet_chips(self, bet):
-        self.chip_count = self.chip_count - bet
+        self.chip_count = self.chip_count - self.bet
         return self.chip_count
 
     def user_pregame_input(self):
@@ -29,13 +30,13 @@ class User:
             return user_request
         elif user_request == 'bet':
             try:
-                bet_amount = int(input("How much would you like to wager?\n"))
-                if bet_amount <= self.chip_count:
-                    return bet_amount
+                self.bet = int(input("How much would you like to wager?\n"))
+                if self.bet <= self.chip_count:
+                    return self.bet
                 else:
                     print("You don't have that many chips!")
                     return self.user_pregame_input()
-                return bet_amount
+                return self.bet
             except:
                 print("That is not a number.")
                 return self.user_pregame_input()
@@ -49,7 +50,7 @@ class User:
                              "Type 'stay' to hold your position.\n"
                              "Type 'double' to double down your bet\n")
 
-        if user_request not in ['hit', 'stay', 'double', 'help','quit']:
+        if user_request not in ['hit', 'stay', 'double', 'help','quit', 'chips']:
             print("That is not a valid response.")
             return self.user_in_game_input()
         return user_request
