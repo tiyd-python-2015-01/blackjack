@@ -2,7 +2,7 @@
 """Shoe collaborates with Deck and Hand"""
 """It is responsible for receiving decks from Deck, shuffling the decks,
    and dealing to the Hand"""
-from Deck import Deck as dk
+from deck import Deck as dk
 import random
 
 class Shoe:
