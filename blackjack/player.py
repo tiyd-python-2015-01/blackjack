@@ -5,9 +5,13 @@ class Player:
 
     Responsibilities:
     Has one (or more) hands.
+    Has money.
     Optionally adds cards to hands during the player's turns.
 
     Collaborators:
     Is one of two agents contained in the game.
     Has at least one hand.
     """
+    def __init__(self):
+        self.money = 100
+        self.hands = []

@@ -14,8 +14,10 @@ class Hand:
     Hands recieve cards from decks.
     Hands are possesed and played by the player or the dealer.
     """
-    def __init__(self):
+    def __init__(self, *args):
         self.cards = []
+        for arg in args:
+            self.cards.append(arg)
 
     def grab(self, a_card):
         self.cards.append(a_card)
@@ -52,3 +54,6 @@ class Hand:
         for card in self.cards:
             initial_value += value_dict[card.rank]
         return initial_value
+
+    def can_split(self):
+        return len(self.cards) == 2 and self.cards[0].same_rank(self.cards[1])
