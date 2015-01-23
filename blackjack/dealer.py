@@ -25,3 +25,6 @@ class Dealer:
 
     def hit_from_deck(self, deck):
         self.hand.grab(deck.draw())
+
+    def dump_cards(self):
+        self.hand = Hand()

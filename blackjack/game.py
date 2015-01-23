@@ -24,8 +24,14 @@ class Game:
             user_choice = input("Initiate side rules? Y/N")
             if user_choice == "Y":
                 print("Ha, no.")
-            user_choice = input("")
-            continue_game = False
+            user_choice = input("Hit or Stand?")
+            self.player.lose_money()
+            if self.player.is_broke():
+                print("You're all out of money! You lose!")
+                continue_game = False
+            self.player.dump_cards()
+            self.dealer.dump_cards()
+            
 
 
 if __name__ == '__main__':

@@ -24,10 +24,7 @@ class Deck:
         self.cards = [card.Card(suit, rank) for suit in suits for rank in ranks]
 
     def shuffle(self):
-        def random_key(throwaway_variable):
-            return random.random()
-
-        self.cards.sort(key=random_key)
+        random.shuffle(self.cards)
 
     def __eq__(self, other):
         return self.cards == other.cards

@@ -72,4 +72,5 @@ class Hand:
         if just_one:
             return str(self.cards[0])
         else:
-            return str(self.cards)
+            card_list = [str(card) for card in self.cards]
+            return card_list

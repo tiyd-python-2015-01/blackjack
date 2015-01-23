@@ -21,8 +21,8 @@ class Player:
 
     def deal(self, deck):
         hand = Hand()
-        hand.grab(deck)
-        hand.grab(deck)
+        hand.grab(deck.draw())
+        hand.grab(deck.draw())
         self.hands.append(hand)
 
     def lose_money(self):
@@ -37,3 +37,14 @@ class Player:
     def win_money(self):
         """When called, increases the player's winnings by the bet."""
         self.money += self.bet
+
+    def show_cards(self):
+        your_hand = self.hands[0]
+        card_string = your_hand.show_cards()
+        print("You have: {}".format(card_string))
+
+    def is_broke(self):
+        return self.money <= 0
+
+    def dump_cards(self):
+        self.hands = []
