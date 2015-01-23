@@ -20,5 +20,4 @@ def test_deck_draw():
     a_deck.draw()
     assert len(a_deck) == 51
 
-
     

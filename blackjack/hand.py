@@ -36,7 +36,7 @@ class Hand:
         return self.__str__()
 
     def value(self):
-        value_dict = {"1": 11,
+        value_dict = {"1": 1,
                       "2": 2,
                       "3": 3,
                       "4": 4,
@@ -50,10 +50,26 @@ class Hand:
                       "Queen": 10,
                       "King": 10}
 
-        initial_value = 0
+        hand_value = 0
+        ace_list = [card.is_ace() for card in self.cards]
         for card in self.cards:
-            initial_value += value_dict[card.rank]
-        return initial_value
+            hand_value += value_dict[card.rank]
+        if hand_value < 12 and any(ace_list):
+            hand_value += 10
+        return hand_value
+
+    def has_ace(self):
+        ace_list = [card.is_ace() for card in self.cards]
+        return any(ace_list)
 
     def can_split(self):
         return len(self.cards) == 2 and self.cards[0].same_rank(self.cards[1])
+
+    def is_bust(self):
+        return self.value() > 21
+
+    def show_cards(self, just_one=False):
+        if just_one:
+            return str(self.cards[0])
+        else:
+            return str(self.cards)

@@ -29,6 +29,9 @@ class Card:
     def same_rank(self, other):
         return self.rank == other.rank
 
+    def is_ace(self):
+        return self.rank is "1"
+
     def __eq__(self, other):
         return self.suit == other.suit and self.rank == other.rank
 

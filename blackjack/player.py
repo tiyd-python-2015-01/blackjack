@@ -1,3 +1,6 @@
+import hand
+
+
 class Player:
     """The player posesses a hand (or more, depending on the rules), and makes
     decisions to bet, to draw cards, and to stand, (among other possibilities)
@@ -12,6 +15,26 @@ class Player:
     Is one of two agents contained in the game.
     Has at least one hand.
     """
-    def __init__(self):
+    def __init__(self, bet=10):
         self.money = 100
         self.hands = []
+        self.bet = bet
+
+    def deal(self, deck):
+        hand = Hand()
+        hand.grab(deck)
+        hand.grab(deck)
+        self.hands.append(hand)
+
+    def lose_money(self):
+        """When called, subtracts the bet from the player's money."""
+        self.money -= self.bet
+
+    def win_blackjack(self):
+        """When called, increases the player's winnings by the special
+           blackjack multipier of the bet"""
+        self.money += (self.bet * 1.5)
+
+    def win_money(self):
+        """When called, increases the player's winnings by the bet."""
+        self.money += self.bet

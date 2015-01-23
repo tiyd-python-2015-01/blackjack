@@ -10,3 +10,13 @@ class Dealer:
     The dealer posesses a hand.
     The dealer is one of the two agents in the game.
     """
+    def __init__(self):
+        self.hand = Hand()
+
+    def deal(self, deck):
+        self.hand.grab(deck)
+        self.hand.grab(deck)
+
+    def show_first_card(self):
+        card_string = self.hand.show_cards(just_one=True)
+        print "The dealer has a: {}".format(card_string)
