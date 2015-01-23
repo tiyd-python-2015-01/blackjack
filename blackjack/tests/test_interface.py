@@ -9,9 +9,9 @@ def test_create_interface():
 def test_display_hands():
     player = Player()
     dealer = Dealer()
-    player.get_hand([Card("King", "Diamonds"), Card("Queen", "Spades")])
-    dealer.get_hand([Card("One", "Diamonds"), Card("Ten", "Clubs")])
+    player.get_hand([Card("King", "♢"), Card("Queen", "♤")])
+    dealer.get_hand([Card("One", "♢"), Card("Ten", "♧")])
     interface = Interface()
-    printout = "Your hand:\nKing of Diamonds\nQueen of Spades\n\nDealer hand:\nTen of Clubs\n"
+    printout = "Your hand:\nKing of ♢\nQueen of ♤\n\nDealer hand:\nTen of ♧\n"
     print(interface.display_hands(player,dealer))
     assert interface.display_hands(player,dealer) == printout

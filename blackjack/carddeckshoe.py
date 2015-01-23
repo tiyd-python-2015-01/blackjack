@@ -19,8 +19,8 @@ Card
 """
 from random import shuffle, randint
 
-SUITS = ['Clubs', 'Diamonds', 'Spades', 'Hearts']
-rankS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'King', 'Queen', 'Joker', 'Ace']
+SUITS = ['♧', '♢', '♤', '♡']
+RANKS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'King', 'Queen', 'Joker', 'Ace']
 
 
 class Shoe:
@@ -47,7 +47,7 @@ class Shoe:
 
 class Deck:
     def __init__(self):
-        self.cards = [Card(rank, suit) for suit in SUITS for rank in rankS]
+        self.cards = [Card(rank, suit) for suit in SUITS for rank in RANKS]
 
     def give_card(self):
         if len(self.cards) > 0:

@@ -4,16 +4,16 @@ from blackjack.carddeckshoe import Shoe
 
 
 def test_create_card():
-    card1 = Card(10, "Club")
-    card2 = Card("King", "Diamond")
+    card1 = Card(10, "♧")
+    card2 = Card("King", "♢")
     assert card1.rank == 10
-    assert card1.suit == "Club"
+    assert card1.suit == "♧"
     assert card2.rank == "King"
-    assert card2.suit == "Diamond"
+    assert card2.suit == "♢"
 
 def test_card_equality():
-    card1 = Card("King", "Diamond")
-    card2 = Card("King", "Diamond")
+    card1 = Card("King", "♧")
+    card2 = Card("King", "♧")
     assert card1 == card2
 
 

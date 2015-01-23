@@ -47,6 +47,26 @@ class Player:
         except:
             return "Player has an empty hand."
 
+    def assess_hand(self):
+        value = 0
+        ace_count = 0
+        for card in self.cards:
+            try:
+                if 2 <= card.rank <= 10:
+                    value += card.rank
+            except:
+                if card.rank in ["King","Queen","Joker"]:
+                    value += 10
+                elif card.rank == "Ace":
+                    value += 11
+                    ace_count +=1
+        while ace_count > 0:
+            if value > 21:
+                value -= 10
+            ace_count -= 1
+        return value
+
+
 class Dealer(Player):
     def __init__(self):
         super().__init__()
