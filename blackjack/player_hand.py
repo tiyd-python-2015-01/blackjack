@@ -1,7 +1,7 @@
 from blackjack.card import Card
 
 
-class Player_hand:
+class PlayerHand:
     """current card count.
 
     Responsibilites:
@@ -21,7 +21,7 @@ class Player_hand:
         self.cards = cards
 
     def __str__(self):
-        return "You have\n{}".format(self.cards)
+        return "{}".format(self.cards)
 
     def player_card_count(self, cards):
         count = 0
@@ -44,6 +44,6 @@ class Player_hand:
         elif count == 21:
             return '21'
         else:
-            return 'hit', 'stay'
+            return 'choice'
         # double down
         # split

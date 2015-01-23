@@ -1,7 +1,7 @@
 from blackjack.card import Card
 from blackjack.deck import Deck
-from blackjack.player_hand import Player_hand
-from blackjack.dealer_hand import Dealer_hand
+from blackjack.player_hand import PlayerHand
+from blackjack.dealer_hand import DealerHand
 from blackjack.user import User
 
 
@@ -28,35 +28,35 @@ def test_deal_card_removes_it():
     assert len(deck) ==51
 
 def test_correct_card_dealing_to_player():
-    new_cards = Player_hand(['10 of Diamonds', '5 of Clubs'])
+    new_cards = PlayerHand(['10 of Diamonds', '5 of Clubs'])
     assert new_cards.cards == ['10 of Diamonds', '5 of Clubs']
 
 def test_deal_player_cards():
     fresh_deck = Deck()
-    new_cards = Player_hand([fresh_deck.deal_card(), fresh_deck.deal_card()])
+    new_cards = PlayerHand([fresh_deck.deal_card(), fresh_deck.deal_card()])
     assert new_cards.cards is not None
 
 def test_player_card_count():
     fresh_deck = Deck()
-    new_cards = Player_hand([fresh_deck.deal_card(), fresh_deck.deal_card()])
+    new_cards = PlayerHand([fresh_deck.deal_card(), fresh_deck.deal_card()])
     assert new_cards.player_card_count(new_cards.cards) >= 2
     assert new_cards.player_card_count(new_cards.cards) <= 22
 
 def test_player_additional_cards_hit():
     fresh_deck = Deck()
-    new_cards = Player_hand([fresh_deck.deal_card(), fresh_deck.deal_card()])
-    next_card = Player_hand(fresh_deck.deal_card())
+    new_cards = PlayerHand([fresh_deck.deal_card(), fresh_deck.deal_card()])
+    next_card = PlayerHand(fresh_deck.deal_card())
     new_cards.cards.append(next_card.cards)
     assert len(new_cards.cards) == 3
 
 def test_player_options():
-    new_cards = Player_hand([])
+    new_cards = PlayerHand([])
     assert new_cards.player_actions(25) == 'bust'
     assert new_cards.player_actions(21) == '21'
     assert new_cards.player_actions(20) == ('hit', 'stay')
 
 def test_dealer_options():
-    new_cards = Dealer_hand([])
+    new_cards = DealerHand([])
     assert new_cards.dealer_actions(25) == 'bust'
     assert new_cards.dealer_actions(21) == '21'
     assert new_cards.dealer_actions(17) == 'stay'

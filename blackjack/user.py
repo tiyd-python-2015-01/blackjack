@@ -1,11 +1,7 @@
-import blackjack.game_file
-import sys
-
 class User:
     """User bets, hand actions, and chip count.
 
     Responsibilities:
-
     * Gives initial chip count:
         500
     * Chooses game settings:
@@ -13,7 +9,6 @@ class User:
         Deal Hand
 
     Collaborators:
-
     * Chooses possible actions passed from Hand
     * Chooses how much to bet.
     * Game_manager class sends user double bet if wins. """
@@ -27,37 +22,34 @@ class User:
         return self.chip_count
 
     def user_pregame_input(self):
-        user_request = input("How much would you like to bet? Type in"
-                         " the desired amount and press enter."
-                         " Type in 'deal' when you're ready for a hand")
-        return user_request
+        user_request = input("Type 'bet' if you'd like to place a bet and"
+                             " start a new hand.\n")
 
-    def user_pregame_steps(self, user_pregame):
-
-        if user_request == 'help':
-            blackjack.game_file.game_help()
-            return user_pregame_input()
-
-        elif user_request == 'quit':
-            return sys.exit()
-
-        elif user_request == type(int):
-            bet_chips(user_request)
-            print("You've bet {} chips.".format(user_request))
-            return user_pregame_input()
-
-        elif user_request == 'deal':
-            return 'deal'
+        if user_request in ['quit', 'help', 'chips']:
+            return user_request
+        elif user_request == 'bet':
+            try:
+                bet_amount = int(input("How much would you like to wager?\n"))
+                if bet_amount <= self.chip_count:
+                    return bet_amount
+                else:
+                    print("You don't have that many chips!")
+                    return self.user_pregame_input()
+                return bet_amount
+            except:
+                print("That is not a number.")
+                return self.user_pregame_input()
+        else:
+            print('That is not a valid response.')
+            return self.user_pregame_input()
 
     def user_in_game_input(self):
-        user_request = input("")
+        user_request = input("What would you like to do? You can either:\n"
+                             "Type 'hit' to receive another card.\n"
+                             "Type 'stay' to hold your position.\n"
+                             "Type 'double' to double down your bet\n")
 
-    def user_in_game_actions(self, user_wish):
-        if user_request == 'help':
-            print(game_help())
-        elif user_request == 'quit':
-            return sys.exit()
-        elif user_request == 'hit':
-            return 'something'
-        elif user_request == 'stay':
-            return 'something'
+        if user_request not in ['hit', 'stay', 'double', 'help','quit']:
+            print("That is not a valid response.")
+            return self.user_in_game_input()
+        return user_request

@@ -1,4 +1,4 @@
-class Dealer_hand:
+class DealerHand:
     """Current card count.
 
     Responsibilities:
@@ -18,7 +18,7 @@ class Dealer_hand:
         self.cards = cards
 
     def __str__(self):
-        return "The dealer has {}".format(self.cards)
+        return "Dealer has {}".format(self.cards)
 
     def dealer_card_count(self, cards):
         count = 0
