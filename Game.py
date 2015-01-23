@@ -5,8 +5,9 @@ class Game:
 
     * Check for winner
     * Handles betting and bankroll
-    * Resets the game
+    * Resets the game and hands
 
     Collaborators
 
     * Checks the player and dealer's hand amounts and compares them
+    """

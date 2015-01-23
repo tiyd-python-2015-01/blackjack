@@ -6,7 +6,7 @@ class Hand:
     * Can hold x cards
     * Has a hard or soft total for hand, aces depend on hand
     * Can add cards to hand
-    * can check if hand is busted (over 21)
+    * Check if hand is busted (over 21)
 
     Collaborators:
 
@@ -18,6 +18,8 @@ class Hand:
     def __init__(self, hand):
         self.hand = hand
 
+
+    @property
     def hard_total(self):
         hard_total = 0
         for card in self.hand:
@@ -31,6 +33,7 @@ class Hand:
         return hard_total
 
 
+    @property
     def soft_total(self):
         soft_total = 0
         for card in self.hand:
@@ -45,7 +48,7 @@ class Hand:
 
 
     def bust(self):
-        if self.soft_total() > 21:
+        if self.soft_total > 21:
             return True
         else:
             return False

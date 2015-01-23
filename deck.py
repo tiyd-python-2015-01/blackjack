@@ -25,30 +25,30 @@ class Deck:
     * Can be put into shoe for dealing and shuffling
     """
     def __init__(self):
-        self.__cards__ = [Card(rank, suit)
+        self._cards = [Card(rank, suit)
                       for rank in RANKS
                       for suit in SUITS]
 
 
     def draw(self):
         """Take a card off the top of the deck and return it"""
-        return self.__cards__.pop()
+        return self._cards.pop()
 
 
     def shuffle(self):
         """Shuffles cards in the deck"""
-        shuffle(self.__cards__)
-        return self.__cards__
+        shuffle(self._cards)
+        return self._cards
 
 
     def __eq__(self, other):
-        return self.__cards__ == other.__cards__
+        return self._cards == other._cards
 
     def __len__(self):
-        return len(self.__cards__)
+        return len(self._cards)
 
     def __str__(self):
-        deck_list = [str(card) for card in self.__cards__]
+        deck_list = [str(card) for card in self._cards]
         return ", ".join(deck_list)
 
     def __repr__(self):

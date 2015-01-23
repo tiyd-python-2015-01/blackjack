@@ -20,9 +20,9 @@ def test_has_hard_total():
     new_hand2 = Hand([Card(4, Clubs), Card(5, Spades)])
     new_hand3 = Hand([Card(2, Diamonds), Card('K', Spades)])
 
-    assert new_hand1.hard_total() == 13
-    assert new_hand2.hard_total() == 9
-    assert new_hand3.hard_total() == 12
+    assert new_hand1.hard_total == 13
+    assert new_hand2.hard_total == 9
+    assert new_hand3.hard_total == 12
 
 def test_has_soft_total():
     new_hand1 = Hand([Card(2, Diamonds), Card('A', Spades)])
@@ -30,10 +30,10 @@ def test_has_soft_total():
     new_hand3 = Hand([Card(2, Diamonds), Card('K', Spades)])
     new_hand4 = Hand([Card('A', Diamonds), Card('A', Spades)])
 
-    assert new_hand1.soft_total() == 3
-    assert new_hand2.soft_total() == 9
-    assert new_hand3.soft_total() == 12
-    assert new_hand4.soft_total() == 2
+    assert new_hand1.soft_total == 3
+    assert new_hand2.soft_total == 9
+    assert new_hand3.soft_total == 12
+    assert new_hand4.soft_total == 2
 
 
 def test_bust():
