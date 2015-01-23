@@ -155,7 +155,7 @@ def test_hit():
     options = GameOptions()
     new_game = Game(options, "Alan")
     hand = Hand(10, [Card("A", "spades"), Card("6", "hearts")])
-    new_game.player.takes_hit(hand)
+    new_game.player.takes_hit(hand, new_game.deck.deal())
     assert len(hand.cards) == 3
 
 
@@ -164,7 +164,7 @@ def test_split():
     new_game = Game(options, "Alan")
     hand = Hand(10, [Card("J", "spades"), Card("J", "clubs")])
     new_game.player.hands.append(hand)
-    new_game.player.splits(hand)
+    new_game.player.splits(hand, [new_game.deck.deal(), new_game.deck.deal()])
     assert len(new_game.player.hands) == 2
     assert len(hand.cards) == 2
     assert hand.cards[0].rank == "J"
@@ -175,7 +175,7 @@ def test_double_down():
     options = GameOptions()
     new_game = Game(options, "Alan")
     hand = Hand(10,[Card("2", "spades"), Card("J", "clubs")])
-    new_game.player.doubles(hand)
+    new_game.player.doubles(hand, new_game.deck.deal())
     assert len(hand.cards) == 3
     assert hand.bet == 20
     assert new_game.player.money == 90
@@ -184,4 +184,4 @@ def test_surrender():
     options = GameOptions()
     new_game = Game(options, "Alan")
     hand = Hand(10,[Card("2", "spades"), Card("J", "clubs")])
-    options.new_game.player.surrenders()
+    new_game.player.surrenders(hand)

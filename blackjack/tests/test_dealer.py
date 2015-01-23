@@ -1,6 +1,8 @@
 from dealer import Dealer
 from card import Card
 from hand import Hand
+from game_options import GameOptions
+from game import Game
 
 
 def test_dealer_hit():
@@ -26,3 +28,9 @@ def test_dealer_hits_soft_17():
     dealer.hand = hand
 
     assert dealer.hit() == True
+
+def test_dealer_takes_hit():
+    options = GameOptions()
+    new_game = Game(options, "Alan")
+    new_game.dealer.hand = Hand(10,[Card("2", "spades"), Card("J", "clubs")])
+    new_game.dealer.takes_hit(new_game.deck.deal())
