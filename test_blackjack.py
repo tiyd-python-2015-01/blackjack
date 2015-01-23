@@ -1,7 +1,7 @@
 import deck as dk
 import card
 import shoe
-import hand
+from hand import Hand, get_hand_value
 
 def test_deck_creation():
     test_deck = dk.Deck()
@@ -21,5 +21,5 @@ def test_card_creation():
 #     assert len(test_deck.shuffle_shoe) == 52
 
 def test_hand_value():
-    test_hand = hand.Hand
-    assert get_hand_value(Card("K", 9)) == 19
+    test_hand = Hand(card.Card("K", 9)
+    assert get_hand_value(test_hand) == 19
