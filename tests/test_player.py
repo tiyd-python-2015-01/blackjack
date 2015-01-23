@@ -15,7 +15,7 @@ def test_can_hit():
     player1 = Player("Juan", 20, hand1)
     player1.hit(deck1)
     assert len(player1.cards) == 3
-    
+
 
 def test_can_bet():
     hand1 = Hand([Card(2, Diamonds), Card('A', Spades)])

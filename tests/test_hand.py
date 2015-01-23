@@ -15,6 +15,13 @@ def test_can_print_hand():
 
     assert repr(new_hand) == "2" + Diamonds + ", "+ "A" + Spades
 
+def test_draw_card():
+    new_hand = Hand([Card(2, Diamonds), Card('A', Spades)])
+    deck = Deck()
+    new_hand.draw(deck)
+
+    assert len(new_hand.hand) == 3
+
 def test_has_hard_total():
     new_hand1 = Hand([Card(2, Diamonds), Card('A', Spades)])
     new_hand2 = Hand([Card(4, Clubs), Card(5, Spades)])
@@ -52,3 +59,10 @@ def test_can_add_cards_from_deck():
     new_hand1.draw(deck1)
     assert len(new_hand1.hand) == 3
     assert len(deck1) == 51
+
+
+def test_new_hand():
+    deck1 = Deck()
+    new_hand1 = Hand([])
+    new_hand1.new_hand(deck1)
+    assert len(new_hand1.hand) == 2

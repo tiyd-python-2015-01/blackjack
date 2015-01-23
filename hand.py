@@ -59,6 +59,11 @@ class Hand:
         self.hand.append(card)
 
 
+    def new_hand(self, deck):
+        self.draw(deck)
+        self.draw(deck)
+
+
     def __str__(self):
         hand_list = [str(card) for card in self.hand]
         return str(', '.join(hand_list))

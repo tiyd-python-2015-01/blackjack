@@ -22,9 +22,8 @@ class Player:
         self.stack = stack
 
 
-    def hit(self, deck):
-        card = deck.draw()
-        return self.cards.append(card)
+    def hit(self, deck): 
+        self.hand.draw(deck)
 
 
     def bet(self, amount):

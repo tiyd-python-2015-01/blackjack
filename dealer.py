@@ -23,10 +23,13 @@ class Dealer():
         self.hand = hand
         self.cards = hand.hand
 
-    def hit(self, deck):  #change to hand class
-        card = deck.draw()
-        return self.cards.append(card)
+    def hit(self, deck):
+        self.hand.draw(deck)
+
 
     def play_out_hand(self, deck):
         while self.hand.soft_total < 17:
-            self.hit(deck)
+            self.hand.draw(deck)
+
+    def show_hand(self):
+        print("{name}'s hand: {hand}".format(name = self.name, hand = self.hand))

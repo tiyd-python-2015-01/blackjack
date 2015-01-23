@@ -21,7 +21,7 @@ def test_can_hit():
 def test_play_out_hand():
     deck1 = Deck()
     dealer1 = Dealer()
-    dealer1.hit(deck1)
-    dealer1.hit(deck1)
+    dealer1.hand.draw(deck1)
+    dealer1.hand.draw(deck1)
     dealer1.play_out_hand(deck1)
     assert dealer1.hand.soft_total > 16
