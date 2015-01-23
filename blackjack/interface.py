@@ -19,8 +19,8 @@ class Interface:
         return self.yes_or_no()
 
     def display_hands(self,player,dealer):
-        player_hand = ("Your hand is {}".format(player.display_hand()))
-        dealer_hand = ("Dealer is showing {}".format(dealer.display_hand()))
+        player_hand = ("Your hand:\n{}\n".format(player.display_hand()))
+        dealer_hand = ("Dealer hand:\n{}\n".format(dealer.display_hand()))
         print(player_hand)
         print(dealer_hand)
         return "{}\n{}".format(player_hand,dealer_hand)
@@ -35,7 +35,7 @@ class Interface:
 
     def yes_or_no(self):
         print("[Y]es")
-        print("[N]o")
+        print("[N]o\n")
         answer = input(">>").lower()
         if answer == "y" or answer == "yes":
             return True

@@ -43,9 +43,9 @@ class Game:
             self.show_cards()
             while self.hit_or_stand():
                 pass
-                #player.hit
-                #display player hand
-            
+                self.user.get_card(self.shoe.give_card())
+                self.show_cards()
+
             # Allow dealer to hit or stand
             # Show Dealer's hits
             # Win or Lose

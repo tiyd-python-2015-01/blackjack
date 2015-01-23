@@ -24,11 +24,11 @@ def test_create_deck():
     assert isinstance(deck.cards[0], Card)
 
 
-def test_get_card_from_deck():
+def test_give_card_from_deck():
     deck = Deck()
-    assert isinstance(deck.get_card(), Card)
+    assert isinstance(deck.give_card(), Card)
     assert len(deck.cards) == 51
-    assert isinstance(deck.get_card(), Card)
+    assert isinstance(deck.give_card(), Card)
     assert len(deck.cards) == 50
 
 
@@ -52,8 +52,8 @@ def test_deal_hand():
     assert len(hand) == 2
     assert len(shoe.cards) == 50
 
-def test_get_card_from_shoe():
+def test_give_card_from_shoe():
     shoe = Shoe()
     assert len(shoe.cards) == 52
-    shoe.get_card()
+    shoe.give_card()
     assert len(shoe.cards) == 51

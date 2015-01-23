@@ -12,6 +12,6 @@ def test_display_hands():
     player.get_hand([Card("King", "Diamonds"), Card("Queen", "Spades")])
     dealer.get_hand([Card("One", "Diamonds"), Card("Ten", "Clubs")])
     interface = Interface()
-    printout = "Your hand is King of Diamonds and Queen of Spades\nDealer is showing One of Diamonds"
+    printout = "Your hand:\nKing of Diamonds\nQueen of Spades\n\nDealer hand:\nTen of Clubs\n"
     print(interface.display_hands(player,dealer))
     assert interface.display_hands(player,dealer) == printout

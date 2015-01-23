@@ -35,7 +35,7 @@ class Shoe:
         hand = [self.cards.pop(), self.cards.pop()]
         return hand
 
-    def get_card(self):
+    def give_card(self):
         if len(self.cards) > 0:
             return self.cards.pop()
         else:
@@ -49,7 +49,7 @@ class Deck:
     def __init__(self):
         self.cards = [Card(rank, suit) for suit in SUITS for rank in rankS]
 
-    def get_card(self):
+    def give_card(self):
         if len(self.cards) > 0:
             return self.cards.pop()
         else:

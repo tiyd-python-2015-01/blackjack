@@ -40,7 +40,10 @@ class Player:
 
     def display_hand(self):
         try:
-            return "{} and {}".format(self.cards[0],self.cards[1])
+            hand = ""
+            for card in self.cards:
+                hand += str(card)+"\n"
+            return hand[0:-1]
         except:
             return "Player has an empty hand."
 
@@ -50,7 +53,11 @@ class Dealer(Player):
 
     def display_hand(self):
         try:
-            return "{}".format(self.cards[0])
+            temp_cards = self.cards[1:]
+            hand = ""
+            for card in temp_cards:
+                hand += str(card)+"\n"
+            return hand[0:-1]
         except:
             return "Dealer has an empty hand."
 
