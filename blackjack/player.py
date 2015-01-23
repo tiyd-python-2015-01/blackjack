@@ -30,6 +30,7 @@ class Player:
         self.cards = []
         self.potential_values = []
         self.cash = 100
+        self.blackjack = False
 
     def get_hand(self,new_cards):
         """receives a list of Cards and stores as players cards"""
@@ -66,6 +67,17 @@ class Player:
             ace_count -= 1
         return value
 
+    def busted(self):
+        return self.assess_hand() > 21
+
+    def is_blackjack(self):
+        if self.assess_hand() == 21:
+            self.blackjack = True
+        else:
+            self.blackjack = False
+        return self.blackjack
+
+
 
 class Dealer(Player):
     def __init__(self):
@@ -80,6 +92,19 @@ class Dealer(Player):
             return hand[0:-1]
         except:
             return "Dealer has an empty hand."
+
+    def display_entire_hand(self):
+        try:
+            hand = ""
+            for card in self.cards:
+                hand += str(card)+"\n"
+            return hand[0:-1]
+        except:
+            return "Dealer has an empty hand."
+
+    def hit_or_stand(self):
+        return self.assess_hand() <=17
+
 
 class Hand:
     def __init__(self):

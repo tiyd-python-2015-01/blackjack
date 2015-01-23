@@ -31,3 +31,23 @@ def test_assess_hand():
     assert player.assess_hand() == 18
     player.get_card(Card(10,"♧"))
     assert player.assess_hand() == 18
+
+def test_is_blackjack():
+    player = Player()
+    player.get_hand([Card("Ace","♢"),Card("King","♡")])
+    assert player.is_blackjack() == True
+    player.get_hand([Card("Queen","♢"),Card("King","♡")])
+    assert player.is_blackjack() == False
+
+def test_user_busted():
+    player = Player()
+    player.get_hand([Card(2,"♢"),Card(3,"♡")])
+    assert player.busted() == False
+    player.get_card(Card("Ace","♢"))
+    assert player.busted() == False
+    player.get_card(Card(10,"♢"))
+    player.get_card(Card("King","♡"))
+    assert player.busted() == True
+    player = Player()
+    player.get_hand([Card(10,"♢"),Card(10,"♡"),Card(2,"♡")])
+    assert player.busted() == True

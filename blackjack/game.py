@@ -41,22 +41,57 @@ class Game:
         while True:
             self.deal_cards()
             self.show_cards()
-            while self.hit_or_stand():
-                pass
+            self.user.is_blackjack()
+            self.dealer.is_blackjack()
+            while self.player_hit_or_stand():
                 self.user.get_card(self.shoe.give_card())
-                self.show_cards()
+                self.interface.show_cards(self.user)
+                if self.user.busted():
+                    break
+            while self.dealer.hit_or_stand() and not self.user.busted():
+                self.dealer.get_card(self.shoe.give_card())
+                self.interface.dealer_hits(self.dealer)
+                if self.dealer.busted():
+                    break
+            else:
+                self.interface.dealer_stands(self.dealer)
+            self.win_or_lost()
+            if not self.interface.play_again():
+                return False
 
-            # Allow dealer to hit or stand
-            # Show Dealer's hits
-            # Win or Lose
-            # Adjust Money
-            # Game Over?
-            break
-        if self.interface.play_again():
-            return True
+    def win_or_lost(self):
+        self.interface.final_cards(self.user,self.dealer)
+        if self.user.busted():
+            print("User busted")
+            return self.player_loses(self.user)
+        if self.dealer.busted():
+            return self.player_wins(self.user)
+        if self.user.assess_hand() > self.dealer.assess_hand():
+            return self.player_wins(self.user)
+        elif self.user.assess_hand() < self.dealer.assess_hand():
+            return self.player_loses(self.user)
+        elif self.user.assess_hand() == 21:
+            if self.user.is_blackjack() and not self.dealer.is_blackjack():
+                print("User blackjack")
+                return self.player_wins(self.user)
+            elif self.dealer.is_blackjack() and not self.user.is_blackjack():
+                print("Dealer blackjack")
+                return self.player_loses(self.user)
+            else:
+                return self.player_ties(self.user)
         else:
-            return False
+            return self.player_ties(self.user)
 
+    def player_loses(self,player):
+        self.user.cash -= 10
+        self.interface.player_loses(self.user)
+
+    def player_wins(self,player):
+        self.user.cash += 10
+        self.interface.player_wins(self.user)
+
+    def player_ties(self,player):
+        self.interface.player_ties(self.user)
 
     def deal_cards(self):
         self.user.get_hand(self.shoe.deal_hand())
@@ -65,5 +100,8 @@ class Game:
     def show_cards(self):
         self.interface.display_hands(self.user, self.dealer)
 
-    def hit_or_stand(self):
+    def player_hit_or_stand(self):
         return self.interface.hit_or_stand()
+
+    def dealer_hit_or_stand(self):
+        return self.interface.dealer_hit_or_stand()
