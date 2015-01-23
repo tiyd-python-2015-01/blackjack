@@ -14,16 +14,21 @@ def test_card_creation():
     test_card = Card("Jack", "Diamonds")
     assert str(test_card) == "Jack of Diamonds"
 
+
 def test_deck_creation_in_shoe_class():
     """Tests the ability of the shoe to create deck"""
     test_deck = Shoe()
     assert len(test_deck.deck) == 52
 
+
 def test_shuffle():
     """test the ability of the shoe to shuffle a deck"""
     deck1 = Shoe()
     deck2 = Shoe()
-    assert deck1.shuffle_shoe(deck1) != deck2.shuffle_shoe(deck2)
+    deck1.shuffle_shoe()
+    deck2.shuffle_shoe()
+    assert deck1.shuffle_shoe() != deck2.shuffle_shoe()
+
 
 # def test_hand_value():
 #     """Will test the ability of a hand to assess its value"""
