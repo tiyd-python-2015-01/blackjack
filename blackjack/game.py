@@ -31,6 +31,8 @@ class Game:
         self.options = options
 
     def can_double(self, hand):
+        """Checks to see if the option to double down is abailable to the
+        player"""
         if self.options.double_9_10_11:
             return 9 <= hand.get_value() < 12 and len(hand.cards) == 2
         elif self.options.double_9_10:
@@ -39,16 +41,22 @@ class Game:
             return len(hand.cards) == 2
 
     def can_split(self, hand):
+        """Checks to see if the option to split is available to the player"""
         if self.options.split_by_rank:
             return hand.get_ranks()[0] == hand.get_ranks()[1]
         else:
             return hand.get_values()[0] == hand.get_values()[1]
 
     def can_surrender(self, player_hand, dealer_show_card):
-        return (not options.no_surrender and (len(player_hand.cards) == 2
-                and dealer.show_card.rank == "A"))
+        """Checks to see if the options to surrender is available to the
+        player"""
+        return (not self.options.no_surrender
+                and len(player_hand.cards) == 2
+                and dealer_show_card.rank == "A")
 
     def create_hands(self, bet):
+        """Creates the player and dealer hands and assigns them to their
+        respective objects"""
         dealer_cards = []
         player_cards = []
         for _ in range(2):
@@ -58,10 +66,14 @@ class Game:
         self.dealer.hand = Hand(0, dealer_cards)
 
     def check_bust(self, hand):
+        """Checks to see if a hand has busted"""
         return hand.get_value() > 21
 
-    def check_push(self, hand1, hand2):
-        return hand1.get_value() == hand2.get_value()
+    def check_push(self, player_hand, dealer_hand):
+        """Compares a player and dealer hand and to see if a set of hands
+        results in a push state"""
+        return player_hand.get_value() == dealer_hand.get_value()
 
     def compare_hands(self, player_hand, dealer_hand ):
+        """Compares the player and dealer hand to resolve the winner"""
         return player_hand.get_value > dealer_hand.get_value

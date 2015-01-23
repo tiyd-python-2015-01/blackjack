@@ -92,4 +92,9 @@ def test_can_surrender():
     options = GameOptions()
     new_game = Game(options, "Alan")
     hand1 = Hand(10, [Card("6", "clubs"), Card("10", "hearts")])
-    
+    hand2 = Hand(10, [Card("7", "hearts"), Card("A", "spades")])
+    assert new_game.can_surrender(hand1, hand2.cards[1])
+    assert not new_game.can_surrender(hand1, hand2.cards[0])
+    new_game.options.no_surrender = True
+    assert not new_game.can_surrender(hand1, hand2.cards[1])
+    assert not new_game.can_surrender(hand1, hand2.cards[0])
