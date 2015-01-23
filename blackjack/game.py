@@ -95,18 +95,3 @@ class Game:
     def compare_hands(self, player_hand, dealer_hand ):
         """Compares the player and dealer hand to resolve the winner"""
         return player_hand.get_value > dealer_hand.get_value
-
-    def takes_hit(self, hand):
-        hand.add_cards(self.deck.deal())
-
-    def splits(self, hand):
-        self.player.modify_money(-1 * hand.bet)
-        new_hand = Hand(hand.bet, [hand.cards[1], self.deck.deal()])
-        hand.cards.pop(1)
-        hand.add_cards(self.deck.deal())
-        self.player.hands.append(new_hand)
-
-    def doubles(self, hand):
-        self.player.modify_money(-1 * hand.bet)
-        hand.bet *= 2
-        self.takes_hit(hand)
