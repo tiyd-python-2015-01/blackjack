@@ -29,4 +29,3 @@ class GameOptions:
 
 # Rules to implement:
 # Early Surrender - NOT DONE
-# No Double After Split - NOT DONE

@@ -148,3 +148,10 @@ def test_no_double_after_split():
     assert new_game.can_double(hand1)
     new_game.options.no_double_after_split = True
     assert not new_game.can_double(hand1)
+
+def test_hit():
+    options = GameOptions()
+    new_game = Game(options, "Alan")
+    hand = Hand(10, [Card("A", "spades"), Card("6", "hearts")])
+    new_game.takes_hit(hand)
+    assert len(hand.cards) == 3

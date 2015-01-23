@@ -76,7 +76,7 @@ whether to hit or stand for it's given hand value.
 To Do:
 + - Add class attribute
 + - Add basic decision rules
-/ - Add optional rules based on user selected options
++ - Add optional rules based on user selected options
 
 
 + <Hand>:  The Hand class will contain a list of cards currently associated
@@ -113,13 +113,12 @@ for use by the Player class to update the Player's money total.  ?May create
 the Dealer object and retrieve the ruleset from GameOptions.?
 
 To Do:
-* - Add list of Game attributes
-* - Add method to distribute Hands to Player and Dealer
-* - Add method to check the status of the game by resolving Hand values
++ - Add list of Game attributes
++ - Add method to distribute Hands to Player and Dealer
++ - Add method to check the status of the game by resolving Hand values
 * - Add method to distribute payouts to the player
-? - Add method for determining available actions for the player (Maybe in Hand
-    Class?)
-? - Add method to retrieve the ruleset from GameOptions and create the
++ - Add method for determining available actions for the player
++ - Add method to retrieve the ruleset from GameOptions and create the
     Dealer based on currently selected rules. (Maybe in Blackjack class?)
 
 
