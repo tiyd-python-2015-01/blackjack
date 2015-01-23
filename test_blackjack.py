@@ -30,6 +30,13 @@ def test_shuffle():
     assert deck1.shuffle_shoe() != deck2.shuffle_shoe()
 
 
+def test_for_dealing_card():
+    """Will test that the shoe has dealt a card. Length of shoe should be 51"""
+    deck1 = Shoe()
+    deck1.deal_card()
+    assert len(deck1.deck) == 51
+
+
 # def test_hand_value():
 #     """Will test the ability of a hand to assess its value"""
 #     test_hand = Hand(card.Card("K", 9)
