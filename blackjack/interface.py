@@ -19,31 +19,36 @@ class Interface:
         return self.yes_or_no()
 
     def display_hands(self,player,dealer):
-        #player_hand = ("Your hand:\n{}\n".format(player.display_hand()))
-        #dealer_hand = ("Dealer hand:\n{}\n".format(dealer.display_hand()))
-        #print(player_hand)
-        #print(dealer_hand)
-        #return "{}\n{}".format(player_hand,dealer_hand)
         player_hand = player.display_hand()
         dealer_hand = dealer.display_hand()
-        print("Your Hand:\t\t\t\tDealer Hand")
-        print("{}\t\t\t\t{}".format(player_hand,dealer_hand))
+        max_length = max(len(player_hand),len(dealer_hand))
+        print("Your Hand:".ljust(30),"Dealer Hand".ljust(30))
+        for n in range(0,max_length):
+            try:
+                print(str(player_hand[n]).ljust(30),str(dealer_hand[n]).ljust(30))
+            except:
+                try:
+                    print(str(player_hand[n]).ljust(30))
+                except:
+                    print(" ".ljust(30),str(dealer_hand[n]).ljust(60))
+        print("Your Value: {}".format(player.assess_hand()).ljust(30),"\n")
+
         return "{}\n{}".format(player_hand,dealer_hand)
 
     def player_wins(self,player):
-        print("You win!")
+        print("You win!","\n")
         self.players_pot(player)
 
     def player_loses(self,player):
-        print("You lose.")
+        print("You lose.","\n")
         self.players_pot(player)
 
     def player_ties(self,player):
-        print("Game is a push.")
+        print("Game is a push.","\n")
         self.players_pot(player)
 
     def players_pot(self,player):
-        print("You currently have ${}".format(player.cash))
+        print("You currently have ${}".format(player.cash),"\n")
 
     def hit_or_stand(self):
         print("Another Card?")
@@ -51,15 +56,24 @@ class Interface:
 
     def show_cards(self, player):
         print("Your cards:")
-        print(player.display_hand())
+        cards = player.display_hand()
+        for n in range(0,len(cards)-1):
+            print(str(cards[n]).ljust(30))
+        print("Your Value: {}".format(player.assess_hand()).ljust(30),"\n")
 
     def dealer_hits(self,dealer):
-        print("Dealer hits")
-        print(dealer.display_hand())
+        print(" ".ljust(30),"Dealer hits:")
+        cards = dealer.display_hand()
+        for n in range(0,len(cards)):
+            print(" ".ljust(30), str(cards[n]).ljust(30))
+        print("")
 
     def dealer_stands(self, dealer):
-        print("Dealer stands")
-        print(dealer.display_hand())
+        print(" ".ljust(30),"Dealer stands")
+        cards = dealer.display_hand()
+        for n in range(0,len(cards)-1):
+            print(" ".ljust(30), str(cards[n]).ljust(30))
+        print("")
 
     def play_again(self):
         print("Would you like to play again?")
@@ -67,20 +81,24 @@ class Interface:
 
     def busted(self):
         print("You've busted.")
-        print("Game over.")
+        print("Game over.\n")
 
     def final_cards(self,player,dealer):
-        # print("Your cards")
-        # print(player.display_hand())
-        # print("With a value of: {}\n".format(player.assess_hand()))
-        # print("Dealer's cards")
-        # print(dealer.display_entire_hand())
-        # print("With a value of: {}\n".format(dealer.assess_hand()))
         player_hand = player.display_hand()
         dealer_hand = dealer.display_entire_hand()
-        print("Your Hand:\t\t\t\tDealer Hand")
-        print("{}\t\t\t\t{}".format(player_hand,dealer_hand))
-        print("Value: {}\t\t\t\tValue: {}".format(player.assess_hand(),dealer.assess_hand()))
+        max_length = max(len(player_hand),len(dealer_hand))
+        print("Your Hand:".ljust(30),"Dealer Hand".ljust(30))
+        for n in range(0,max_length):
+            try:
+                print(str(player_hand[n]).ljust(30),str(dealer_hand[n]).ljust(30))
+            except:
+                try:
+                    print(str(player_hand[n]).ljust(30))
+                except:
+                    print(" ".ljust(30),str(dealer_hand[n]).ljust(60))
+        print(("Your Value: {}".format(player.assess_hand()).ljust(30)),
+              ("Dealer Value: {}".format(dealer.assess_hand()).ljust(30)),"\n")
+        return "{}\n{}".format(player_hand,dealer_hand)
 
 
     def yes_or_no(self):

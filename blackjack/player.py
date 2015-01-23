@@ -40,13 +40,14 @@ class Player:
         self.cards.append(new_card)
 
     def display_hand(self):
-        try:
-            hand = ""
-            for card in self.cards:
-                hand += str(card)+"\n"
-            return hand[0:-1]
-        except:
-            return "Player has an empty hand."
+        # try:
+        #     hand = ""
+        #     for card in self.cards:
+        #         hand += str(card)+"\n"
+        #     return hand[0:-1]
+        # except:
+        #     return "Player has an empty hand."
+        return self.cards
 
     def assess_hand(self):
         value = 0
@@ -84,23 +85,10 @@ class Dealer(Player):
         super().__init__()
 
     def display_hand(self):
-        try:
-            temp_cards = self.cards[1:]
-            hand = ""
-            for card in temp_cards:
-                hand += str(card)+"\n"
-            return hand[0:-1]
-        except:
-            return "Dealer has an empty hand."
+        return self.cards[1:]
 
     def display_entire_hand(self):
-        try:
-            hand = ""
-            for card in self.cards:
-                hand += str(card)+"\n"
-            return hand[0:-1]
-        except:
-            return "Dealer has an empty hand."
+        return self.cards
 
     def hit_or_stand(self):
         return self.assess_hand() <=17

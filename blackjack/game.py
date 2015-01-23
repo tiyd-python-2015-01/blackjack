@@ -43,12 +43,12 @@ class Game:
             self.show_cards()
             self.user.is_blackjack()
             self.dealer.is_blackjack()
-            while self.player_hit_or_stand():
+            while not self.user.is_blackjack() and self.player_hit_or_stand():
                 self.user.get_card(self.shoe.give_card())
                 self.interface.show_cards(self.user)
                 if self.user.busted():
                     break
-            while self.dealer.hit_or_stand() and not self.user.busted():
+            while not self.user.busted() and self.dealer.hit_or_stand():
                 self.dealer.get_card(self.shoe.give_card())
                 self.interface.dealer_hits(self.dealer)
                 if self.dealer.busted():
@@ -62,7 +62,6 @@ class Game:
     def win_or_lost(self):
         self.interface.final_cards(self.user,self.dealer)
         if self.user.busted():
-            print("User busted")
             return self.player_loses(self.user)
         if self.dealer.busted():
             return self.player_wins(self.user)
@@ -72,10 +71,8 @@ class Game:
             return self.player_loses(self.user)
         elif self.user.assess_hand() == 21:
             if self.user.is_blackjack() and not self.dealer.is_blackjack():
-                print("User blackjack")
                 return self.player_wins(self.user)
             elif self.dealer.is_blackjack() and not self.user.is_blackjack():
-                print("Dealer blackjack")
                 return self.player_loses(self.user)
             else:
                 return self.player_ties(self.user)
