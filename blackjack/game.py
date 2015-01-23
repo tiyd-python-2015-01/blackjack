@@ -100,8 +100,8 @@ class Game:
         hand.add_cards(self.deck.deal())
 
     def splits(self, hand):
-        player.modify_money(-1 * hand.bet)
-        new_hand = Hand(hand.bet, [hand[1], self.deck.deal()])
-        hand.pop(1)
+        self.player.modify_money(-1 * hand.bet)
+        new_hand = Hand(hand.bet, [hand.cards[1], self.deck.deal()])
+        hand.cards.pop(1)
         hand.add_cards(self.deck.deal())
         self.player.hands.append(new_hand)
