@@ -2,14 +2,15 @@
 """Hand collaborates with Shoe and the Player"""
 """Hand receives cards from Shoe, calculates a value for Player"""
 
-from card import Card
+from card import Card, ranks, suits
+from deck import Deck
 
 class Hand:
     """Hand will know which cards it has, the value of those cards.
        It will receive two cards to start, then more depending on player
        action."""
 
-    def __init__(self, Card):
+    def __init__(self, *Card):
 
         self.rank = get_rank(Card)
         self.values = {"1" : 1, "2" : 2,"3" : 3, "4" : 4, "5" : 5, "6" : 6,
