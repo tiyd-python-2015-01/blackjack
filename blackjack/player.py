@@ -1,5 +1,4 @@
-import hand
-
+from hand import Hand
 
 class Player:
     """The player posesses a hand (or more, depending on the rules), and makes

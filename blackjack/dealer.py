@@ -1,3 +1,5 @@
+from hand import Hand
+
 class Dealer:
     """The dealer is one of the two agents in the game, and plays
     deterministically against the player.
@@ -14,9 +16,12 @@ class Dealer:
         self.hand = Hand()
 
     def deal(self, deck):
-        self.hand.grab(deck)
-        self.hand.grab(deck)
+        self.hand.grab(deck.draw())
+        self.hand.grab(deck.draw())
 
     def show_first_card(self):
         card_string = self.hand.show_cards(just_one=True)
-        print "The dealer has a: {}".format(card_string)
+        print("The dealer has a: {}".format(card_string))
+
+    def hit_from_deck(self, deck):
+        self.hand.grab(deck.draw())

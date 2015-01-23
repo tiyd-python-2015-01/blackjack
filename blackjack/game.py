@@ -1,5 +1,6 @@
-import player
-import dealer
+from player import Player
+from dealer import Dealer
+from deck import Deck
 
 
 class Game:
@@ -7,16 +8,26 @@ class Game:
        game loop."""
 
     def __init__(self):
-        dealer = Dealer()
-        player = Player()
+        self.dealer = Dealer()
+        self.player = Player()
 
 
-    def play():
-        continue = True
-        while continue:
+    def play(self):
+        continue_game = True
+        while continue_game:
             deck = Deck()
             deck.shuffle()
-            player.deal(deck)
-            dealer.deal(deck)
-            dealer.show_first_card()
-            continue = False
+            self.player.deal(deck)
+            self.dealer.deal(deck)
+            self.dealer.show_first_card()
+            self.player.show_cards()
+            user_choice = input("Initiate side rules? Y/N")
+            if user_choice == "Y":
+                print("Ha, no.")
+            user_choice = input("")
+            continue_game = False
+
+
+if __name__ == '__main__':
+    game = Game()
+    game.play()
