@@ -9,6 +9,8 @@ class Game:
     def __init__(self):
         self.winner = ''
 
+    def set_winner(self, whowon):
+        self.winner = whowon
 
     def get_winner(self):
         return self.winner
