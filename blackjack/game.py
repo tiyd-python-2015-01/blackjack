@@ -105,3 +105,8 @@ class Game:
         hand.cards.pop(1)
         hand.add_cards(self.deck.deal())
         self.player.hands.append(new_hand)
+
+    def doubles(self, hand):
+        self.player.modify_money(-1 * hand.bet)
+        hand.bet *= 2
+        self.takes_hit(hand)

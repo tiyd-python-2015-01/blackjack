@@ -170,3 +170,12 @@ def test_split():
     assert hand.cards[0].rank == "J"
     assert new_game.player.hands[1].cards[0].rank == "J"
     assert len(new_game.player.hands[1].cards) == 2
+
+def test_double_down():
+    options = GameOptions()
+    new_game = Game(options, "Alan")
+    hand = Hand(10,[Card("2", "spades"), Card("J", "clubs")])
+    new_game.doubles(hand)
+    assert len(hand.cards) == 3
+    assert hand.bet == 20
+    assert new_game.player.money == 90
