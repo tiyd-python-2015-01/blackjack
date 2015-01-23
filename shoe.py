@@ -6,6 +6,7 @@ from deck import Deck
 from card import Card, ranks, suits
 import random
 
+
 class Shoe:
     """Collects decks. Shuffles. Deals cards to hands"""
     def __init__(self, decks=1):
@@ -19,5 +20,12 @@ class Shoe:
         pass
 
 
-    def shuffle_shoe(self, deck):
-        ready_to_deal = random.shuffle(deck)
+    def shuffle_shoe(self):
+        """Shuffles the deck"""
+        random.shuffle(self.deck)
+        return self.deck
+
+    def deal_card(self):
+        """Deals a card"""
+        dealt_card = self.deck.pop()
+        return dealt_card

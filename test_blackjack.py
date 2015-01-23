@@ -37,6 +37,13 @@ def test_for_dealing_card():
     assert len(deck1.deck) == 51
 
 
+def test_hand_receives_cards():
+    deck1 = Shoe()
+    hand1 = Hand()
+    hand1.add_card(deck1.deal_card())
+    assert len(hand1.hand) == 1
+
+
 # def test_hand_value():
 #     """Will test the ability of a hand to assess its value"""
 #     test_hand = Hand(card.Card("K", 9)
