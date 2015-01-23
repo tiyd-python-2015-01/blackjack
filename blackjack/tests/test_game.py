@@ -34,6 +34,33 @@ def test_push():
     assert not new_game.check_push(hand, hand2)
 
 
+def test_can_split_resplitting():
+    options = GameOptions()
+    new_game = Game(options, "Alan")
+    hand = Hand(10, [Card("J", "hearts"), Card("Q", "diamonds")])
+    new_game.player.hands.append(hand)
+    assert new_game.can_split(hand)
+    new_game.player.hands.append(hand)
+    assert new_game.can_split(hand)
+    new_game.options.resplitting = False
+    assert not new_game.can_split(hand)
+    new_game.player.hands.pop()
+    assert new_game.can_split(hand)
+
+
+def test_resplitting_aces():
+    options = GameOptions()
+    new_game = Game(options, "Alan")
+    hand = Hand(10, [Card("A", "hearts"), Card("A", "diamonds")])
+    new_game.player.hands.append(hand)
+    assert new_game.can_split(hand)
+    new_game.player.hands.append(hand)
+    print(len(new_game.player.hands))
+    assert not new_game.can_split(hand)
+    new_game.options.resplit_aces = True
+    assert new_game.can_split(hand)
+
+
 def test_can_split_by_rank():
     options = GameOptions()
     options.split_by_rank = True
@@ -46,10 +73,9 @@ def test_can_split_by_rank():
 
 def test_can_split_by_value():
     options = GameOptions()
-    options.split_by_rank = True
     new_game = Game(options, "Alan")
     hand = Hand(10, [Card("Q", "hearts"), Card("10", "diamonds")])
-    assert not new_game.can_split(hand)
+    assert new_game.can_split(hand)
 
 
 def test_can_double_normal():
@@ -88,6 +114,7 @@ def test_can_double_9_10():
     hand = Hand(10, [Card("6", "clubs"), Card("8", "hearts")])
     assert not new_game.can_double(hand)
 
+
 def test_can_surrender():
     options = GameOptions()
     new_game = Game(options, "Alan")
@@ -98,3 +125,15 @@ def test_can_surrender():
     new_game.options.no_surrender = True
     assert not new_game.can_surrender(hand1, hand2.cards[1])
     assert not new_game.can_surrender(hand1, hand2.cards[0])
+
+
+def test_hit_split_aces():
+    options = GameOptions()
+    new_game = Game(options, "Alan")
+    hand1 = Hand(10, [Card("A", "spades"), Card("6", "hearts")])
+    hand2 = Hand(10, [Card("A", "hearts"), Card("7", "spades")])
+    new_game.player.hands.append(hand1)
+    new_game.player.hands.append(hand2)
+    assert not new_game.can_hit(hand1)
+    new_game.player.hands.pop()
+    assert new_game.can_hit(hand1)

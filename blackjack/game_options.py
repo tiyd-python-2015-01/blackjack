@@ -17,7 +17,7 @@ class GameOptions:
         self.number_of_decks = 1
         self.hit_soft_17 = False
         self.early_surrender = False
-        self.resplitting = False
+        self.resplitting = True
         self.resplit_aces = False
         self.hit_split_aces = False
         self.split_by_rank = False
@@ -29,7 +29,4 @@ class GameOptions:
 
 # Rules to implement:
 # Early Surrender - NOT DONE
-# Resplitting - NOT DONE
-# Resplitting Aces - NOT DONE
-# Hit Split Aces - NOT DONE
 # No Double After Split - NOT DONE

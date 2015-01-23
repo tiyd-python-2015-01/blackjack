@@ -40,12 +40,27 @@ class Game:
         else:
             return len(hand.cards) == 2
 
+    def can_hit(self, hand):
+        """Checks to see if the player has the option to hit.  Only not
+        available if hitting split aces is disabled and player has split
+        aces"""
+        if not self.options.hit_split_aces and (len(self.player.hands) > 1
+            and hand.cards[0].rank == "A"):
+            return False
+        else:
+            return True
+
     def can_split(self, hand):
         """Checks to see if the option to split is available to the player"""
-        if self.options.split_by_rank:
+        if not self.options.resplitting and len(self.player.hands) > 1:
+            return False
+        elif not self.options.resplit_aces and (len(self.player.hands) > 1
+            and "A" in hand.get_ranks()):
+            return False
+        elif self.options.split_by_rank:
             return hand.get_ranks()[0] == hand.get_ranks()[1]
         else:
-            return hand.get_values()[0] == hand.get_values()[1]
+            return hand.cards[0] == hand.cards[1]
 
     def can_surrender(self, player_hand, dealer_show_card):
         """Checks to see if the options to surrender is available to the

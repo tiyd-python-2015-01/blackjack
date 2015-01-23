@@ -38,7 +38,7 @@ class Card:
         return self.__str__()
 
     def __eq__(self, other):
-        return self.rank == other.rank and self.suit == other.suit
+        return self.value == other.value
 
     def _evaluate_card_value(self):
         if self.rank.isdigit():
