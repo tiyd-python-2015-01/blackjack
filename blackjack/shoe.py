@@ -20,7 +20,7 @@ class Shoe:
 
     def __init__(self, an_int, a_deck):
         self.decks = an_int
-        self.shuffle = random.shuffle(a_deck.cards * an_int)
+        self.shuffle = random.shuffle(a_deck.cards * an_int
 
 
     def __str__(self):

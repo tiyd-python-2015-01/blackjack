@@ -1,13 +1,31 @@
+from blackjack.card import Card
+from blackjack.deck import Deck
+from blackjack.hand import Hand
+
+
 class Player:
     """
 
     Responsibilities:
-    * take inputs from the user - # of decks in shoe, hit or stay
+    * has chips
+    * bets chips
+    * wins chips
 
-    Collaborators:
-    *
-    * get information from Hand about the player and dealer hands
-    * on hit, tell player's Hand to get another Card from Shoe"""
+    Collaborators:"""
 
-    def __init__(self):
-        self.chips = 100
+    def __init__(self, chips=100):
+        self.chips = chips
+
+    def make_bet(self):
+        self.chips -= 10
+        return self.chips
+
+    def win_bet(self):
+        self.chips += 20
+        return self.chips
+
+    def __str__(self):
+        return "Player has {} chips.".format(self.chips)
+
+    def __repr__(self):
+        return self.__str__()

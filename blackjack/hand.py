@@ -14,9 +14,9 @@ class Hand:
     * give Dealer the cards and value of the two hands
     * give user the cards and value of the two hands"""
 
-    def __init__(self):
+    def __init__(self, value=0):
         self.cards = []
-        self.value = 0
+        self.value = value
 
     def _str__(self):
         card_list = [str(card) for card in self.cards]
@@ -44,6 +44,18 @@ class Hand:
                       'Q':10,
                       'K':10,
                       'A':11}
+
+        list_of_a = [card.rank for card in self.cards if card.rank == 'A']
+        a_counter = len(list_of_a)
+
         hand_ranks = [card.rank for card in self.cards]
         values = [value_dict[x] for x in hand_ranks]
-        return sum(values)
+        value = sum(values)
+
+
+        while a_counter > 0:
+            if value > 21:
+                value -= 10
+            a_counter -= 1
+
+        return value
