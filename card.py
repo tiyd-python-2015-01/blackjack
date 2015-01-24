@@ -1,6 +1,6 @@
 """Card class"""
-"""A card will collaborate with Deck and Hand class"""
-"""A card is responsible for its suit and rank"""
+"""A card will collaborate with Shoe and Hand class"""
+"""A card is responsible for knowing its suit and rank"""
 
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J",
               "Q", "K", "A"]
@@ -19,7 +19,7 @@ class Card:
     def get_suit(self):
         return self.suit
 
-    def get_rank(self):
+    def get_rank(self, card):
         return self.rank
 
     def __str__(self):

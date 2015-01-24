@@ -1,7 +1,8 @@
 """Shoe class"""
-"""Shoe collaborates with Deck and Hand"""
-"""It is responsible for receiving decks from Deck, shuffling the decks,
-   and dealing to the Hand"""
+"""Shoe collaborates with Card and Hand"""
+"""It is responsible for receiving cards from Card, compiling and
+   shuffling the decks, and dealing to the Hand"""
+
 from deck import Deck
 from card import Card, ranks, suits
 import random
@@ -27,5 +28,5 @@ class Shoe:
 
     def deal_card(self):
         """Deals a card"""
-        dealt_card = self.deck.pop()
-        return dealt_card
+        self.deck.pop()
+        return self.deck

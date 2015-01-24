@@ -1,12 +1,6 @@
-from deck import Deck
 from card import Card, ranks, suits
 from shoe import Shoe
 from hand import Hand
-
-def test_deck_creation():
-    """Tests the ability of the deck to create a list of 52 cards"""
-    test_deck = Deck()
-    assert len(test_deck.deck) == 52
 
 
 def test_card_creation():
@@ -38,13 +32,22 @@ def test_for_dealing_card():
 
 
 def test_hand_receives_cards():
+    """Will test that the hand receives a card from the shoe"""
     deck1 = Shoe()
     hand1 = Hand()
     hand1.add_card(deck1.deal_card())
     assert len(hand1.hand) == 1
 
 
-# def test_hand_value():
-#     """Will test the ability of a hand to assess its value"""
-#     test_hand = Hand(card.Card("K", 9)
-#     assert get_hand_value(test_hand) == 19
+def test_card_value():
+    """Will test the ability of a hand to assess a card's value"""
+    test_hand = Hand()
+    test_card1 = Card("K", "Hearts")
+    assert test_hand.get_hand_value() == 10
+
+
+def test_hand_value():
+    """Test the ability of a hand to calculate its own value"""
+    test_hand = Hand()
+    test_card2 = Card("2", "Diamonds")
+    assert type(test_hand.get_hand_value(test_card2)) == int
