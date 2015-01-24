@@ -183,7 +183,7 @@ class Interface:
             and len(self.game.player.hands[0].cards) == 2
             and len(self.game.player.hands) == 1):
             print("BLACKJACK!\n")
-            if check_for_dealer_blackjack():
+            if self.check_for_dealer_blackjack():
                 print("Dealer has BLACKJACK.  Push...\n")
                 self.game.payout(self.game.player.hands[0],
                                            self.game.dealer.hand)
