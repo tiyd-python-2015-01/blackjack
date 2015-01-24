@@ -24,7 +24,7 @@ class Player:
         self.insured = True
 
     def modify_money(self, value):
-        if self.money + value > 0:
+        if self.money + value >= 0:
             self.money += value
         else:
             raise ValueError("Player money cannot be negative.")

@@ -107,11 +107,12 @@ class Game:
     def get_available_actions(self, player_hand, dealer_show_card):
         actions = {}
         actions["hit"] = self.can_hit(player_hand)
-        actions["split"] = self.can_split(player_hand)
+        actions["split"] = (self.can_split(player_hand) and
+                            self.player.money >= player_hand.bet)
         actions["surrender"] = self.can_surrender(player_hand,
                                                   dealer_show_card)
-        actions["double"] = self.can_double(player_hand)
-        actions["insure"] = self.can_insure(player_hand, dealer_show_card)
+        actions["double"] = (self.can_double(player_hand) and
+                             self.player.money >= player_hand.bet)
         return actions
 
     def payout(self, player_hand, dealer_hand):

@@ -227,7 +227,6 @@ def test_get_available_actions():
     assert actions["double"]
     assert not actions["split"]
     assert not actions["surrender"]
-    assert not actions["insure"]
     new_game.player.hands[0] = Hand(10,[Card("J", "spades"),
                                         Card("J", "clubs")])
     new_game.dealer.hand = Hand(0, [Card("A", "spades"), Card("7", "Clubs")])
@@ -238,4 +237,3 @@ def test_get_available_actions():
     assert actions["double"]
     assert actions["split"]
     assert actions["surrender"]
-    assert actions["insure"]

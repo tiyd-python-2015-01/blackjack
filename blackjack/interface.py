@@ -73,7 +73,6 @@ class Interface:
 
             if dealers_turn:
                 need_to_compare = self.dealer_play()
-
                 if need_to_compare:
                     self.evaluate_hands()
                     break
@@ -93,24 +92,24 @@ class Interface:
                         self.game.payout(hand[1], self.game.dealer.hand)
                     else:
                         print("Hand {} loses!".format(hand[0]+1))
-            print_dealer_hand()
+            self.print_dealer_hand()
         elif self.game.check_push(self.game.player.hands[0],
                                   self.game.dealer.hand):
             self.game.payout(self.game.player.hands[0],
                                        self.game.dealer.hand)
             print("Push.\n")
-            print_dealer_hand()
+            self.print_dealer_hand()
         else:
             if self.game.compare_hands(self.game.player.hands[0],
                                        self.game.dealer.hand):
                 print("You win!\n")
                 self.game.payout(self.game.player.hands[0],
                                  self.game.dealer.hand)
-                print_dealer_hand()
+                self.print_dealer_hand()
 
             else:
                 print("Dealer wins.\n")
-                print_dealer_hand()
+                self.print_dealer_hand()
 
     def dealer_play(self):
         while self.game.dealer.hit():
@@ -136,7 +135,8 @@ class Interface:
             return True
         if (self.game.dealer.get_show_card().rank == "A"
             and len(self.game.player.hands[0].cards) == 2
-            and len(self.game.player.hands) == 1):
+            and len(self.game.player.hands) == 1
+            and self.game.player.money >= self.player.hands[0].bet):
             self.offer_insurance()
             if self.game.options.early_surrender:
                 if self.offer_surrender():
@@ -217,9 +217,6 @@ class Interface:
             if actions["surrender"]:
                 print("Surrende(R), ", end="")
                 valid_input.append("R")
-            if actions["insure"]:
-                print("Buy (I)nsurance, ", end="")
-                valid_input.append("I")
             print ("(S)tand")
             selection = input("{} ".format(choice(icons))).upper()
             valid_selection_made = selection in valid_input
@@ -286,7 +283,10 @@ class Interface:
                 print("You currently have {} dollars.".format(
                     self.game.player.money))
                 bet = int(input("{} ".format(choice(icons))))
-                if bet % 5 is not 0 or 0 > bet > 20:
+                if (bet % 5 is not 0
+                    or bet < 0
+                    or bet > 20
+                    or bet > self.game.player.money):
                     raise ValueError
                 else:
                     return bet
