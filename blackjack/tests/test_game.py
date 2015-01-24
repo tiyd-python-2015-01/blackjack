@@ -121,11 +121,10 @@ def test_can_surrender():
     new_game = Game(options, "Alan")
     hand1 = Hand(10, [Card("6", "clubs"), Card("10", "hearts")])
     hand2 = Hand(10, [Card("7", "hearts"), Card("A", "spades")])
-    assert new_game.can_surrender(hand1, hand2.cards[1])
-    assert not new_game.can_surrender(hand1, hand2.cards[0])
+    assert new_game.can_surrender(hand1)
     new_game.options.no_surrender = True
-    assert not new_game.can_surrender(hand1, hand2.cards[1])
-    assert not new_game.can_surrender(hand1, hand2.cards[0])
+    assert not new_game.can_surrender(hand1)
+    assert not new_game.can_surrender(hand1)
 
 
 def test_hit_split_aces():
@@ -221,17 +220,15 @@ def test_get_available_actions():
     new_game.player.hands.append(Hand(10,[Card("2", "spades"),
                                           Card("J", "clubs")]))
     new_game.dealer.hand = Hand(0, [Card("J", "spades"), Card("7", "Clubs")])
-    actions = new_game.get_available_actions(new_game.player.hands[0],
-                                             new_game.dealer.get_show_card())
+    actions = new_game.get_available_actions(new_game.player.hands[0])
     assert actions["hit"]
     assert actions["double"]
     assert not actions["split"]
-    assert not actions["surrender"]
+    assert actions["surrender"]
     new_game.player.hands[0] = Hand(10,[Card("J", "spades"),
                                         Card("J", "clubs")])
     new_game.dealer.hand = Hand(0, [Card("A", "spades"), Card("7", "Clubs")])
-    actions = new_game.get_available_actions(new_game.player.hands[0],
-                                             new_game.dealer.get_show_card())
+    actions = new_game.get_available_actions(new_game.player.hands[0])
 
     assert actions["hit"]
     assert actions["double"]
