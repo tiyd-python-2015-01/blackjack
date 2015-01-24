@@ -18,7 +18,7 @@ def test_card_value():
     test_hand = Hand()
     test_card = Card("J", "Hearts")
     test_hand.add_card(test_card)
-    assert test_hand.get_card_value(test_card) == 10
+    assert test_hand.get_hand_value() == 10
 
 
 def test_hand_value():

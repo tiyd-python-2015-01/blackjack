@@ -25,8 +25,8 @@ class Hand:
 
     def add_card(self, card):
         """Adds a card from the shoe to the hand"""
-        player_hand = self.hand.append(card)
-        return player_hand
+        self.hand.append(card)
+        return self.hand
 
     def get_card_value(self, card):
         for card in self.hand:
@@ -40,6 +40,5 @@ class Hand:
         for card in self.hand:
             card_value = self.valuedict[card.get_rank()]
             hand_value += card_value
-        # hand_value = [self.get_card_value(card) for card in self.hand]
         print(hand_value)
         return hand_value

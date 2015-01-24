@@ -28,5 +28,5 @@ class Shoe:
 
     def deal_card(self):
         """Deals a card"""
-        dealt_card = self.deck.pop()
+        dealt_card = self.deck.pop(random.randrange(0, 52))
         return dealt_card
