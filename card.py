@@ -19,7 +19,7 @@ class Card:
     def get_suit(self):
         return self.suit
 
-    def get_rank(self, card):
+    def get_rank(self):
         return self.rank
 
     def __str__(self):
