@@ -64,4 +64,4 @@ def test_blackjack():
     test_cards.append(Card("10", "clubs"))
     hand = Hand(10, test_cards)
 
-    assert hand.get_value() == "BLACKJACK"
+    assert hand.get_value() == 21

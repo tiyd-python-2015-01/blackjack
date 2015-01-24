@@ -201,7 +201,7 @@ def test_payout():
     new_game.create_hands(10)
     new_game.player.hands[0] = Hand(10,[Card("A", "spades"),
                                         Card("J", "clubs")])
-    new_game.payout(new_game.player.hands[0], new_game.dealer.hand)
+    new_game.payout_blackjack(new_game.player.hands[0])
     assert new_game.player.money == 125
 
     new_game.create_hands(10)
@@ -211,7 +211,7 @@ def test_payout():
     new_game.dealer.hand = Hand(0,[Card("A", "spades"),
                                     Card("J", "clubs")])
     new_game.player.insured = True
-    assert new_game.dealer.hand.get_value() == "BLACKJACK"
+    assert new_game.dealer.hand.get_value() == 21
     new_game.payout(new_game.player.hands[0], new_game.dealer.hand)
     assert new_game.player.money == 125
 

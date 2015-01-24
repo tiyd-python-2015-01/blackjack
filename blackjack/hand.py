@@ -31,12 +31,16 @@ class Hand:
 
         return card_rank_list
 
+    def get_card_strings(self):
+        card_strings = []
+        for card in self.cards:
+            card_strings.append(str(card))
+        return card_strings
+
     def get_value(self):
         hand_value = 0
         for card in self.cards:
             hand_value += card.value
-        if hand_value == 21 and len(self.cards) == 2:
-            return "BLACKJACK"
         if ((hand_value > 21 and "A" in self.get_ranks()) or
             hand_value <= 11 and "A" in self.get_ranks()):
             for card in self.cards:

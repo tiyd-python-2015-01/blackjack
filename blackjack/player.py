@@ -20,7 +20,7 @@ class Player:
         self.insured = False
 
     def buys_insurance(self):
-        self.modify_money(self.hands[0] * -.5)
+        self.modify_money( int(-.5*self.hands[0].bet))
         self.insured = True
 
     def modify_money(self, value):
@@ -33,17 +33,20 @@ class Player:
         hand.add_cards(card)
 
     def splits(self, hand, cards):
-        self.modify_money(-1 * hand.bet)
+        self.modify_money(-1*hand.bet)
         new_hand = Hand(hand.bet, [hand.cards[1], cards[0]])
         hand.cards.pop(1)
         hand.add_cards(cards[1])
         self.hands.append(new_hand)
 
     def doubles(self, hand, card):
-        self.modify_money(-1 * hand.bet)
+        self.modify_money(-1*hand.bet)
         hand.bet *= 2
         self.takes_hit(hand, card)
 
     def surrenders(self, hand):
-        self.modify_money(.5 * hand.bet)
+        self.modify_money(.5*hand.bet)
         hand.bet *= .5
+
+    def reset_player(self):
+        self.hands = []

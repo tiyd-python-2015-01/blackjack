@@ -70,12 +70,14 @@ class Game:
         player"""
         return (not self.options.no_surrender
                 and len(player_hand.cards) == 2
-                and dealer_show_card.rank == "A")
+                and dealer_show_card.rank == "A"
+                and not len(self.player.hands) > 1)
 
     def can_insure(self, player_hand, dealer_show_card):
         """Checks to see if the options to insure is available to the
         player"""
-        return len(player_hand.cards) == 2 and dealer_show_card.rank == "A"
+        return (len(player_hand.cards) == 2 and dealer_show_card.rank == "A"
+                and not len(self.player.hands) > 1 and not self.player.insured)
 
     def create_hands(self, bet):
         """Creates the player and dealer hands and assigns them to their
@@ -100,7 +102,7 @@ class Game:
 
     def compare_hands(self, player_hand, dealer_hand ):
         """Compares the player and dealer hand to resolve the winner"""
-        return player_hand.get_value > dealer_hand.get_value
+        return player_hand.get_value() > dealer_hand.get_value()
 
     def get_available_actions(self, player_hand, dealer_show_card):
         actions = {}
@@ -115,9 +117,15 @@ class Game:
     def payout(self, player_hand, dealer_hand):
         """Distributes money to the player after a hand is resolved and the
         player wins."""
-        if dealer_hand.get_value() == "BLACKJACK" and self.player.insured:
+        if ((dealer_hand.get_value() == 21 and len(dealer_hand.cards) == 2)
+           and self.player.insured):
             self.player.modify_money(player_hand.bet)
-        elif player_hand.get_value() == "BLACKJACK":
-            self.player.modify_money(player_hand.bet * 2.5)
         else:
             self.player.modify_money(player_hand.bet * 2)
+
+    def payout_blackjack(self, player_hand):
+        """Pays out on player blackjack"""
+        self.player.modify_money(int(player_hand.bet * 2.5))
+
+    def reshuffle(self):
+        self.deck = Deck(self.options.number_of_decks)
