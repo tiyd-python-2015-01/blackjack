@@ -22,8 +22,8 @@ class Hand:
 
     def add_card(self, card):
         """Adds a card from the shoe to the hand"""
-        self.hand.append(card)
-        return self.hand
+        player_hand = self.hand.append(card)
+        return player_hand
 
 
     def get_hand_value(self, shoe):
@@ -33,7 +33,7 @@ class Hand:
         self.hand_value = 0
         ace_in_hand = False
         for card in self.hand:
-            self.hand_value += rank
+            self.hand_value += self.values[rank]
             if rank == "A":
                 ace_in_hand = True
         if not ace_in_hand:
