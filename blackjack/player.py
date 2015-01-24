@@ -20,23 +20,34 @@ class Player:
         self.hand = hand
         self.bank = bank
 
+
     def __len__(self):
         """Keeps up with amount of cards in hand"""
         return len(self.hand)
 
-    def __str__(self):
-        """String representation of player hand as list of cards."""
-        return str([hand for hand  in self.hand])
 
-    def __repr__(self):
-        return self.__str__()
-
-    def player_hit(self, deck):
-        card = deck.draw()
+    def take_a_hit(self, deck):
+        card = deck.deal_card()
         return self.hand.append(card)
+
 
     def hand_value(self):
         value = 0
+        #aces = 0 FIGURE OUT HOW TO FLIP ACE VALUE 1 or 11
         for card in self.hand:
-            value = value + card.value
+            if type(card.rank) == int:
+                value += card.rank
+            elif card.rank == "Ace":
+                value += 11
+            else:
+                value += 10
         return value
+
+
+def __str__(self):
+    """String representation of player hand as list of cards."""
+    return str(self.hand)
+
+
+def __repr__(self):
+    return self.__str__()

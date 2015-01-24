@@ -9,7 +9,7 @@ def test_deck_length():
 
 def test_draw_card():
     deck = Deck()
-    card = deck.draw()
+    card = deck.deal_card()
 
     assert card is not None
     assert len(deck) == 51

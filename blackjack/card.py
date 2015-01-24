@@ -16,25 +16,26 @@ class Card:
     def __init__(self, rank, suit): ###This is a constructor
         self.rank = rank
         self.suit = suit
-        self.value = self.point_value(self.rank)
+        #self.value = self.point_value(self.rank)
 
-    def point_value(self, rank):
-        if type(rank) == int:
-            value = rank
-            return value
-        elif rank == "Ace":
-            value = 11
-            return value
-        else:
-            value = 10
-            return value
-    ###does value need to be determined somewhere else instead?
+###moved to player/dealer Class
+#    def point_value(self, rank):
+#        if type(rank) == int:
+#            value = rank
+#            return value
+#        elif rank == "Ace":
+#            value = 11
+#            return value
+#        else:
+#            value = 10
+#            return value
 
-    def swap_ace(self):
-        if self.value == 11:
-            self.value = 1
-        else:
-            self.value = 11
+### moved to player/dealer Class
+#    def swap_ace(self):
+#        if self.value == 11:
+#            self.value = 1
+#        else:
+#            self.value = 11
 
     def __eq__(self,other_card):
         if self.rank == other_card.rank and self.suit == other_card.suit:
