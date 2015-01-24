@@ -38,7 +38,7 @@ class Deck:
     def shuffle(self):
         """Shuffles cards in the deck"""
         shuffle(self._cards)
-        return self._cards
+        return self
 
 
     def __eq__(self, other):

@@ -66,3 +66,15 @@ def test_new_hand():
     new_hand1 = Hand([])
     new_hand1.new_hand(deck1)
     assert len(new_hand1.hand) == 2
+
+def test_reset_hand():
+    new_hand1 = Hand([Card(2, Diamonds), Card('K', Spades), Card('Q', Diamonds)])
+    new_hand1.reset_hand()
+    assert new_hand1.hand == []
+    assert len(new_hand1.hand) == 0
+
+def test_best_hand():
+    new_hand = Hand([Card(9, Diamonds), Card('A', Spades), Card(9, Spades)])
+    assert new_hand.best_hand == 19
+    new_hand2 = Hand([Card(9, Diamonds), Card('A', Spades), Card(2, Spades)])
+    assert new_hand2.best_hand == 12

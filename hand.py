@@ -46,6 +46,14 @@ class Hand:
                 soft_total += card.rank
         return soft_total
 
+    @property
+    def best_hand(self):
+        if self.hard_total > 21:
+            return int(self.soft_total)
+        else:
+            return int(self.hard_total)
+
+
 
     def bust(self):
         if self.soft_total > 21:
@@ -62,6 +70,12 @@ class Hand:
     def new_hand(self, deck):
         self.draw(deck)
         self.draw(deck)
+
+
+    def reset_hand(self):
+        self.hand = []
+        print(self.hand)
+
 
 
     def __str__(self):
