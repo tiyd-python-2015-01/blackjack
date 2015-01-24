@@ -123,7 +123,7 @@ class Game:
             self.player.modify_money(player_hand.bet)
         elif player_hand.get_value() == dealer_hand.get_value():
             self.player.modify_money(player_hand.bet)
-        else:
+        elif self.player_hand.get_value() > delaer_hand.get_value:
             self.player.modify_money(player_hand.bet * 2)
 
     def payout_blackjack(self, player_hand):
