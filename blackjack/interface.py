@@ -63,9 +63,14 @@ class Interface:
                 if len(self.game.player.hands) == 1:
                     print("You bust!\n")
                     break
-                elif len(self.game.player.hands) > current_hand + 1:
+                elif len(self.game.player.hands) == current_hand + 1:
                     print("You bust!\n")
-                    print("Dealer's turn!\n")
+                    for hand in self.game.player.hands:
+                        if hand.get_value() <= 21:
+                            print("Dealer's turn!\n")
+                            dealers_turn = True
+                    else:
+                        break
                 else:
                     print("You bust!\n")
                     current_hand += 1
@@ -215,12 +220,12 @@ class Interface:
         """Takes the users selected action and performs it"""
         if selection == "H" and actions["hit"]:
             new_card = self.game.deck.deal()
-            print("Received {}".format(new_card))
+            print("\nReceived {}\n".format(new_card))
             self.game.player.takes_hit(self.game.player.hands[current_hand],
                                   new_card)
         elif selection == "D" and actions["double"]:
             new_card = self.game.deck.deal()
-            print("Received {}".format(new_card))
+            print("\nReceived {}\n".format(new_card))
             self.game.player.doubles(self.game.player.hands[current_hand],
                                 new_card)
         elif selection == "P" and actions["split"]:

@@ -77,6 +77,8 @@ def test_can_split_by_value():
     new_game = Game(options, "Alan")
     hand = Hand(10, [Card("Q", "hearts"), Card("10", "diamonds")])
     assert new_game.can_split(hand)
+    hand = Hand(10, [Card("A", "hearts"), Card("A", "diamonds")])
+    assert new_game.can_split(hand)
 
 
 def test_can_double_normal():
@@ -190,7 +192,7 @@ def test_payout():
     options = GameOptions()
     new_game = Game(options, "Alan")
     new_game.create_hands(10)
-    new_game.player.hands[0] = Hand(10,[Card("2", "spades"),
+    new_game.player.hands[0] = Hand(10,[Card("4", "spades"),
                                     Card("J", "clubs")])
     new_game.dealer.hand = Hand(10,[Card("3", "spades"),
                                     Card("Q", "clubs")])

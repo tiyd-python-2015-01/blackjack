@@ -63,7 +63,8 @@ class Game:
         elif self.options.split_by_rank:
             return hand.get_ranks()[0] == hand.get_ranks()[1]
         else:
-            return hand.cards[0] == hand.cards[1]
+            return (hand.cards[0] == hand.cards[1] or
+                    hand.get_ranks()[0] == hand.get_ranks()[1])
 
     def can_surrender(self, player_hand):
         """Checks to see if the options to surrender is available to the
@@ -123,7 +124,7 @@ class Game:
             self.player.modify_money(player_hand.bet)
         elif player_hand.get_value() == dealer_hand.get_value():
             self.player.modify_money(player_hand.bet)
-        elif self.player_hand.get_value() > delaer_hand.get_value:
+        elif player_hand.get_value() > dealer_hand.get_value():
             self.player.modify_money(player_hand.bet * 2)
 
     def payout_blackjack(self, player_hand):
