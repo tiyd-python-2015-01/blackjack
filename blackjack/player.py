@@ -17,6 +17,11 @@ class Player:
         self.name = name
         self.hands = []
         self.money = 100
+        self.insured = False
+
+    def buys_insurance(self):
+        self.modify_money(self.hands[0] * -.5)
+        self.insured = True
 
     def modify_money(self, value):
         if self.money + value > 0:

@@ -27,5 +27,8 @@ class Dealer:
             else:
                 return False
 
+    def get_show_card(self):
+        return self.hand.cards[0]
+
     def takes_hit(self, card):
         self.hand.cards.append(card)

@@ -72,6 +72,11 @@ class Game:
                 and len(player_hand.cards) == 2
                 and dealer_show_card.rank == "A")
 
+    def can_insure(self, player_hand, dealer_show_card):
+        """Checks to see if the options to insure is available to the
+        player"""
+        return len(player_hand.cards) == 2 and dealer_show_card.rank == "A"
+
     def create_hands(self, bet):
         """Creates the player and dealer hands and assigns them to their
         respective objects"""
@@ -81,6 +86,7 @@ class Game:
             player_cards.append(self.deck.deal())
             dealer_cards.append(self.deck.deal())
         self.player.hands.append(Hand(bet, player_cards))
+        self.player.modify_money(bet * -1)
         self.dealer.hand = Hand(0, dealer_cards)
 
     def check_bust(self, hand):
@@ -95,3 +101,23 @@ class Game:
     def compare_hands(self, player_hand, dealer_hand ):
         """Compares the player and dealer hand to resolve the winner"""
         return player_hand.get_value > dealer_hand.get_value
+
+    def get_available_actions(self, player_hand, dealer_show_card):
+        actions = {}
+        actions["hit"] = self.can_hit(player_hand)
+        actions["split"] = self.can_split(player_hand)
+        actions["surrender"] = self.can_surrender(player_hand,
+                                                  dealer_show_card)
+        actions["double"] = self.can_double(player_hand)
+        actions["insure"] = self.can_insure(player_hand, dealer_show_card)
+        return actions
+
+    def payout(self, player_hand, dealer_hand):
+        """Distributes money to the player after a hand is resolved and the
+        player wins."""
+        if dealer_hand.get_value() == "BLACKJACK" and self.player.insured:
+            self.player.modify_money(player_hand.bet)
+        elif player_hand.get_value() == "BLACKJACK":
+            self.player.modify_money(player_hand.bet * 2.5)
+        else:
+            self.player.modify_money(player_hand.bet * 2)

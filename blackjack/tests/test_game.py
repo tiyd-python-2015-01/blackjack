@@ -13,6 +13,7 @@ def test_create_hands():
     assert len(new_game.dealer.hand.cards) == 2
     assert len(new_game.deck.cards) == 48
     assert new_game.player.hands[0].bet == 10
+    assert new_game.player.money == 90
 
 
 def test_bust():
@@ -185,3 +186,56 @@ def test_surrender():
     new_game = Game(options, "Alan")
     hand = Hand(10,[Card("2", "spades"), Card("J", "clubs")])
     new_game.player.surrenders(hand)
+
+def test_payout():
+    options = GameOptions()
+    new_game = Game(options, "Alan")
+    new_game.create_hands(10)
+    new_game.player.hands[0] = Hand(10,[Card("2", "spades"),
+                                    Card("J", "clubs")])
+    new_game.dealer.hand = Hand(10,[Card("3", "spades"),
+                                    Card("Q", "clubs")])
+    new_game.payout(new_game.player.hands[0], new_game.dealer.hand)
+    assert new_game.player.money == 110
+
+    new_game.create_hands(10)
+    new_game.player.hands[0] = Hand(10,[Card("A", "spades"),
+                                        Card("J", "clubs")])
+    new_game.payout(new_game.player.hands[0], new_game.dealer.hand)
+    assert new_game.player.money == 125
+
+    new_game.create_hands(10)
+    assert new_game.player.money == 115
+    new_game.player.hands[0] = Hand(10,[Card("2", "spades"),
+                                        Card("J", "clubs")])
+    new_game.dealer.hand = Hand(0,[Card("A", "spades"),
+                                    Card("J", "clubs")])
+    new_game.player.insured = True
+    assert new_game.dealer.hand.get_value() == "BLACKJACK"
+    new_game.payout(new_game.player.hands[0], new_game.dealer.hand)
+    assert new_game.player.money == 125
+
+def test_get_available_actions():
+    options = GameOptions()
+    new_game = Game(options, "Alan")
+    new_game.player.hands.append(Hand(10,[Card("2", "spades"),
+                                          Card("J", "clubs")]))
+    new_game.dealer.hand = Hand(0, [Card("J", "spades"), Card("7", "Clubs")])
+    actions = new_game.get_available_actions(new_game.player.hands[0],
+                                             new_game.dealer.get_show_card())
+    assert actions["hit"]
+    assert actions["double"]
+    assert not actions["split"]
+    assert not actions["surrender"]
+    assert not actions["insure"]
+    new_game.player.hands[0] = Hand(10,[Card("J", "spades"),
+                                        Card("J", "clubs")])
+    new_game.dealer.hand = Hand(0, [Card("A", "spades"), Card("7", "Clubs")])
+    actions = new_game.get_available_actions(new_game.player.hands[0],
+                                             new_game.dealer.get_show_card())
+
+    assert actions["hit"]
+    assert actions["double"]
+    assert actions["split"]
+    assert actions["surrender"]
+    assert actions["insure"]

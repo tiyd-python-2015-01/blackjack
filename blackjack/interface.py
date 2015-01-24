@@ -1,6 +1,7 @@
 from game_options import GameOptions
+from random import choice
 
-
+icons = ["♡", "♧", "♢", "♤"]
 class Interface:
     """ Interface class will provide all of the methods of interacting with
     the user.  It will contain all of the methods for displaying to the
@@ -11,6 +12,8 @@ class Interface:
     * Receiving input from the player
     """
 
+    def display_game_status(self, game):
+        pass
     def main_menu(self):
         """ Displays the title, programmer info, and main menu for the game.
         Takes user input and returns to the calling Game class"""
@@ -44,22 +47,40 @@ class Interface:
         print("♧ 2 - Set Game Options")
         print("♢ 3 - Quit")
         print("-----------------------")
-        selection = input("♤ ")
+        selection = input("{} ".format(choice(icons)))
 
         return selection
+
+    def get_bet(self, player):
+        """Prompts the user to select a bet amount in multiples of 5, not
+        exceeding 20"""
+        print("\n"*80)
+        while True:
+            print("How much would you like to wager on the next hand? ")
+            print("Please wager in multiples of 5.  Maximum bet is 20.")
+            try:
+                print("You currently have {} dollars.".format(player.money))
+                bet = int(input("{} ".format(choice(icons))))
+                if bet % 5 is not 0 or 0 > bet > 20:
+                    raise ValueError
+                else:
+                    return bet
+            except ValueError:
+                print("Sorry, that's not a valid bet.")
 
     def get_name(self):
         """Prompts the user to input a name, used for the creation of a
         Player object."""
         print("\n"*80)
         print("Great!  Let's play some Blackjack!")
-        name = input("Please enter your name: ")
+        name = input("Please enter your name {} ".format(choice(icons)))
         return name
 
     def options_menu(self, options):
         """Displays the options menu and updates option variables to reflect
         user selections."""
-        while True:
+        while selection is not "Q":
+            selection = ""
             print("\n"*80)
             print("Game Options:\n")
             print("1 - Number of Decks: {}".format(options.number_of_decks))
@@ -95,7 +116,7 @@ class Interface:
                                                         else "Disabled"))
             print("R - Reset to Defaults")
             print("Q - Return to Main Menu")
-            selection = input("♡ ")
+            selection = input("{} ".format(choice(icons)))
 
             if selection.upper() == "Q":
                 return options
@@ -108,7 +129,8 @@ class Interface:
         ruleset selected by the player."""
         if selection == "1":
             try:
-                decks = int(input("Choose number of decks (8 max):  "))
+                decks = int(input("Choose number of decks (8 max){} ".format(
+                choice(icons))))
                 if decks < 1 or decks > 8:
                     raise ValueError
                 options.number_of_decks = decks
