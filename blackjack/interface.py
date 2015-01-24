@@ -155,6 +155,8 @@ class Interface:
 
         if self.check_for_dealer_blackjack():
             print("Dealer has blackjack!\n")
+            self.game.payout(self.game.player.hands[0],
+                             self.game.dealer.hand)
             return True
 
         return False
