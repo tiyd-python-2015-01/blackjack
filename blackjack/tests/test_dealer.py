@@ -22,9 +22,9 @@ def test_hit_test():
     b_hand.cards = [Card('7', 'Hearts'), Card('10', 'Diamonds')]
     c_hand.cards = [Card('8', 'Hearts'), Card('10', 'Diamonds')]
 
-    assert dealer.hit_test(a_hand) == "Hit"
-    assert dealer.hit_test(b_hand) == "Stand"
-    assert dealer.hit_test(c_hand) == "Stand"
+    assert dealer.hit_test(a_hand) == "HIT"
+    assert dealer.hit_test(b_hand) == "STAND"
+    assert dealer.hit_test(c_hand) == "STAND"
 
     d_hand = Hand(value=16)
     e_hand = Hand(value=17)
@@ -33,6 +33,6 @@ def test_hit_test():
     e_hand.cards = [Card('A', 'Hearts'), Card('6', 'Diamonds')]
     f_hand.cards = [Card('A', 'Hearts'), Card('7', 'Diamonds')]
 
-    assert dealer.hit_test(d_hand) == "Hit"
-    assert dealer.hit_test(e_hand) == "Hit"
-    assert dealer.hit_test(f_hand) == "Stand"
+    assert dealer.hit_test(d_hand) == "HIT"
+    assert dealer.hit_test(e_hand) == "HIT"
+    assert dealer.hit_test(f_hand) == "STAND"

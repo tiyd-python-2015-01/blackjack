@@ -16,13 +16,16 @@ class Game:
         return deck
 
     def blackjack_check(self, hand):
-        pass
+        if hand.value == 21:
+            return True
+        else:
+            return False
 
     def bust_check(self, hand):
         if hand.value > 21:
-            return 'bust'
+            return True
         else:
-            return 'ok'
+            return False
 
     def higher_hand(self, p_hand, d_hand):
         """if both player and dealer stand, checks to see who wins"""

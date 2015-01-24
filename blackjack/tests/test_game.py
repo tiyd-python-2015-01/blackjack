@@ -11,9 +11,9 @@ def test_bust_check():
     b_hand = Hand(value=21)
     c_hand = Hand(value=22)
 
-    assert game.bust_check(a_hand) == 'ok'
-    assert game.bust_check(b_hand) == 'ok'
-    assert game.bust_check(c_hand) == 'bust'
+    assert game.bust_check(a_hand) == False
+    assert game.bust_check(b_hand) == False
+    assert game.bust_check(c_hand) == True
 
 
 def test_higher_hand():
