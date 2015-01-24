@@ -41,6 +41,7 @@ class Card:
         return self.value == other.value
 
     def _evaluate_card_value(self):
+        """Evaluates the value of the card and sets it as a class attribute"""
         if self.rank.isdigit():
             self.value = int(self.rank)
         elif self.rank == "A":
@@ -49,6 +50,7 @@ class Card:
             self.value = 10
 
     def swap_ace(self):
+        """Swaps the value of the ace if requested by the game."""
         if self.value == 11:
             self.value = 1
         else:

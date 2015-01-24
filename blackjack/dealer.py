@@ -17,6 +17,8 @@ class Dealer:
         self.hit_soft_17 = hit_soft_17
 
     def hit(self):
+        """Determines if the dealer should hit or not.  Has option to allow
+        for hit/no hit on soft 17"""
         if not self.hit_soft_17:
             return self.hand.get_value() < 17
         else:
@@ -28,7 +30,9 @@ class Dealer:
                 return False
 
     def get_show_card(self):
+        """Returns the dealer's show card for display in the game"""
         return self.hand.cards[0]
 
     def takes_hit(self, card):
+        """Appends a dealt card to the dealer's hand"""
         self.hand.cards.append(card)

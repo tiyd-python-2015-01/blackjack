@@ -35,7 +35,9 @@ class Interface:
                 break
 
     def play_hand(self):
-
+        """Hand loop.  Continues until the end of the hand.  Prints updates
+        about the status of the hand to the screen and makes method calls
+        to allow user actions."""
         print("\n"*80)
         bet = self.get_bet()
         self.game.player.reset_player()
@@ -86,6 +88,8 @@ class Interface:
                     break
 
     def evaluate_hands(self):
+        """Evaluates the final hands of the player and dealer and makes
+        the appropriate calls the the playout method of the Game class"""
         if len(self.game.player.hands) > 1:
             for hand in enumerate(self.game.player.hands):
                 if self.game.check_bust(hand[1]):
@@ -119,6 +123,9 @@ class Interface:
                 self.print_dealer_hand()
 
     def dealer_play(self):
+        """Dealer's play method.  Goes through all dealer turns until the
+        hit() method of dealer determines it needs to stand or the dealer
+        busts"""
         while self.game.dealer.hit():
             new_card = self.game.deck.deal()
             print("Dealer hits, and recieves {}.\n".format(str(new_card)))
@@ -134,10 +141,15 @@ class Interface:
             return True
 
     def print_dealer_hand(self):
+        """Prints the dealer's hand to the screen"""
         print("Dealer's final hand: {}\n".format(
             self.game.dealer.hand.get_card_strings()))
 
     def resolve_blackjacks(self):
+        """Resolves all cases of either or both the player and dealer having
+        blackjack and makes appropriate payouts.  Also calls the offer
+        insurance method to allow the player to insure before blackjacks
+        are resolved."""
         if self.check_for_player_blackjack():
             return True
         if (self.game.dealer.get_show_card().rank == "A"
@@ -162,14 +174,16 @@ class Interface:
         return False
 
     def check_for_dealer_blackjack(self):
+        """Checks the dealer's hand for blackjack"""
         return self.game.dealer.hand.get_value() == 21
 
     def check_for_player_blackjack(self):
+        """Checks to see if the player has blackjack"""
         if (self.game.player.hands[0].get_value() == 21
             and len(self.game.player.hands[0].cards) == 2
             and len(self.game.player.hands) == 1):
             print("BLACKJACK!\n")
-            if self.game.dealer.hand.get_value() == 21:
+            if check_for_dealer_blackjack():
                 print("Dealer has BLACKJACK.  Push...\n")
                 self.game.payout(self.game.player.hands[0],
                                            self.game.dealer.hand)
@@ -182,6 +196,7 @@ class Interface:
             return False
 
     def print_hands(self, current_hand):
+        """Displays the dealer's and player's hands to the screen"""
         print("Dealer's Hand: [{}, [X]]".format(
                                             self.game.dealer.get_show_card()))
 
@@ -197,6 +212,7 @@ class Interface:
         print("\nMoney: {}".format(self.game.player.money))
 
     def execute_selection(self, selection, actions, current_hand):
+        """Takes the users selected action and performs it"""
         if selection == "H" and actions["hit"]:
             new_card = self.game.deck.deal()
             print("Received {}".format(new_card))
@@ -215,9 +231,10 @@ class Interface:
             self.game.player.surrenders(self.game.player.hands[current_hand])
 
     def offer_actions(self, current_hand):
+        """Prints available actions to the screen and allows user to input
+        their selected action."""
         actions = self.game.get_available_actions(
-                      self.game.player.hands[current_hand],
-                      self.game.dealer.get_show_card())
+                      self.game.player.hands[current_hand])
         valid_selection_made = False
         while not valid_selection_made:
             valid_input = ["S"]
@@ -240,6 +257,8 @@ class Interface:
         return selection, actions
 
     def offer_insurance(self):
+        """Method that allows the user to buy insurace if the dealer's upcard
+        is an Ace"""
         print("Dealer has an Ace showing.  Buy insurance?")
         while True:
             player_choice = input("(Y/N) {} ".format(choice(icons))).upper()

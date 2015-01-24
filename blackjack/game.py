@@ -65,12 +65,11 @@ class Game:
         else:
             return hand.cards[0] == hand.cards[1]
 
-    def can_surrender(self, player_hand, dealer_show_card):
+    def can_surrender(self, player_hand):
         """Checks to see if the options to surrender is available to the
         player"""
         return (not self.options.no_surrender
                 and len(player_hand.cards) == 2
-                and dealer_show_card.rank == "A"
                 and not len(self.player.hands) > 1)
 
     def can_insure(self, player_hand, dealer_show_card):
@@ -104,13 +103,14 @@ class Game:
         """Compares the player and dealer hand to resolve the winner"""
         return player_hand.get_value() > dealer_hand.get_value()
 
-    def get_available_actions(self, player_hand, dealer_show_card):
+    def get_available_actions(self, player_hand):
+        """Generates a dictionary specifying the available actions
+        for a given hand."""
         actions = {}
         actions["hit"] = self.can_hit(player_hand)
         actions["split"] = (self.can_split(player_hand) and
                             self.player.money >= player_hand.bet)
-        actions["surrender"] = self.can_surrender(player_hand,
-                                                  dealer_show_card)
+        actions["surrender"] = self.can_surrender(player_hand)
         actions["double"] = (self.can_double(player_hand) and
                              self.player.money >= player_hand.bet)
         return actions
@@ -131,4 +131,5 @@ class Game:
         self.player.modify_money(int(player_hand.bet * 2.5))
 
     def reshuffle(self):
+        """Creates a new deck for use by the game"""
         self.deck = Deck(self.options.number_of_decks)

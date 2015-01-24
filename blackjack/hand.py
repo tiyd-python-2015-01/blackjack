@@ -21,9 +21,12 @@ class Hand:
         self.bet = bet
 
     def add_cards(self, card):
+        """Appends a dealt card to the Hand object's cards list"""
         self.cards.append(card)
 
     def get_ranks(self):
+        """Returns a list of ranks of all cards in the Hand object's
+        card list"""
         card_rank_list = []
 
         for card in self.cards:
@@ -32,6 +35,8 @@ class Hand:
         return card_rank_list
 
     def get_card_strings(self):
+        """Returns a string representation of all cards in the Hand object's
+        card list"""
         card_strings = []
         for card in self.cards:
             card_strings.append(str(card))
@@ -39,6 +44,7 @@ class Hand:
         return cards
 
     def get_value(self):
+        """Returns the total value of all cards in the card list"""
         hand_value = 0
         for card in self.cards:
             hand_value += card.value
