@@ -1,7 +1,7 @@
 from card import Card, ranks, suits
 from shoe import Shoe
 from hand import Hand
-
+from player import Player
 
 def test_card_creation():
     """Will test the __str__ output of the Card class"""
@@ -51,3 +51,12 @@ def test_hand_value():
     shoe = Shoe()
     test_hand = Hand()
     assert test_hand.get_hand_value(shoe) == 0
+
+
+def test_hit():
+    """tests the ability of the player to add a card to his/her hand"""
+    test_hand = Hand()
+    test_player = Player("Dean")
+    test_hand_value = 10
+    test_player.hit()
+    assert test_hand.hand_value > test_hand_value
