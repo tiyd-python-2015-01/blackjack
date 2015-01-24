@@ -24,6 +24,14 @@ class Player:
         self.chips += 20
         return self.chips
 
+    def win_blackjack(self):
+        self.chips += 25
+        return self.chips
+
+    def push(self):
+        self.chips += 10
+        return self.chips
+
     def __str__(self):
         return "Player has {} chips.".format(self.chips)
 

@@ -13,3 +13,13 @@ def test_win_bet():
     a_player = Player(chips=90)
     a_player.win_bet()
     assert a_player.chips == 110
+
+def test_win_blackjack():
+    a_player = Player(chips=90)
+    a_player.win_blackjack()
+    assert a_player.chips == 115
+
+def test_push():
+    a_player = Player(chips=90)
+    a_player.push()
+    assert a_player.chips == 100

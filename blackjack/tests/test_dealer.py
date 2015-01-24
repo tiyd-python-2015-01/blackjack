@@ -13,6 +13,13 @@ def test_shown_cards():
     assert test_card.suit == 'Diamonds'
 
 
+def test_shown_value():
+    dealer = Dealer()
+    a_hand = Hand()
+    a_hand.cards = [Card('2', 'Hearts'), Card('3', 'Diamonds')]
+    assert dealer.shown_value(a_hand) == '3'
+
+
 def test_hit_test():
     dealer = Dealer()
     a_hand = Hand(value=16)

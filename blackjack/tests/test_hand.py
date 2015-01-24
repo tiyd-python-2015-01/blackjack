@@ -9,6 +9,14 @@ def test_get_card():
     assert len(a_hand.cards) == 1
     assert len(a_deck.cards) == 51
 
+def test_new_card():
+    a_hand = Hand()
+    a_hand.cards = [Card('2', 'Hearts'), Card('10', 'Spades')]
+    test_card = a_hand.new_card()
+    assert test_card.rank == '10'
+    assert test_card.suit == 'Spades'
+
+
 def test_valuation_non_ace():
     a_hand = Hand()
     a_hand.cards =[Card('2', 'Hearts'), Card('10', 'Spades')]

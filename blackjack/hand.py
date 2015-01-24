@@ -29,6 +29,10 @@ class Hand:
         card = deck.draw()
         return self.cards.append(card)
 
+    def new_card(self):
+        newest_card = self.cards[-1]
+        return newest_card
+
     def valuation(self):
         value_dict = {'1':1,
                       '2':2,
