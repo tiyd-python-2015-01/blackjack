@@ -35,7 +35,7 @@ dealer respectively.
 To Do:
 + - Assign class attributes
 + - Add method to evaluate the value of Card
-+ - Add ASCII representations of suits
++ - Add Unicode representations of suits
 + - Add method for swapping value of Aces
 
 
@@ -103,7 +103,7 @@ To Do:
 + - Add in advanced rule variations
 
 
-* <Game>:  The Game class will be the backbone of the game.  It will store
++ <Game>:  The Game class will be the backbone of the game.  It will store
 the wager amount made by the player, created and distribute Hand objects to
 the Player and Dealer and will control game flow based on hand
 values held by the player and dealer.  It will have methods to calculate
@@ -116,13 +116,13 @@ To Do:
 + - Add list of Game attributes
 + - Add method to distribute Hands to Player and Dealer
 + - Add method to check the status of the game by resolving Hand values
-* - Add method to distribute payouts to the player
++ - Add method to distribute payouts to the player
 + - Add method for determining available actions for the player
 + - Add method to retrieve the ruleset from GameOptions and create the
     Dealer based on currently selected rules. (Maybe in Blackjack class?)
 
 
-* <Run>:  The Run class will be the driver script for the game.
++ <Main>:  The Run class will be the driver script for the game.
 It will control all of the program flow and interact with the Game and
 Interface Classes to start new hands, request menu displays, request output
 to the console from the Interface Class.  This file will contain the
@@ -130,22 +130,21 @@ main method for the game, and will be the script executed to start the
 game.
 
 To Do:
-* - Plan overall program flow and determine best structure for this class
-* - Add main method to initialize the game and start program flow
++ - Add main method to initialize the game and start program flow
 
 
-* <Interface>:  The Interface class will contain all of the ASCII text that
++ <Interface>:  The Interface class will contain all of the ASCII text that
 will be used for in-game card representations, menus and methods for
 receiving input from the user.
 
 To Do:
 + - Design main menu
-* - Design options menu
-* - Add method for updating options based on user input from options menu
-* - Add method for displaying current hands for the dealer and player to
++ - Design options menu
++ - Add method for updating options based on user input from options menu
++ - Add method for displaying current hands for the dealer and player to
     the console
-* - Add method to display win/lose text after each hand
-...more
++ - Add method to display win/lose text after each hand
++ - Add control game flow to the interface
 
 
 /////<PyGameInterface>:  Very unlikely, but this class would replace the

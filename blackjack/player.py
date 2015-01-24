@@ -18,6 +18,7 @@ class Player:
         self.hands = []
         self.money = 100
         self.insured = False
+        self.doubled = False
 
     def buys_insurance(self):
         """Modifys the player's money if they choose to buy insurance when
@@ -51,6 +52,7 @@ class Player:
         """Doubles the player's bet on the current hand."""
         self.modify_money(-1*hand.bet)
         hand.bet *= 2
+        self.doubled = True
         self.takes_hit(hand, card)
 
     def surrenders(self, hand):
@@ -61,3 +63,5 @@ class Player:
     def reset_player(self):
         """Resets the players list of controlled hands"""
         self.hands = []
+        self.insured = False
+        self.doubled = False

@@ -41,7 +41,7 @@ class Game:
             elif self.options.double_9_10:
                 return 9 <= hand.get_value() < 11 and len(hand.cards) == 2
             else:
-                return len(hand.cards) == 2
+                return len(hand.cards) == 2 and not self.player.doubled
 
     def can_hit(self, hand):
         """Checks to see if the player has the option to hit.  Only not
@@ -124,7 +124,8 @@ class Game:
             self.player.modify_money(player_hand.bet)
         elif player_hand.get_value() == dealer_hand.get_value():
             self.player.modify_money(player_hand.bet)
-        elif player_hand.get_value() > dealer_hand.get_value():
+        elif (player_hand.get_value() > dealer_hand.get_value() or
+              dealer_hand.get_value() > 21):
             self.player.modify_money(player_hand.bet * 2)
 
     def payout_blackjack(self, player_hand):

@@ -25,7 +25,3 @@ class GameOptions:
         self.no_double_after_split = False
         self.double_9_10_11 = False
         self.double_9_10 = False
-
-
-# Rules to implement:
-# Early Surrender - NOT DONE

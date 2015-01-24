@@ -45,7 +45,6 @@ class Interface:
         print("\n"*80)
         current_hand = 0
         dealers_turn = False
-        self.game.player.insured = False
         print("Dealing Cards {}\n".format(choice(icons)))
 
         if len(self.game.deck.cards) < 30:
@@ -67,8 +66,9 @@ class Interface:
                     print("You bust!\n")
                     for hand in self.game.player.hands:
                         if hand.get_value() <= 21:
-                            print("Dealer's turn!\n")
                             dealers_turn = True
+                    if dealers_turn:
+                        print("Dealer's turn!\n")
                     else:
                         break
                 else:
