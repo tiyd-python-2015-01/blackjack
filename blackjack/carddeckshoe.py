@@ -20,14 +20,14 @@ Card
 from random import shuffle, randint
 
 SUITS = ['♧', '♢', '♤', '♡']
-RANKS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'King', 'Queen', 'Joker', 'Ace']
+RANKS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'King', 'Queen', 'Jack', 'Ace']
 
 
 class Shoe:
     """Shoe handles most of the work of these classes.
     Shoe initializes itself as a list of decks but then uses self.cards
     as the single list of all the cards being played in the game.  """
-    
+
     def __init__(self, number_of_decks=1):
         self.decks = [Deck() for n in range(number_of_decks)]
         self.cards = [card for deck in self.decks for card in deck.cards]

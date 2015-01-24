@@ -40,13 +40,6 @@ class Player:
         self.cards.append(new_card)
 
     def display_hand(self):
-        # try:
-        #     hand = ""
-        #     for card in self.cards:
-        #         hand += str(card)+"\n"
-        #     return hand[0:-1]
-        # except:
-        #     return "Player has an empty hand."
         return self.cards
 
     def assess_hand(self):
@@ -57,7 +50,7 @@ class Player:
                 if 2 <= card.rank <= 10:
                     value += card.rank
             except:
-                if card.rank in ["King","Queen","Joker"]:
+                if card.rank in ["King","Queen","Jack"]:
                     value += 10
                 elif card.rank == "Ace":
                     value += 11
@@ -91,7 +84,16 @@ class Dealer(Player):
         return self.cards
 
     def hit_or_stand(self):
-        return self.assess_hand() <=17
+        """ Return True to hit (get another card)
+        else False to stand.
+        If hand is less than 17 or was dealt a soft 17, Hit"""
+        if self.assess_hand() < 17:
+            return True
+        elif (len(self.cards) == 2 and self.assess_hand() == 17 and
+        (self.cards[0].rank == "Ace" or self.cards[1].rank == "Ace")):
+            return True
+        else:
+            return False
 
 
 class Hand:

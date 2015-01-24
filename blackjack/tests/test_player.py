@@ -1,4 +1,5 @@
 from blackjack.player import Player
+from blackjack.player import Dealer
 from blackjack.carddeckshoe import Card
 
 
@@ -31,6 +32,21 @@ def test_assess_hand():
     assert player.assess_hand() == 18
     player.get_card(Card(10,"♧"))
     assert player.assess_hand() == 18
+
+def test_dealer_hit():
+    dealer = Dealer()
+    dealer.get_hand([Card(5,"♢"),Card("Jack","♡")])
+    assert dealer.hit_or_stand() == True
+
+def test_dealer_soft_hit():
+    dealer = Dealer()
+    dealer.get_hand([Card(6,"♢"),Card("Ace","♡")])
+    assert dealer.hit_or_stand() == True
+
+def test_dealer_stand():
+    dealer = Dealer()
+    dealer.get_hand([Card(7,"♢"),Card("Queen","♡")])
+    assert dealer.hit_or_stand() == False
 
 def test_is_blackjack():
     player = Player()

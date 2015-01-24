@@ -18,6 +18,17 @@ class Interface:
         print("""Would you like to play a game?""")
         return self.yes_or_no()
 
+    def print_options(self):
+        print("""Would you like to choose the size of the shoe?""")
+        if self.yes_or_no():
+            return self.get_shoe_size()
+        else:
+            return 1
+
+    def get_shoe_size(self):
+        print("Great!\nPlease enter a size between 1 and 8.")
+        return self.get_shoe_input()
+
     def display_hands(self,player,dealer):
         player_hand = player.display_hand()
         dealer_hand = dealer.display_hand()
@@ -61,19 +72,13 @@ class Interface:
             print(str(cards[n]).ljust(30))
         print("Your Value: {}".format(player.assess_hand()).ljust(30),"\n")
 
-    def dealer_hits(self,dealer):
+    def dealer_hits(self,dealer,player):
         print(" ".ljust(30),"Dealer hits:")
-        cards = dealer.display_hand()
-        for n in range(0,len(cards)):
-            print(" ".ljust(30), str(cards[n]).ljust(30))
-        print("")
+        self.display_hands(player,dealer)
 
-    def dealer_stands(self, dealer):
+    def dealer_stands(self, dealer,player):
         print(" ".ljust(30),"Dealer stands")
-        cards = dealer.display_hand()
-        for n in range(0,len(cards)-1):
-            print(" ".ljust(30), str(cards[n]).ljust(30))
-        print("")
+        self.display_hands(player,dealer)
 
     def play_again(self):
         print("Would you like to play again?")
@@ -103,7 +108,17 @@ class Interface:
     def farewell(self,player):
         print("Thanks for playing!")
         print("You're leaving with ${}".format(player.cash))
-        
+
+    def get_shoe_input(self):
+        size = input(">>")
+        try:
+            if 0 < int(size) <= 8:
+                return int(size)
+            else:
+                return self.get_shoe_input()
+        except:
+            return self.get_shoe_input()
+
     def yes_or_no(self):
         print("[Y]es")
         print("[N]o\n")

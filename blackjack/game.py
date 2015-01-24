@@ -11,9 +11,7 @@ Game
         -Interface
         -Players
 """
-from random import randint
 from .interface import Interface
-
 from .player import Player
 from .player import Dealer
 from .carddeckshoe import Card
@@ -48,31 +46,32 @@ class Game:
             -Perform hits/stands for dealer
             -Determine winner
             -Prompt player for another game """
-        self.shoe = Shoe(1)
+        shoe_size = self.interface.print_options()
+        self.shoe = Shoe(shoe_size)
         self.shoe.shuffle()
-        split = randint(20,25)
         while True:
             #If shoe gets down to last 20-25 cards, re-shuffle
-            if len(self.shoe.cards) < split:
-                self.shoe = Shoe(1)
+            if len(self.shoe.cards) < 26:
+                self.shoe = Shoe(shoe_size)
                 self.shoe.shuffle()
-                split = randint(20,25)
             self.deal_cards()
-            self.show_cards()
+            #self.show_cards()
+            self.interface.display_hands(self.user,self.dealer)
             self.user.is_blackjack()
             self.dealer.is_blackjack()
             while (not self.user.is_blackjack()
                     and not self.user.busted()
                     and self.player_hit_or_stand()):
                 self.user.get_card(self.shoe.give_card())
-                self.interface.show_cards(self.user)
+                #self.interface.show_cards(self.user)
+                self.interface.display_hands(self.user,self.dealer)
             while (not self.user.busted()
                     and not self.dealer.busted()
                     and self.dealer.hit_or_stand()):
                 self.dealer.get_card(self.shoe.give_card())
-                self.interface.dealer_hits(self.dealer)
+                self.interface.dealer_hits(self.dealer,self.user)
             else:
-                self.interface.dealer_stands(self.dealer)
+                self.interface.dealer_stands(self.dealer,self.user)
             self.win_or_lost()
             if not self.interface.play_again():
                 self.interface.farewell(self.user)
