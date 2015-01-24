@@ -3,14 +3,14 @@
 """It is responsible for receiving cards from Card, compiling and
    shuffling the decks, and dealing to the Hand"""
 
-from deck import Deck
+
 from card import Card, ranks, suits
 import random
 
 
 class Shoe:
     """Collects decks. Shuffles. Deals cards to hands"""
-    def __init__(self, decks=1):
+    def __init__(self, how_many=1):
 
         self.deck = [Card(rank, suit)
                      for rank in ranks
@@ -28,5 +28,5 @@ class Shoe:
 
     def deal_card(self):
         """Deals a card"""
-        self.deck.pop()
-        return self.deck
+        dealt_card = self.deck.pop()
+        return dealt_card

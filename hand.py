@@ -20,18 +20,16 @@ class Hand:
                        "K" : 10, "A" : 11}
 
 
-
-
     def add_card(self, card):
         """Adds a card from the shoe to the hand"""
         self.hand.append(card)
         return self.hand
 
 
-
-    def get_hand_value(self):
+    def get_hand_value(self, shoe):
         """Determines the value of a hand based on the cards therein."""
-        rank = Card.get_rank(Shoe.deal_card(Shoe))
+        card = shoe.deal_card()
+        rank = card.get_rank(card)
         self.hand_value = 0
         current_hand_value =+ self.values[rank]
         if self.hand.count("A") in self.hand > 1:
