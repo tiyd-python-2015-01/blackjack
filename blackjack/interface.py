@@ -100,7 +100,10 @@ class Interface:
               ("Dealer Value: {}".format(dealer.assess_hand()).ljust(30)),"\n")
         return "{}\n{}".format(player_hand,dealer_hand)
 
-
+    def farewell(self,player):
+        print("Thanks for playing!")
+        print("You're leaving with ${}".format(player.cash))
+        
     def yes_or_no(self):
         print("[Y]es")
         print("[N]o\n")
