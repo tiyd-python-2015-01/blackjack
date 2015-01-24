@@ -43,13 +43,11 @@ def test_card_value():
     """Will test the ability of a hand to assess a card's value"""
     shoe = Shoe()
     test_hand = Hand()
-    test_card1 = Card("K", "Hearts")
-    assert test_hand.get_hand_value(shoe) == 10
+    assert test_hand.get_hand_value(shoe) == 0
 
 
 def test_hand_value():
     """Test the ability of a hand to calculate its own value"""
     shoe = Shoe()
     test_hand = Hand()
-    test_card2 = Card("2", "Diamonds")
-    assert test_hand.get_hand_value(shoe) == 2
+    assert test_hand.get_hand_value(shoe) == 0

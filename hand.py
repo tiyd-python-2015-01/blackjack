@@ -15,9 +15,9 @@ class Hand:
         """Creates instance of Hand"""
         self.hand = []
 
-        self.values = {"1" : 1, "2" : 2,"3" : 3, "4" : 4, "5" : 5, "6" : 6,
+        self.values = {"2" : 2,"3" : 3, "4" : 4, "5" : 5, "6" : 6,
                        "7" : 7, "8" : 8, "9": 9, "10" : 10, "J" : 10, "Q" : 10,
-                       "K" : 10, "A" : 11}
+                       "K" : 10, "A" : 1}
 
 
     def add_card(self, card):
@@ -31,11 +31,16 @@ class Hand:
         card = shoe.deal_card()
         rank = card.get_rank(card)
         self.hand_value = 0
-        current_hand_value =+ self.values[rank]
-        if self.hand.count("A") in self.hand > 1:
-            current_hand_value = 12
-        elif current_hand_value > 21 and "A" in Hand:
-            current_hand_value -= 10
+        ace_in_hand = False
+        for card in self.hand:
+            self.hand_value += rank
+            if rank == "A":
+                ace_in_hand = True
+        if not ace_in_hand:
+            return self.hand_value
         else:
-            current_hand_value
-        return current_hand_value
+            if self.hand_value + 10 <= 21:
+                self.hand_value + 10
+                return self.hand_value
+            else:
+                return self.hand_value
