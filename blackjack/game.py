@@ -121,6 +121,8 @@ class Game:
         if ((dealer_hand.get_value() == 21 and len(dealer_hand.cards) == 2)
            and self.player.insured):
             self.player.modify_money(player_hand.bet)
+        elif player_hand.get_value() == dealer_hand.get_value():
+            self.player.modify_money(player_hand.bet)
         else:
             self.player.modify_money(player_hand.bet * 2)
 

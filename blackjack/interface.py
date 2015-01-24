@@ -23,11 +23,15 @@ class Interface:
         while self.game.player.money >= 5:
             self.play_hand()
             while True:
+                if self.game.player.money < 5:
+                    print("You don't have enough money to play!")
+                    input()
+                    break
                 player_choice = input("Play another hand? (Y/N) {} ".format(
                                       choice(icons))).upper()
                 if player_choice in ["Y","N"]:
                     break
-            if player_choice == "N":
+            if player_choice == "N" or self.game.player.money < 5:
                 break
 
     def play_hand(self):
@@ -54,9 +58,12 @@ class Interface:
             self.execute_selection(selection, actions, current_hand)
 
             if self.game.check_bust(self.game.player.hands[current_hand]):
-                if len(self.game.player.hands) == current_hand + 1:
+                if len(self.game.player.hands) == 1:
                     print("You bust!\n")
                     break
+                elif len(self.game.player.hands) > current_hand + 1:
+                    print("You bust!\n")
+                    print("Dealer's turn!\n")
                 else:
                     print("You bust!\n")
                     current_hand += 1
@@ -65,10 +72,9 @@ class Interface:
                 break
             elif selection == "S" or selection == "D":
                 if len(self.game.player.hands) > current_hand + 1:
-                    print("Dealer's turn!\n")
                     current_hand += 1
                 else:
-                    print("Dealer's trun!\n")
+                    print("Dealer's turn!\n")
                     dealers_turn = True
 
             if dealers_turn:
@@ -86,6 +92,7 @@ class Interface:
                     print("Hand {} busted.".format(hand[0]+1))
                 elif self.game.check_push(hand[1], self.game.dealer.hand):
                     print("Push on hand {}.".format(hand[0]+1))
+                    self.game.payout(hand[1], self.game.dealer.hand)
                 else:
                     if self.game.compare_hands(hand[1], self.game.dealer.hand):
                         print("Hand {} wins!".format(hand[0]+1))
@@ -127,7 +134,7 @@ class Interface:
             return True
 
     def print_dealer_hand(self):
-        print("Dealer's final hand: {}".format(
+        print("Dealer's final hand: {}\n".format(
             self.game.dealer.hand.get_card_strings()))
 
     def resolve_blackjacks(self):
@@ -136,7 +143,7 @@ class Interface:
         if (self.game.dealer.get_show_card().rank == "A"
             and len(self.game.player.hands[0].cards) == 2
             and len(self.game.player.hands) == 1
-            and self.game.player.money >= self.player.hands[0].bet):
+            and self.game.player.money >= self.game.player.hands[0].bet):
             self.offer_insurance()
             if self.game.options.early_surrender:
                 if self.offer_surrender():
@@ -145,10 +152,11 @@ class Interface:
                     print("Dealer had: {}\n".format(
                         self.game.dealer.hand.get_card_strings()))
                     return True
-            else:
-                if self.check_for_dealer_blackjack():
-                    print("Dealer has blackjack!\n")
-                    return True
+
+        if self.check_for_dealer_blackjack():
+            print("Dealer has blackjack!\n")
+            return True
+
         return False
 
     def check_for_dealer_blackjack(self):
@@ -156,7 +164,8 @@ class Interface:
 
     def check_for_player_blackjack(self):
         if (self.game.player.hands[0].get_value() == 21
-            and len(self.game.player.hands[0].cards) == 2):
+            and len(self.game.player.hands[0].cards) == 2
+            and len(self.game.player.hands) == 1):
             print("BLACKJACK!\n")
             if self.game.dealer.hand.get_value() == 21:
                 print("Dealer has BLACKJACK.  Push...\n")
@@ -176,9 +185,14 @@ class Interface:
 
         print("Player's Hand{}: ".format("s" if len(self.game.player.hands) > 1
                                          else ""), end="")
-        for hand in self.game.player.hands:
-            print("{} ".format(hand.get_card_strings(), end=""))
-        print("Money: {}".format(self.game.player.money))
+        card_string = ""
+        for hand in enumerate(self.game.player.hands):
+            card_string += "{}{} ".format("*" if hand[0] == current_hand else
+                                          "",
+                                          hand[1].get_card_strings(), end="")
+
+        print(card_string)
+        print("\nMoney: {}".format(self.game.player.money))
 
     def execute_selection(self, selection, actions, current_hand):
         if selection == "H" and actions["hit"]:
@@ -304,6 +318,7 @@ class Interface:
     def options_menu(self, options):
         """Displays the options menu and updates option variables to reflect
         user selections."""
+        selection = ""
         while selection is not "Q":
             selection = ""
             print("\n"*80)

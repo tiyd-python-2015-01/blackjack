@@ -35,7 +35,8 @@ class Hand:
         card_strings = []
         for card in self.cards:
             card_strings.append(str(card))
-        return card_strings
+        cards = "[ " + " ".join(card_strings) + " ]"
+        return cards
 
     def get_value(self):
         hand_value = 0
