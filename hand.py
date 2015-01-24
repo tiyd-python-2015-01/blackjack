@@ -15,9 +15,12 @@ class Hand:
         """Creates instance of Hand"""
         self.hand = []
 
-        self.values = {"2" : 2,"3" : 3, "4" : 4, "5" : 5, "6" : 6,
+        self.valuedict = {"2" : 2,"3" : 3, "4" : 4, "5" : 5, "6" : 6,
                        "7" : 7, "8" : 8, "9": 9, "10" : 10, "J" : 10, "Q" : 10,
                        "K" : 10, "A" : 1}
+
+    def __str__(self):
+        return "Hand contains {}".format(self.hand)
 
 
     def add_card(self, card):
@@ -25,22 +28,18 @@ class Hand:
         player_hand = self.hand.append(card)
         return player_hand
 
-
-    def get_hand_value(self, shoe):
-        """Determines the value of a hand based on the cards therein."""
-        card = shoe.deal_card()
-        rank = card.get_rank(card)
-        self.hand_value = 0
-        ace_in_hand = False
+    def get_card_value(self, card):
         for card in self.hand:
-            self.hand_value += self.values[rank]
-            if rank == "A":
-                ace_in_hand = True
-        if not ace_in_hand:
-            return self.hand_value
-        else:
-            if self.hand_value + 10 <= 21:
-                self.hand_value + 10
-                return self.hand_value
-            else:
-                return self.hand_value
+            card_value = self.valuedict[card.get_rank()]
+            return card_value
+
+
+    def get_hand_value(self):
+        has_ace = False
+        hand_value = 0
+        for card in self.hand:
+            card_value = self.valuedict[card.get_rank()]
+            hand_value += card_value
+        # hand_value = [self.get_card_value(card) for card in self.hand]
+        print(hand_value)
+        return hand_value

@@ -43,23 +43,28 @@ def test_card_value():
     """Will test the ability of a hand to assess a card's value"""
     shoe = Shoe()
     test_hand = Hand()
-    test_hand.add_card(shoe.deal_card())
-    assert test_hand.get_hand_value(shoe) >= 1
+    test_card = Card("J", "Hearts")
+    test_hand.add_card(test_card)
+    assert test_hand.get_card_value(test_card) == 10
 
 
 def test_hand_value():
     """Test the ability of a hand to calculate its own value"""
     shoe = Shoe()
+    card1 = Card("J", "Hearts")
+    card2 = Card("6", "Clubs")
     test_hand = Hand()
-    test_hand.add_card(shoe.deal_card())
-    assert test_hand.get_hand_value(shoe) >= 1
+    test_hand.add_card(card2)
+    test_hand.add_card(card1)
+    print(test_hand)
+    assert test_hand.get_hand_value() == 16
 
-
-def test_hit():
-    """tests the ability of the player to add a card to his/her hand"""
-    shoe = Shoe()
-    test_hand = Hand()
-    test_player = Player("Dean")
-    test_hand_value = 10
-    test_player.hit()
-    assert test_hand.get_hand_value(shoe) > test_hand_value
+#
+# def test_hit():
+#     """tests the ability of the player to add a card to his/her hand"""
+#     shoe = Shoe()
+#     test_hand = Hand()
+#     test_player = Player("Dean")
+#     test_hand_value = 0
+#     test_player.hit()
+#     assert test_hand.get_hand_value() > test_hand_value
