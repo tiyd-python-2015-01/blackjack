@@ -33,6 +33,7 @@ class Game:
     def hit_or_stand(self):
         choice = input('Press "h" to Hit, or "s" to stand: ').lower()
         return choice == 'h'
+        
 
     def new_turn(self):
         self.dealer.hand.reset_hand()
@@ -42,6 +43,7 @@ class Game:
         self.dealer.hand.new_hand(self.deck)
         self.player.hand.new_hand(self.deck)
         self.pot = 0
+
 
     def place_bet(self, amount):
         try:

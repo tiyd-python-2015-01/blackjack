@@ -23,7 +23,7 @@ class Dealer():
             hand = Hand([])
         self.name = "Dealer"
         self.hand = hand
-        
+
 
     def hit(self, deck):
         self.hand.draw(deck)
@@ -41,4 +41,6 @@ class Dealer():
         print("{name}'s hand: XX {hand}".format(name = self.name, hand = self.hand.hand[1]))
 
     def reveal_hand(self):
-        print("{name}'s hand: {hand}".format(name = self.name, hand = self.hand))
+        print("{name}'s hand: {hand} ({value})".format(name = self.name,
+                                               hand = self.hand,
+                                               value = self.hand.best_hand))

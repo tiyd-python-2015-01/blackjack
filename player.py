@@ -35,4 +35,6 @@ class Player:
         return self.stack
 
     def show_hand(self):
-        print("{name}'s hand: {hand}".format(name = self.name, hand = self.hand))
+        print("{name}'s hand: {hand} ({value})".format(name = self.name,
+                                               hand = self.hand,
+                                               value = self.hand.best_hand))

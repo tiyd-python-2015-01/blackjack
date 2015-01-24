@@ -18,32 +18,31 @@ while game_loop:
 
     game.new_turn()
 
+    if player.stack < 1:
+        print("You are out of money! Game over!")
+        break
+
     print("You have {} dollars".format(game.player.stack))
     print("How much would you like to bet?")
     game.place_bet(input("> "))
 
-    print(game.dealer.hand.hand)
-    print(game.player.hand.hand)
-    print(game.deck._cards)
     game.dealer.show_hand()
     game.player.show_hand()
 
     hit = game.hit_or_stand()
 
-    while hit and not player.hand.bust():
+    while hit and not game.player.hand.bust():
         game.player.hit(game.deck)
         game.player.show_hand()
-        print("Your hand value is: {}".format(game.player.hand.best_hand))
         if game.player.hand.best_hand < 21:
             hit = game.hit_or_stand() #player can't bust
 
 
 
-    if player.hand.best_hand <= 21:
+    if player.hand.best_hand <= 21 and dealer.hand.best_hand != 21:
         game.dealer.play_out_hand(game.deck)
         game.dealer.reveal_hand()
-        print("The dealer's hand value is: {}".format(game.dealer.hand.best_hand))
-        print("Your hand value is: {}".format(game.player.hand.best_hand))
+        game.player.show_hand()
 
         if game.dealer.hand.best_hand > 21:
             print("Dealer busts!, you win!")
@@ -53,12 +52,14 @@ while game_loop:
                 print("You Lose")
             elif game.dealer.hand.best_hand < game.player.hand.best_hand:
                 print("You Win!")
-                player.stack += game.pot * 2
+                game.player.stack += game.pot * 2
             elif game.dealer.hand.best_hand == game.player.hand.best_hand:
                 print("Push!")
                 game.player.stack += game.pot
     else:
-        print("Your hand value is: {}".format(game.player.hand.best_hand))
-        print("Your hand is over 21, you lose!!")
+        if dealer.hand.best_hand == 21:
+            print("Dealer has blackjack! You lose!")
+        else:
+            print("Your hand is over 21, you lose!!")
 
     game_loop = game.play_again()

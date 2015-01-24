@@ -5,7 +5,7 @@ from random import shuffle
 #assign unicode chararcters for each suit
 Clubs, Diamonds, Hearts, Spades = u'\u2663', u'\u2666', u'\u2665', u'\u2660'
 SUITS = (Clubs, Diamonds, Hearts, Spades)
-RANKS = (1, 2, 3, 4, 5, 6, 7, 8, 9, 'J', 'Q', 'K', 'A')
+RANKS = (2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A')
 
 
 class Deck:
