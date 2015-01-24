@@ -1,6 +1,4 @@
 from hand import Hand
-
-
 from player import Player
 
 class Dealer():

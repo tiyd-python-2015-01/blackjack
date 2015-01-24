@@ -33,7 +33,16 @@ class Game:
     def hit_or_stand(self):
         choice = input('Press "h" to Hit, or "s" to stand: ').lower()
         return choice == 'h'
-        
+
+    def check_for_winner(self, dealer, player):
+        if self.player.hand.best_hand < self.dealer.hand.best_hand:
+            return("You Lose")
+        elif self.dealer.hand.best_hand < self.player.hand.best_hand:
+            print("You Win!")
+            self.player.stack += self.pot * 2
+        elif self.dealer.hand.best_hand == self.player.hand.best_hand:
+            print("Push!")
+            self.player.stack += self.pot
 
     def new_turn(self):
         self.dealer.hand.reset_hand()

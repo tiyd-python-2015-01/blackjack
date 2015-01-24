@@ -27,7 +27,8 @@ class Deck:
     def __init__(self):
         self._cards = [Card(rank, suit)
                       for rank in RANKS
-                      for suit in SUITS]
+                      for suit in SUITS
+                      ]
 
 
     def draw(self):
