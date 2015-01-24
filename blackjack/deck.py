@@ -35,10 +35,6 @@ class Deck:
         return len(self.cards)
 
 
-    def make_shoe(self, number_of_decks):
-        return (self.cards * number_of_decks)
-
-
 class Shoe(Deck):
     def __init__(self, number_of_decks):
         super().__init__()
