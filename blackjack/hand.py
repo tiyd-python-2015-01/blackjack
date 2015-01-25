@@ -16,7 +16,8 @@ class Hand:
     * Dealer
     * add_card()
     * get value()
-    * get_status(): soft or hard  "soft has a card valued as 11"
+    * get_hand_status(): soft or hard  "soft has a card valued as 11"
+    * set_hand_status(): updates hand type: soft or hard
     """
 
 # Creates hand
@@ -25,7 +26,7 @@ class Hand:
         self.__cards__ = []
         self.__status__ = 'H'
 
-    def update_hand_status(self, newstatus):
+    def set_hand_status(self, newstatus):
         self.__status__ = newstatus
 
     def get_hand_status(self):
@@ -37,7 +38,7 @@ class Hand:
 
     def get_value(self):
         total = 0
-        for i in range(0,len(self.__cards__)):
+        for i in range(0, len(self.__cards__)):
             total += self.__cards__[i].get_value()
         if self.__status__ == "S":
             total += 10
