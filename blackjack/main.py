@@ -20,8 +20,13 @@ class Main:
                 game = Game(options, name)
                 interface.play_game(game)
             elif selection == "2":
-                options = interface.options_menu(options)
+                game = Game(options, "None")
+                game = interface.load_game_menu(game)
+                if game:
+                    interface.play_game(game)
             elif selection == "3":
+                options = interface.options_menu(options)
+            elif selection == "4":
                 break
 
 

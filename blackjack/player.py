@@ -1,4 +1,7 @@
 from hand import Hand
+from datetime import datetime
+import pickle
+import hashlib
 
 
 class Player:
@@ -21,6 +24,7 @@ class Player:
         self.money = 100
         self.insured = False
         self.doubled = False
+        self.player_hash = None
 
     def buys_insurance(self):
         """Modifys the player's money if they choose to buy insurance when
@@ -67,3 +71,50 @@ class Player:
         self.hands = []
         self.insured = False
         self.doubled = False
+
+    def save_player_state(self, options):
+        """Saves the player's progress for later play"""
+        if not self.player_hash:
+            self.player_hash = hashlib.md5(bytes(str(datetime.now()),
+                                           "UTF-8")).hexdigest()
+        player_data = {"name": self.name,
+                       "money": self.money,
+                       "hash": self.player_hash,
+                       "options": options
+                       }
+        try:
+            with open("saves.dat", "rb") as read_file:
+                data = pickle.load(read_file)
+                for saved_player in data:
+                    if self.player_hash == saved_player["hash"]:
+                        saved_player["money"] = self.money
+                        saved_player["options"] = options
+                        break
+                else:
+                    data.append(player_data)
+
+            with open("saves.dat", "wb") as write_file:
+                pickle.dump(data, write_file)
+
+        except FileNotFoundError:
+            with open("saves.dat", "xb") as write_file:
+                data = [{"name": self.name,
+                         "money": self.money,
+                         "hash": self.player_hash,
+                         "options": options}]
+                pickle.dump(data, write_file)
+
+    def load_player_state(self, player_hash, game):
+        """Loads the player's previous information from saved game file."""
+        try:
+            with open("saves.dat", "rb") as read_file:
+                data = pickle.load(read_file)
+                for saved_player in data:
+                    if player_hash == saved_player["hash"]:
+                        self.name = saved_player["name"]
+                        self.money = saved_player["money"]
+                        self.player_hash = saved_player["hash"]
+                        game.options = saved_player["options"]
+                        break
+        except IOError:
+            print("Error loading game...Sorry.")
