@@ -34,81 +34,83 @@ class Interface:
             if player_choice == "N" or self.game.player.money < 5:
                 break
 
-    def play_hand(self):
-        """Hand loop.  Continues until the end of the hand.  Prints updates
-        about the status of the hand to the screen and makes method calls
-        to allow user actions."""
+    def initialize_hand(self):
+        """Initializes the variables needed for the correct flow of the
+        hand"""
         print("\n"*80)
         bet = self.get_bet()
+        print("\n"*80)
+
         self.game.player.reset_player()
         self.game.create_hands(bet)
-        print("\n"*80)
-        current_hand = 0
-        dealers_turn = False
-        print("Dealing Cards {}\n".format(choice(icons)))
+        self.current_hand = 0
+        self.dealers_turn = False
+        self.continue_hand = True
 
         if len(self.game.deck.cards) < 30:
             self.game.reshuffle()
 
-        while True:
+    def play_hand(self):
+        """Hand loop.  Continues until the end of the hand.  Prints updates
+        about the status of the hand to the screen and makes method calls
+        to allow user actions."""
 
-            self.print_hands(current_hand)
+        self.initialize_hand()
+        print("Dealing Cards {}\n".format(choice(icons)))
+
+        while self.continue_hand:
+            self.print_hands()
+
             if self.resolve_blackjacks():
                 break
-            selection, actions = self.offer_actions(current_hand)
-            self.execute_selection(selection, actions, current_hand)
 
-            if self.game.check_bust(self.game.player.hands[current_hand]):
-                if len(self.game.player.hands) == 1:
-                    print("You bust!\n")
-                    break
-                elif len(self.game.player.hands) == current_hand + 1:
-                    print("You bust!\n")
-                    for hand in self.game.player.hands:
-                        if hand.get_value() <= 21:
-                            dealers_turn = True
-                    if dealers_turn:
-                        print("Dealer's turn!\n")
-                    else:
-                        break
-                else:
-                    print("You bust!\n")
-                    current_hand += 1
-            elif selection == "R":
-                print("You surrendered...\n")
-                break
-            elif selection == "S" or selection == "D":
-                if len(self.game.player.hands) > current_hand + 1:
-                    current_hand += 1
-                else:
-                    print("Dealer's turn!\n")
-                    dealers_turn = True
+            selection, actions = self.offer_actions()
+            self.execute_selection(selection, actions)
+
+            dealers_turn = self.players_turn(selection)
 
             if dealers_turn:
+                print("Dealer's turn!")
                 need_to_compare = self.dealer_play()
                 if need_to_compare:
                     self.evaluate_hands()
-                    break
+                    self.continue_hand = False
                 else:
-                    break
+                    self.continue_hand = False
+
+    def players_turn(self, selection):
+        """Allows the player to make game selections and determines if the
+        dealer will need to take a turn"""
+        dealers_turn = False
+        if self.game.check_bust(self.game.player.hands[self.current_hand]):
+            if len(self.game.player.hands) == 1:
+                print("You bust!\n")
+                self.continue_hand = False
+                return False
+            elif len(self.game.player.hands) == self.current_hand + 1:
+                print("You bust!\n")
+                for hand in self.game.player.hands:
+                    if hand.get_value() <= 21:
+                        dealers_turn = True
+                return dealers_turn
+            else:
+                print("You bust!\n")
+                self.current_hand += 1
+        elif selection == "R":
+            print("You surrendered...\n")
+            self.continue_hand = False
+            return False
+        elif selection == "S" or selection == "D":
+            if len(self.game.player.hands) > self.current_hand + 1:
+                self.current_hand += 1
+            else:
+                return True
 
     def evaluate_hands(self):
         """Evaluates the final hands of the player and dealer and makes
         the appropriate calls the the playout method of the Game class"""
         if len(self.game.player.hands) > 1:
-            for hand in enumerate(self.game.player.hands):
-                if self.game.check_bust(hand[1]):
-                    print("Hand {} busted.".format(hand[0]+1))
-                elif self.game.check_push(hand[1], self.game.dealer.hand):
-                    print("Push on hand {}.".format(hand[0]+1))
-                    self.game.payout(hand[1], self.game.dealer.hand)
-                else:
-                    if self.game.compare_hands(hand[1], self.game.dealer.hand):
-                        print("Hand {} wins!".format(hand[0]+1))
-                        self.game.payout(hand[1], self.game.dealer.hand)
-                    else:
-                        print("Hand {} loses!".format(hand[0]+1))
-            self.print_dealer_hand()
+            self.evaluate_split_hands()
         elif self.game.check_push(self.game.player.hands[0],
                                   self.game.dealer.hand):
             self.game.payout(self.game.player.hands[0],
@@ -122,10 +124,25 @@ class Interface:
                 self.game.payout(self.game.player.hands[0],
                                  self.game.dealer.hand)
                 self.print_dealer_hand()
-
             else:
                 print("Dealer wins.\n")
                 self.print_dealer_hand()
+
+    def evaluate_split_hands(self):
+        """Method for evaluating multiple hands after a split."""
+        for hand in enumerate(self.game.player.hands):
+            if self.game.check_bust(hand[1]):
+                print("Hand {} busted.".format(hand[0]+1))
+            elif self.game.check_push(hand[1], self.game.dealer.hand):
+                print("Push on hand {}.".format(hand[0]+1))
+                self.game.payout(hand[1], self.game.dealer.hand)
+            else:
+                if self.game.compare_hands(hand[1], self.game.dealer.hand):
+                    print("Hand {} wins!".format(hand[0]+1))
+                    self.game.payout(hand[1], self.game.dealer.hand)
+                else:
+                    print("Hand {} loses!".format(hand[0]+1))
+        self.print_dealer_hand()
 
     def dealer_play(self):
         """Dealer's play method.  Goes through all dealer turns until the
@@ -200,7 +217,7 @@ class Interface:
         else:
             return False
 
-    def print_hands(self, current_hand):
+    def print_hands(self):
         """Displays the dealer's and player's hands to the screen"""
         print("Dealer's Hand: [{}, [X]]".format(
                                             self.game.dealer.get_show_card()))
@@ -209,37 +226,39 @@ class Interface:
                                          else ""), end="")
         card_string = ""
         for hand in enumerate(self.game.player.hands):
-            card_string += "{}{} ".format("*" if hand[0] == current_hand else
-                                          "",
+            card_string += "{}{} ".format("*" if hand[0] == self.current_hand
+                                          else "",
                                           hand[1].get_card_strings(), end="")
 
         print(card_string)
         print("\nMoney: {}".format(self.game.player.money))
 
-    def execute_selection(self, selection, actions, current_hand):
+    def execute_selection(self, selection, actions):
         """Takes the users selected action and performs it"""
         if selection == "H" and actions["hit"]:
             new_card = self.game.deck.deal()
             print("\nReceived {}\n".format(new_card))
-            self.game.player.takes_hit(self.game.player.hands[current_hand],
-                                  new_card)
+            self.game.player.takes_hit(self.game.player.hands[
+                                       self.current_hand],
+                                       new_card)
         elif selection == "D" and actions["double"]:
             new_card = self.game.deck.deal()
             print("\nReceived {}\n".format(new_card))
-            self.game.player.doubles(self.game.player.hands[current_hand],
+            self.game.player.doubles(self.game.player.hands[self.current_hand],
                                 new_card)
         elif selection == "P" and actions["split"]:
             new_cards = [self.game.deck.deal(), self.game.deck.deal()]
-            self.game.player.splits(self.game.player.hands[current_hand],
+            self.game.player.splits(self.game.player.hands[self.current_hand],
                                     new_cards)
         elif selection == "R" and actions["surrender"]:
-            self.game.player.surrenders(self.game.player.hands[current_hand])
+            self.game.player.surrenders(self.game.player.hands[
+                                        self.current_hand])
 
-    def offer_actions(self, current_hand):
+    def offer_actions(self):
         """Prints available actions to the screen and allows user to input
         their selected action."""
         actions = self.game.get_available_actions(
-                      self.game.player.hands[current_hand])
+                      self.game.player.hands[self.current_hand])
         valid_selection_made = False
         while not valid_selection_made:
             valid_input = ["S"]
