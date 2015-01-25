@@ -13,11 +13,6 @@ class Game:
     class, and pulls from functions and interface.
     """
 
-    def reset_table(self):
-        """Clears the hands of the player and dealer."""
-        self.player.hand.clear_hand()
-        self.dealer.hand.clear_hand()
-
     def start(self):
         """Initiates the player and dealer objects that will be used for
         the game."""
@@ -43,9 +38,12 @@ class Game:
         and automatically loses."""
         self.pot = ask_for_bet(self.player.money)
         self.player.make_bet(self.pot)
-
         show_table(self.player, self.dealer, self.pot)
         self.surrender_option = early_surrender()
+        if is_ace(self.dealer.hand):
+            if bet_insurance_choice():
+                self.side_bet = insurance_bet(self.pot)
+                self.player.make_bet(self.side_bet)
         while self.player.hand.value < 22:
             if self.surrender_option:
                 break
@@ -68,7 +66,6 @@ class Game:
         a card."""
         self.dealer.reveal()
         show_table_later(self.player, self.dealer, self.pot)
-        print(self.dealer.hand)
         if not blkjck_chk(self.dealer.hand):
             while self.dealer.hand.value < 17:
                 self.dealer.take_card(self.deck)
@@ -79,14 +76,17 @@ class Game:
         explain the amount """
         if blkjck_chk(self.player.hand) and blkjck_chk(self.dealer.hand):
             push(self.dealer.hand.value, self.player.hand.value)
-            self.player.get_money(self.pot * (2))
+            self.player.get_money(self.pot)
+            if self.side_bet > 0:
+                self.player.get_money(self.side_bet * (2))
 
         elif blkjck_chk(self.dealer.hand):
             dealer_win(self.dealer.hand.value, self.player.hand.value,
                        self.pot)
+            if self.side_bet > 0:
+                self.player.get_money(self.side_bet* (2))
 
         elif blkjck_chk(self.player.hand):
-            blackjack_text()
             player_win_text(self.pot * (2))
             self.player.get_pot(self.pot * (2))
 
@@ -105,8 +105,18 @@ class Game:
         else:
             player_win_text(self.pot * (2))
             self.player.get_money(self.pot * (2))
+        check_for_insurance(self.side_bet, self.dealer.hand,
+                            self.player.money)
+
+    def reset_table(self):
+        """Clears the hands of the player and dealer, and pot and sid bet."""
+        self.player.hand.clear_hand()
+        self.dealer.hand.clear_hand()
+        self.side_bet = 0
+        self.pot = 0
 
     def __init__(self):
+        """Goes through the main game loop."""
         self.start()
         while True:
             while True:

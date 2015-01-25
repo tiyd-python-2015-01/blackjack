@@ -110,11 +110,21 @@ def insurance_bet(pot):
     bet half of the original pot."""
     while True:
         insurance_limit = (pot / 2)
-        print("How much would you like to bet?)
+        print("How much would you like to bet?")
         bet = input("You can only bet up to ${}: ".format((insurance_limit)))
-        if bet.isdigit() and bet <= insurance_limit:
+        if bet.isdigit() and float(bet) <= insurance_limit:
             return int(bet)
         print("That was not a number or you bet more than you are able.")
+
+def won_insurance_bet(side_bet):
+    """Text if player wins insurance side bet."""
+    print("The dealer had blackjack, you won the insurance bet.")
+    print("You win ${}.".format(side_bet))
+
+def lost_insurance_bet(side_bet):
+    """Text if player loses insurance side bet."""
+    print("The dealer did not have blackjack, you lose the insurance bet.")
+    print("You lose ${}".format(side_bet))
 
 
 def yes_or_no():

@@ -1,4 +1,5 @@
 from card import Card
+from interface import*
 
 
 def checker_for_letters(prompt):
@@ -30,6 +31,15 @@ def blkjck_chk(hand):
     else:
         return False
 
+def check_for_insurance(side_bet, dealer_hand, player_money):
+    """This checks to see if the player betted for insurance. and that the
+    dealer has blackjack. If they do it pays out double the bet to the
+    player. Otherwise they lose the bet."""
+    if side_bet > 0 and blkjck_chk(dealer_hand):
+        won_insurance_bet(side_bet)
+        player_money += (side_bet * 2)
+    elif side_bet > 0 and not blkjck_chk(dealer_hand):
+        lost_insurance_bet(side_bet)
 
 def is_ace(dealer_hand):
     return dealer_hand.value == 11
