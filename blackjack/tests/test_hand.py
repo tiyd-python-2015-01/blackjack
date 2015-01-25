@@ -59,7 +59,13 @@ def test_hand_is_splittable():
     assert not can_not_split_hand.can_split()
     assert not too_big_to_split_hand.can_split()
 
+
 def test_hand_is_bust():
     busted_hand = Hand(spade_of_eights, heart_of_eights, a_card,
                        a_second_card)
     assert busted_hand.is_bust()
+
+
+def test_hand_num_cards():
+    hand_with_three_cards = Hand(an_ace, a_card, a_second_card)
+    assert hand_with_three_cards.num_cards() is 3

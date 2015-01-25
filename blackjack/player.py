@@ -40,11 +40,36 @@ class Player:
 
     def show_cards(self):
         your_hand = self.hands[0]
-        card_string = your_hand.show_cards()
-        print("You have: {}".format(card_string))
+        card_list = your_hand.show_cards()
+        card_string = ", ".join(card_list)
+        hand_value = your_hand.value()
+        print("You have: {} ({})".format(card_string, hand_value))
 
     def is_broke(self):
+        #print("Has {}, so isbroke is {}".format(self.money, self.money <= 0))
         return self.money <= 0
+
+    def is_bust(self):
+        return self.hands[0].is_bust()
 
     def dump_cards(self):
         self.hands = []
+
+    def hit_from_deck(self, deck):
+        self.hands[0].grab(deck.draw())
+
+    def num_cards(self):
+        cards = 0
+        for hand in self.hands:
+            cards += hand.num_cards()
+        return cards
+
+    def get_value(self):
+        return self.hands[0].value()
+
+    def has_blackjack(self):
+        return self.hands[0].is_blackjack()
+
+    def show_money(self):
+        money_string = "${}".format(self.money)
+        return money_string

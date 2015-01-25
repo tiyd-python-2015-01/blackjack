@@ -74,3 +74,9 @@ class Hand:
         else:
             card_list = [str(card) for card in self.cards]
             return card_list
+
+    def num_cards(self):
+        return len(self.cards)
+
+    def is_blackjack(self):
+        return len(self.cards) == 2 and self.value == 21
