@@ -1,7 +1,7 @@
 from player import Player
 from hand import Hand
 from card import Card
-from deck import Deck, Clubs, Diamonds, Hearts, Spades
+from shoe import Shoe, Clubs, Diamonds, Hearts, Spades
 
 def test_can_hold_hand():
     hand1 = Hand([Card(2, Diamonds), Card('A', Spades)])
@@ -10,10 +10,10 @@ def test_can_hold_hand():
 
 
 def test_can_hit():
-    deck1 = Deck()
+    shoe1 = Shoe(6)
     hand1 = Hand([Card(2, Diamonds), Card('A', Spades)])
     player1 = Player("Juan", 20, hand1)
-    player1.hit(deck1)
+    player1.hit(shoe1)
     assert len(player1.cards) == 3
 
 

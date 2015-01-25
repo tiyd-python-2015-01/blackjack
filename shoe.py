@@ -32,13 +32,11 @@ class Shoe(Deck):
 
     def draw(self):
         """Take a card off the top of the deck and return it"""
-        pass
         return self._cards.pop()
 
 
     def shuffle(self):
         """Shuffles cards in the deck"""
-        pass
         shuffle(self._cards)
         return self
 

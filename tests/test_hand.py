@@ -1,7 +1,6 @@
 from card import Card
 from hand import Hand
-from deck import Deck
-from deck import Clubs, Diamonds, Hearts, Spades
+from shoe import Shoe, Clubs, Hearts, Diamonds, Spades
 
 
 def test_can_hold_cards():
@@ -17,8 +16,8 @@ def test_can_print_hand():
 
 def test_draw_card():
     new_hand = Hand([Card(2, Diamonds), Card('A', Spades)])
-    deck = Deck()
-    new_hand.draw(deck)
+    shoe = Shoe(6)
+    new_hand.draw(shoe)
 
     assert len(new_hand.hand) == 3
 
@@ -53,18 +52,18 @@ def test_bust():
     assert new_hand3.bust() == False
 
 
-def test_can_add_cards_from_deck():
-    deck1 = Deck()
+def test_can_add_cards_from_shoe():
+    shoe1 = Shoe(6)
     new_hand1 = Hand([Card(2, Diamonds), Card('A', Spades)])
-    new_hand1.draw(deck1)
+    new_hand1.draw(shoe1)
     assert len(new_hand1.hand) == 3
-    assert len(deck1) == 51
+    assert len(shoe1) == 311
 
 
 def test_new_hand():
-    deck1 = Deck()
+    shoe1 = Shoe(6)
     new_hand1 = Hand([])
-    new_hand1.new_hand(deck1)
+    new_hand1.new_hand(shoe1)
     assert len(new_hand1.hand) == 2
 
 def test_reset_hand():

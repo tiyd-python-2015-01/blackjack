@@ -74,8 +74,6 @@ class Hand:
 
     def reset_hand(self):
         self.hand = []
-        print(self.hand)
-
 
 
     def __str__(self):
