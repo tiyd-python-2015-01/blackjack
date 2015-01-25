@@ -26,12 +26,6 @@ class Hand:
         self.__cards__ = []
         self.__status__ = 'H'
 
-    def set_hand_status(self, newstatus):
-        self.__status__ = newstatus
-
-    def get_hand_status(self):
-        return self.__status__
-
     def add_card(self, card):
         self.__cards__.append(card)
         return self
@@ -43,6 +37,12 @@ class Hand:
         if self.__status__ == "S":
             total += 10
         return total
+
+    def set_hand_status(self, newstatus):
+        self.__status__ = newstatus
+
+    def get_hand_status(self):
+        return self.__status__
 
     def __len__(self):
         return len(self.__cards__)
