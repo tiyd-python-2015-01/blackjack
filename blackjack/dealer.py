@@ -25,7 +25,8 @@ class Dealer:
         print("The dealer has a: {}".format(card_string))
 
     def show_cards(self):
-        card_string = self.hand.show_cards()
+        card_list = self.hand.show_cards()
+        card_string = ", ".join(card_list)
         hand_value = self.hand.value()
         print("The dealer has: {} ({})".format(card_string, hand_value))
 

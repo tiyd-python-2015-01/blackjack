@@ -20,6 +20,7 @@ class Hand:
             self.cards.append(arg)
 
     def grab(self, a_card):
+        """Puts a given card in the hand."""
         self.cards.append(a_card)
 
     def __len__(self):
@@ -36,6 +37,8 @@ class Hand:
         return self.__str__()
 
     def value(self):
+        """Returns the most favorable interpretation of the scoring of a
+           hand's cards."""
         value_dict = {"1": 1,
                       "2": 2,
                       "3": 3,
