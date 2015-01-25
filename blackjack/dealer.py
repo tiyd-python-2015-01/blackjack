@@ -11,7 +11,7 @@ class Dealer:
         * Has a budget
         * Has a status: Bust, Hit, Stand
         * Methods:
-            Deal() - gives ne card
+            Deal() - gives one card
             add_card() adds a card to its hand
             Get_hand()) returns the cards in the hand
             get_hand_value() returns the value of the hand

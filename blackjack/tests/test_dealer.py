@@ -24,22 +24,17 @@ def test_dealer_deals():
 
 
 def test_dealer_add_card():
-    assert mydealer.add_card(mycard1) == ['A of Diamonds']
-    assert mydealer.add_card(mycard2) == ['A of Diamonds', '2 of Diamonds']
-    assert mydealer.add_card(mycard3) == ['A of Diamonds', '8 of Diamonds',
-                                          '9 of Hearts']
+    mydealer.add_card(mycard1)
+    assert str(mydealer.get_hand()) == "['A of Diamonds']"
+    mydealer.add_card(mycard2)
+    assert str(mydealer.get_hand()) == "['A of Diamonds', '2 of Diamonds']"
 
-
+    
 def test_set_and_get_status():
     mydealer.set_status('H')
     assert mydealer.get_status() == 'H'
     mydealer.set_status('B')
     assert mydealer.get_status() == 'B'
-
-
-def test_get_hand():
-    assert mydealer.get_hand() == ['A of Diamonds', '8 of Diamonds',
-                                   '9 of Hearts']
 
 
 def test_and_get_hand_status():
