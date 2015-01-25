@@ -1,5 +1,6 @@
 import blackjack.functions as fun
 
+
 def test_hit_stand():
     x = 'HIT'
     y = 'STAND'

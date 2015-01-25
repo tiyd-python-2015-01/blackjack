@@ -4,6 +4,7 @@ from blackjack.hand import Hand
 from blackjack.player import Player
 from blackjack.dealer import Dealer
 
+
 def test_shown_cards():
     dealer = Dealer()
     a_hand = Hand()

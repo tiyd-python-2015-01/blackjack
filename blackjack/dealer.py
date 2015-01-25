@@ -3,6 +3,7 @@ from blackjack.deck import Deck
 from blackjack.hand import Hand
 from blackjack.player import Player
 
+
 class Dealer:
     """A computer player that uses an algorithm to determine whether to hit
     or stay
@@ -12,19 +13,20 @@ class Dealer:
     * Hit on 17 (with Ace in hand)
     * Hit on 16 or under
     * Stay on 18-21
+    * Display just the shown card when the dealer's hole card is
+    still concealed
 
     Collaborators:
-    * on hit, tell dealer's Hand to get Card from Shoe
-    * """
+    * uses the Hand class to determine the value of the hand, on which it
+    bases its actions"""
 
     def __init__(self):
         pass
 
-
     def hit_test(self, a_hand):
+        """algorithm to determine the automated actions of the dealer.
+        This includes the idea of the dealer hitting on a 'soft' 17"""
         list_of_a = [card.rank for card in a_hand.cards if card.rank == 'A']
-        #print("Length = {}".format(len(list_of_a)))
-        #print("Value = {}".format(a_hand.value))
         if len(list_of_a) > 0:
             if a_hand.value < 18:
                 return "HIT"
@@ -36,12 +38,12 @@ class Dealer:
             else:
                 return "STAND"
 
-
-
     def shown(self, a_hand):
+        """displays just 1 card of the dealer's at the start of the hand"""
         return a_hand.cards[1]
 
     def shown_value(self, a_hand):
+        """calculates the value of just the dealer's starting shown card"""
         card = a_hand.cards[1]
         new_hand = Hand()
         new_hand.cards = [card]

@@ -32,8 +32,8 @@ if __name__ == "__main__":
             player_hand = Hand()
             dealer_hand = Hand()
 
-            print ("\n \n")
-            print ("New Hand\n")
+            print("\n \n")
+            print("New Hand\n")
 
             while True:
                 print("You have {} chips.".format(player.chips))
@@ -42,7 +42,6 @@ if __name__ == "__main__":
                 player.bet = int(new_bet)
                 if player.bet <= player.chips:
                     break
-
 
             player.make_bet()
 
@@ -54,9 +53,10 @@ if __name__ == "__main__":
             player_hand.value = player_hand.valuation()
             dealer_hand.value = dealer_hand.valuation()
 
-            print("Player hand: {} {}".format(player_hand.value, player_hand.cards))
-            print("Dealer shows: {} [{}]".format(dealer.shown_value(dealer_hand), dealer.shown(dealer_hand)))
-            #print(dealer_hand.value)
+            print("Player hand: {} {}".format(
+                player_hand.value, player_hand.cards))
+            print("Dealer shows: {} [{}]".format(
+                dealer.shown_value(dealer_hand), dealer.shown(dealer_hand)))
             p_blackjack = game.blackjack_check(player_hand)
             d_blackjack = game.blackjack_check(dealer_hand)
             if p_blackjack is True:
@@ -72,21 +72,25 @@ if __name__ == "__main__":
                     print("")
                     print("{}".format(player_hand.new_card()))
                     print("")
-                    print("Player has: {} {}".format(player_hand.value, player_hand.cards))
-                    print("Dealer shows: {} [{}]".format(dealer.shown_value(dealer_hand), dealer.shown(dealer_hand)))
+                    print("Player has: {} {}".format(
+                        player_hand.value, player_hand.cards))
+                    print("Dealer shows: {} [{}]".format(
+                        dealer.shown_value(dealer_hand), dealer.shown(
+                            dealer_hand)))
                     print("")
                     p_bust = game.bust_check(player_hand)
-                    if p_bust == True:
+                    if p_bust is True:
                         break
                     hit_or_stand = 0
-            if p_bust == True:
+            if p_bust is True:
                 break
 
             print("")
             print("Dealer's turn.")
             input("Press ENTER to continue. \n")
             print("Dealer shows his hole card.")
-            print("Dealer has: {} {}".format(dealer_hand.value, dealer_hand.cards))
+            print("Dealer has: {} {}".format(
+                dealer_hand.value, dealer_hand.cards))
             input("Press ENTER to continue. \n")
             print("")
 
@@ -101,21 +105,24 @@ if __name__ == "__main__":
                 dealer_hand.value = dealer_hand.valuation()
                 print("{}".format(dealer_hand.new_card()))
                 print("")
-                print("Player has: {} {}".format(player_hand.value, player_hand.cards))
-                print("Dealer has: {} {}".format(dealer_hand.value, dealer_hand.cards))
+                print("Player has: {} {}".format(
+                    player_hand.value, player_hand.cards))
+                print("Dealer has: {} {}".format(
+                    dealer_hand.value, dealer_hand.cards))
                 input("Press ENTER to continue. \n")
                 d_bust = game.bust_check(dealer_hand)
-                if d_bust == True:
+                if d_bust is True:
                     break
                 hit_or_stand = dealer.hit_test(dealer_hand)
-            if d_bust == True:
+            if d_bust is True:
                 break
 
             print("Dealer stands.")
             input("Press ENTER to continue. \n")
-            print("Player has: {} {}".format(player_hand.value, player_hand.cards))
-            print("Dealer has: {} {}".format(dealer_hand.value, dealer_hand.cards))
-
+            print("Player has: {} {}".format(
+                player_hand.value, player_hand.cards))
+            print("Dealer has: {} {}".format(
+                dealer_hand.value, dealer_hand.cards))
 
             higher_hand = game.higher_hand(player_hand, dealer_hand)
             if higher_hand == 'p_hand':

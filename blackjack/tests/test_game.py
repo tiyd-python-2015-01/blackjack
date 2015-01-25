@@ -5,15 +5,16 @@ from blackjack.player import Player
 from blackjack.dealer import Dealer
 from blackjack.game import Game
 
+
 def test_bust_check():
     game = Game()
     a_hand = Hand(value=20)
     b_hand = Hand(value=21)
     c_hand = Hand(value=22)
 
-    assert game.bust_check(a_hand) == False
-    assert game.bust_check(b_hand) == False
-    assert game.bust_check(c_hand) == True
+    assert game.bust_check(a_hand) is False
+    assert game.bust_check(b_hand) is False
+    assert game.bust_check(c_hand) is True
 
 
 def test_higher_hand():

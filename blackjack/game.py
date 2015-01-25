@@ -11,17 +11,21 @@ class Game:
         pass
 
     def create_and_shuffle_deck(self):
+        """Creates and shuffles deck"""
         deck = Deck()
         deck.shuffle()
         return deck
 
     def blackjack_check(self, hand):
+        """checks to see if a hand has blackjack.  To be used only
+        at a juncture where the hand has only 2 cards."""
         if hand.value == 21:
             return True
         else:
             return False
 
     def bust_check(self, hand):
+        """checks to see whether a hand has busted, ie has value over 21"""
         if hand.value > 21:
             return True
         else:

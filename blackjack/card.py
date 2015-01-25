@@ -4,7 +4,6 @@ class Card:
     Responsibilities:
 
     * Has a rank and a suit.
-    * Two cards with the same suit and rank should be equal to each other
     * Cards should have readable representations
 
     Collaborators:
