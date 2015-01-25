@@ -175,6 +175,19 @@ class Interface:
             else:
                 print("Please enter Y or N.")
 
+    def offer_surrender(self):
+        """Used on early surrender games.  Gives the player the option to
+        surrender before the dealer checks for blackjack."""
+        while True:
+            player_choice = input("Surrender? (Y/N) {} ".format(
+                choice(icons))).upper()
+            if player_choice == "Y":
+                return True
+            elif player_choice == "N":
+                return False
+            else:
+                print("Invalid input.")
+
     def play_game(self, game):
         """Starts each hand an keeps the game going.  Offers the user the
         choice to play another hand or not."""
@@ -287,17 +300,18 @@ class Interface:
         are resolved."""
         if self.check_for_player_blackjack():
             return True
-        if (self.game.dealer.get_show_card().rank == "A"
+        if self.game.options.early_surrender:
+            if self.offer_surrender():
+                self.game.player.surrenders(self.game.player.hands[0])
+                print("You surrendered.\n")
+                print("Dealer had: {}\n".format(
+                    self.game.dealer.hand.get_card_strings()))
+                return True
+        elif (self.game.dealer.get_show_card().rank == "A"
                 and len(self.game.player.hands[0].cards) == 2
                 and len(self.game.player.hands) == 1
                 and self.game.player.money >= self.game.player.hands[0].bet):
-            self.offer_insurance()
-            if self.game.options.early_surrender:
-                if self.offer_surrender():
-                    self.game.player.surrenders(self.game.player.hands[0])
-                    print("You surrendered.\n")
-                    print("Dealer had: {}\n".format(
-                        self.game.dealer.hand.get_card_strings()))
+                    self.offer_insurance()
                     return True
 
         if self.check_for_dealer_blackjack():
@@ -327,7 +341,6 @@ class Interface:
             "\033[.37m|| '--'\033[.31mC\033[.37m|| '--'\033[.31mK\033[.37m|\n"
             "`------'`------'`------'`------'`------'`------'`------'`------'"
             "`------'")
-
 
         info = ("Programmed by: Alan Grissett\n"
                 "The Iron Yard - Durham\n"
