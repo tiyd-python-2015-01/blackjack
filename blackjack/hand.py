@@ -1,24 +1,20 @@
 class Hand:
+
     def __init__(self):
         self.cards = []
-
 
     def __str__(self):
         return "consists of {}.".format(self.cards)
 
-
     def __repr__(self):
         return self.__str__()
-
 
     def __len__(self):
         return len(self.cards)
 
-
     def add(self, card):
         """Adding a method so a card may be added to a hand."""
         self.cards.append(card)
-
 
     def remove(self):
         """Adding a method so a card may be removed from a hand."""
@@ -42,7 +38,6 @@ class Hand:
                 else:
                     hand_value += 11
         return hand_value
-
 
     def clear_hand(self):
         """A way to get rid of cards inbetween games."""

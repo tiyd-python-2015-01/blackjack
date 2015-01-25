@@ -10,12 +10,14 @@ def test_player_class():
     assert len(new_deck) == 51
     assert len(new_player.hand) == 1
 
+
 def test_player_making_bet():
     new_player = Player()
     new_player.make_bet(10)
     assert new_player.money == 90
     new_player.make_bet(80)
     assert new_player.money == 10
+
 
 def test_player_winning():
     new_player = Player()

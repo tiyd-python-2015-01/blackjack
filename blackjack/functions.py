@@ -31,6 +31,9 @@ def blkjck_chk(hand):
         return False
 
 
+def is_ace(dealer_hand):
+    return dealer_hand.value == 11
+
 
 def hit(player_or_dealer, deck):
     player_or_dealer.take_card(deck)

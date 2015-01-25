@@ -4,6 +4,7 @@ from blackjack.deck import Deck
 dealer = Dealer()
 deck = Deck()
 
+
 def test_dealer_hand():
     dealer.take_card(deck)
     dealer.put_face_down(deck)
@@ -12,4 +13,3 @@ def test_dealer_hand():
     dealer.reveal()
     assert len(dealer.face_down) == 0
     assert len(dealer.hand) == 2
-    
