@@ -26,9 +26,14 @@ def test_hand_class():
     hand.add(card)
     assert len(hand) == 1
 
-def test_hand_value():
 
-    assert first_hand.value_check() == 17
-    assert second_hand.value_check() == 13
-    assert third_hand.value_check() == 15
-    assert  fourth_hand.value_check() == 14
+def test_hand_value():
+    assert first_hand.value == 17
+    assert second_hand.value == 13
+    assert third_hand.value == 15
+    assert fourth_hand.value == 14
+
+
+def test_clear_hand():
+    first_hand.clear_hand()
+    assert len(first_hand) == 0

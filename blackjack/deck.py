@@ -1,4 +1,4 @@
-from blackjack import card
+import card
 import random
 
 
@@ -26,8 +26,17 @@ class Deck:
         return self.cards == other.cards
 
 
+    def shuffle(self):
+        """Lets the deck shuffle when down to 26 cards."""
+        random.shuffle(self.cards)
+
+
     def deal_card(self):
+        """Returns a new, random card, from within the deck. Checks to see
+        if the deck has only 26 cards. If it does the deck is shuffled."""
         new_card = self.cards.pop(random.randint(0, len(self.cards) - 1))
+        if len(self.cards) == 26:
+            self.cards.shuffle()
         return new_card
 
 

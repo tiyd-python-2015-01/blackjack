@@ -1,4 +1,4 @@
-from blackjack.hand import Hand
+from hand import Hand
 
 class Dealer:
     """
@@ -32,7 +32,7 @@ class Dealer:
 
 
     def __str__(self):
-        return "The dealers hand consists of {}.".format(self.hand)
+        return "The dealers hand consists of {}".format(self.hand)
 
 
     def __repr__(self):

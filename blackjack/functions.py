@@ -1,4 +1,4 @@
-from blackjack.card import Card
+from card import Card
 
 
 def checker_for_letters(prompt):
@@ -20,12 +20,16 @@ def checker_for_letters(prompt):
 def check_bust(hand):
     """Returns True if the value of the hand is greater than 21. False if it
     is less than 21."""
-    return hand.value_check() > 21
+    return hand.value > 21
 
 
 def blkjck_chk(hand):
     """Returns True if the hand was blackjack."""
-    return hand.value_check() == 21 and len(hand) == 2
+    if hand.value == 21 and len(hand) == 2:
+         return True
+    else:
+        return False
+
 
 
 def hit(player_or_dealer, deck):

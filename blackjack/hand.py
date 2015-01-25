@@ -4,7 +4,7 @@ class Hand:
 
 
     def __str__(self):
-        return "Your hand consists of {}.".format(self.cards)
+        return "consists of {}.".format(self.cards)
 
 
     def __repr__(self):
@@ -22,9 +22,10 @@ class Hand:
 
     def remove(self):
         """Adding a method so a card may be removed from a hand."""
-        self.cards.pop()
+        return self.cards.pop()
 
-    def value_check(self):
+    @property
+    def value(self):
         """Checks to see what the value of a hand is. Goes through the whole hand
         and finds the values of each card other than an ace"""
         face_cards = ["Jack", "Queen", "King"]
@@ -41,3 +42,8 @@ class Hand:
                 else:
                     hand_value += 11
         return hand_value
+
+
+    def clear_hand(self):
+        """A way to get rid of cards inbetween games."""
+        self.cards = []

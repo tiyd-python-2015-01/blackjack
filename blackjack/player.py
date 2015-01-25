@@ -1,6 +1,5 @@
-from blackjack.deck import Deck
-from blackjack.hand import Hand
-from blackjack.functions import checker_for_letters as cfl
+from deck import Deck
+from hand import Hand
 class Player:
     """
     Responsibilities:
@@ -29,7 +28,7 @@ class Player:
         self.money -= amount
 
 
-    def get_pot(self, amount):
+    def get_money(self, amount):
         """Adds money for winning a game."""
         self.money += amount
 
