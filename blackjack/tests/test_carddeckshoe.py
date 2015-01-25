@@ -23,18 +23,7 @@ def test_create_deck():
     assert len(deck.cards) == 52
     assert isinstance(deck.cards[0], Card)
 
-
-def test_give_card_from_deck():
-    deck = Deck()
-    assert isinstance(deck.give_card(), Card)
-    assert len(deck.cards) == 51
-    assert isinstance(deck.give_card(), Card)
-    assert len(deck.cards) == 50
-
-
 def test_create_shoe():
-    shoe = Shoe()
-    assert len(shoe.decks) == 1
     shoe = Shoe(3)
     assert len(shoe.cards) == 156
     assert isinstance(shoe.cards[0], Card)
