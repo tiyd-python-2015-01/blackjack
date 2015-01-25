@@ -18,7 +18,7 @@ class Shoe:
 
 
     def __str__(self):
-        pass
+        return "Shoe contains {} cards.".format(len(self.deck))
 
 
     def shuffle_shoe(self):
@@ -28,5 +28,5 @@ class Shoe:
 
     def deal_card(self):
         """Deals a card"""
-        dealt_card = self.deck.pop(random.randrange(0, 52))
+        dealt_card = self.deck.pop(random.randrange(0, len(self.deck)))
         return dealt_card

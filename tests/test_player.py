@@ -11,7 +11,7 @@ def test_hit():
     test_player = Player("Dean")
     print(hand)
     print(test_player.hit(hand))
-    assert hand.get_hand_value() >= 2
+    assert hand.get_hand_value() >= 1
 
 
 # def test_walk():
@@ -19,9 +19,8 @@ def test_hit():
 #     test_player = Player("Dean")
 #     assert test_player.walk == "Game over"
 
+
 def test_player_bet():
     test_player = Player("Dean")
     test_player.bet()
     assert test_player.bank == 90
-
-    

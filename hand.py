@@ -23,6 +23,10 @@ class Hand:
         return "Hand contains {}".format(self.hand)
 
 
+    def __len__(self):
+        return len(self)    
+
+
     def add_card(self, card):
         """Adds a card from the shoe to the hand"""
         self.hand.append(card)
