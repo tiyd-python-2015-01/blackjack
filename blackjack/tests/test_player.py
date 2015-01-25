@@ -35,15 +35,10 @@ def test_get_and_set_status():
 
 
 def test_dealer_add_card():
-    assert myplayer.add_card(mycard1) == ['A of Diamonds']
-    assert myplayer.add_card(mycard2) == ['A of Diamonds', '2 of Diamonds']
-    assert myplayer.add_card(mycard3) == ['A of Diamonds', '8 of Diamonds',
-                                          '9 of Hearts']
-
-
-def test_get_hand():
-    assert myplayer.get_hand() == ['A of Diamonds', '8 of Diamonds',
-                                   '9 of Hearts']
+    myplayer.add_card(mycard1)
+    assert str(myplayer.get_hand()) == "['A of Diamonds']"
+    myplayer.add_card(mycard2)
+    assert str(myplayer.get_hand()) == "['A of Diamonds', '8 of Diamonds']"
 
 
 def test_and_get_hand_status():

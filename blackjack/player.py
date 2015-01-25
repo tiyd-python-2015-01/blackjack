@@ -42,6 +42,9 @@ class Player:
         self.__budget__ = budget
         self.__hand__ = Hand()
 
+    def get_name(self):
+        return self.__name__
+
     def add_card(self, card):
         self.__hand__.add_card(card)
 
