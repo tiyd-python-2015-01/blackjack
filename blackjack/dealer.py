@@ -43,7 +43,10 @@ class Dealer:
 
     def shown_value(self, a_hand):
         card = a_hand.cards[1]
-        return card.rank
+        new_hand = Hand()
+        new_hand.cards = [card]
+        value = new_hand.valuation()
+        return value
 
     def __str__(self):
         return "Dealer"

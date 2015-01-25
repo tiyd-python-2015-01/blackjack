@@ -12,6 +12,9 @@ if __name__ == "__main__":
     player = Player()
     dealer = Dealer()
 
+    print("\n \n")
+    print("Let's play blackjack!")
+
     play_game = True
     while play_game:
 
@@ -23,8 +26,6 @@ if __name__ == "__main__":
         p_blackjack = False
         d_blackjack = False
 
-        player.make_bet()
-
         while not (p_win or d_win or tie or p_blackjack or d_blackjack):
             game = Game()
             deck = game.create_and_shuffle_deck()
@@ -33,6 +34,18 @@ if __name__ == "__main__":
 
             print ("\n \n")
             print ("New Hand\n")
+
+            while True:
+                print("You have {} chips.".format(player.chips))
+                print("What is your bet?")
+                new_bet = input("> ")
+                player.bet = int(new_bet)
+                if player.bet <= player.chips:
+                    break
+
+
+            player.make_bet()
+
             player_hand.get_card(deck)
             dealer_hand.get_card(deck)
             player_hand.get_card(deck)
@@ -144,8 +157,8 @@ if __name__ == "__main__":
                 player.push()
                 print("You have {} chips remaining.".format(player.chips))
 
-        if player.chips < 10:
-            print("You don't have enough chips to make another bet!")
+        if player.chips <= 0:
+            print("You're out of chips!  You're done!  Go home!")
             print("I hope you learned a valuable lesson about gambling.")
             exit()
 

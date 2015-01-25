@@ -17,7 +17,10 @@ def test_shown_value():
     dealer = Dealer()
     a_hand = Hand()
     a_hand.cards = [Card('2', 'Hearts'), Card('3', 'Diamonds')]
-    assert dealer.shown_value(a_hand) == '3'
+    assert dealer.shown_value(a_hand) == 3
+    b_hand = Hand()
+    b_hand.cards = [Card('2', 'Hearts'), Card('K', 'Diamonds')]
+    assert dealer.shown_value(b_hand) == 10
 
 
 def test_hit_test():

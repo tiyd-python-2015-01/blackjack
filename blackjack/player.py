@@ -13,23 +13,24 @@ class Player:
 
     Collaborators:"""
 
-    def __init__(self, chips=100):
+    def __init__(self, chips=100, bet=10):
         self.chips = chips
+        self.bet = bet
 
     def make_bet(self):
-        self.chips -= 10
+        self.chips -= self.bet
         return self.chips
 
     def win_bet(self):
-        self.chips += 20
+        self.chips += (2*self.bet)
         return self.chips
 
     def win_blackjack(self):
-        self.chips += 25
+        self.chips += (2.5*self.bet)
         return self.chips
 
     def push(self):
-        self.chips += 10
+        self.chips += self.bet
         return self.chips
 
     def __str__(self):

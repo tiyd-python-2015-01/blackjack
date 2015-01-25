@@ -9,6 +9,10 @@ def test_make_bet():
     a_player.make_bet()
     assert a_player.chips == 90
 
+    b_player = Player(bet=20)
+    b_player.make_bet()
+    assert b_player.chips == 80
+
 def test_win_bet():
     a_player = Player(chips=90)
     a_player.win_bet()
