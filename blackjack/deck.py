@@ -11,6 +11,7 @@ class Deck:
     * Methods:
         - Shuffle()  shuffles the deck
         - Deal() deals a card and updates the deck
+        - get_length() tells me how many card I have
 
     Collaborators:
 
@@ -33,14 +34,14 @@ class Deck:
         return self
 
     def deal(self):
-        pos = random.randint(0, self.get_length())
+        pos = random.randint(0, self.get_length()-1)
         return self.deck.pop(pos)
 
-    def __eq__(self,other):
+    def __eq__(self, other):
         return self.deck == other.deck
 
-    def __ne__(self,other):
-        return not self.__eq__(other) 
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
     def __repr__(self):
         return "{}".format(self.deck)
