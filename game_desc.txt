@@ -13,7 +13,7 @@ if Player.Hand.Value() == Dealer.Hand.Value() == 21:  Blackjack Push. Game Ends.
 else
      if Player.Hand.Value() == 21 Game Ends. Update Game.Winner to Player
      if Dealer.Hand.Value() == 21 Game Ends. Update Game.Winner to Dealer
-else   # no one got 21
+else   # no one got blackjack
 
 While Player wants a hit:   (determine decision point to choose hit or stand)
     Dealer deals one Card.
