@@ -1,14 +1,13 @@
 from card import Card
 from deck import Deck
 from player import Player
+from player import Dealer
 
 def test_Card():
 
     new_card = Card("King", "Spade")
     assert new_card.number == "King"
     assert new_card.suit == "Spade"
-
-
 
 def test_deck():
 
@@ -22,15 +21,23 @@ def test_deck():
 def test_player():
 
     new_deck = Deck()
-    new_player = Player(100,new_deck)
+    new_player = Player(new_deck)
     new_player.get_hand()
     assert len(new_player) == 2
     assert len(new_deck) == 50
     new_player.hit()
     assert len(new_deck) == 49
     assert len(new_player) == 3
-    assert new_player.pot == 100
-    new_player.bet()
-    assert new_player.pot == 90
-    new_player.bet()
-    assert new_player.bet
+
+    new_player.hand = [Card("Ace","Clubs"),Card("Ace","Clubs"),Card("Ace","Clubs")]
+    assert new_player.get_value() ==13
+    new_player.hand = [Card("Ace","Clubs"),Card("Ace","Clubs")]
+    assert new_player.get_value() == 12
+
+def test_dealer():
+    new_deck = Deck()
+    dealer = Dealer(new_deck)
+    dealer.get_hand()
+    assert len(dealer) == 2
+    dealer.hit()
+    assert len(dealer) == 3
