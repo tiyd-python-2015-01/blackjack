@@ -1,14 +1,14 @@
 from card import Card
 from deck import Deck
 
-class Player:
+class Dealer:
     """The CPU Player playing the game human player
 
     Responsibilities:
 
     * Has an active hand of dealt cards
     * Calculates the point value of hand
-    * Makes decision on whether to hit or stand
+    * Hit/Stands on calculated point value of hand
 
     Collaborators:
 
@@ -16,26 +16,44 @@ class Player:
     * Interacts with Game Class
     * Interacts with Interface Class"""
 
-    def __init__(self, deal_hand=[]):
-        self.deal_hand = deal_hand
+    def __init__(self, hand=[]):
+        self.hand = hand
+
 
     def __len__(self):
         """Keeps up with amount of cards in hand"""
-        return len(self.deal_hand)
+        return len(self.hand)
 
-    def __str__(self):
-        """String representation of player hand as list of cards."""
-        return str([hand for hand in self.deal_hand])
 
-    def __repr__(self):
-        return self.__str__()
+    def take_a_hit(self, deck):
+        card = deck.deal_card()
+        return self.hand.append(card)
 
-    def dealer_hit(self, deck):
-        card = deck.draw()
-        return self.deal_hand.append(card)
 
     def hand_value(self):
         value = 0
-        for card in self.deal_hand:
-            value = value + card.value
+        #aces = 0 FIGURE OUT HOW TO FLIP ACE VALUE 1 or 11
+        for card in self.hand:
+            if type(card.rank) == int:
+                value += card.rank
+            elif card.rank == "Ace":
+                value += 11
+            else:
+                value += 10
         return value
+
+    def blackjack(self):
+        if self.hand_value() == 21 and len(self.hand) == 2:
+            return True
+        else:
+            return False
+
+
+
+    def __str__(self):
+        """String representation of player hand as list of cards."""
+        return str(self.hand)
+
+
+    def __repr__(self):
+        return self.__str__()

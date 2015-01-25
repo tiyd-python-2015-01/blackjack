@@ -7,13 +7,11 @@ def test_player_bank():
     assert player1.bank == 100
 
 def default_test_hand_value():
-    new_deck = Deck()
     player1 = Player()
     assert player1.hand_value == 0
 
 
 def test_hand_value_with_cards():
-    new_deck = Deck()
     new_player = Player()
     new_player.hand = [Card("Jack", "Clubs"), Card(9, "Spades")]
     assert new_player.hand_value() == 19

@@ -43,11 +43,17 @@ class Player:
                 value += 10
         return value
 
+    def blackjack(self):
+        if self.hand_value() == 21 and len(self.hand) == 2:
+            return True
+        else:
+            return False
 
-def __str__(self):
-    """String representation of player hand as list of cards."""
-    return str(self.hand)
+
+    def __str__(self):
+        """String representation of player hand as list of cards."""
+        return str(self.hand)
 
 
-def __repr__(self):
-    return self.__str__()
+    def __repr__(self):
+        return self.__str__()

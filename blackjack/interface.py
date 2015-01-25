@@ -1,5 +1,5 @@
-from card import Card
-from deck import Deck
+from player import Player
+from dealer import Dealer
 
 class Interface:
     """The prompts for displaying of input & output
@@ -7,31 +7,96 @@ class Interface:
     Responsibilities:
 
     * Ask Player for input
-    *
+    * Displays output messages
 
     Collaborators:
 
     * Works with Game class
     *"""
 
+    def __init__(self):
+        pass
+
     def welcome_message(self):
         print("="*25)
-        print("Welcome to Blackjack")
-        start = input("Would you like to play: [Y] or [N]").upper
+        print("Its time for Blackjack")
+        start = input("Would you like to play: [Y] or [N]").upper()
         if start == "Y":
-            continue
-        if start == "N":
-            quit()
+            return True
+        elif start == "N":
+            return False#or exit()?
+        else:
+            return self.welcome_message()
 
-    def hit_stand(self):
-        move = input(">> Would you like to [H]it or [S]tand").upper
-        if move == "H":
-            Player.player_hit(Deck)
-        if move == "S":
-            ##end player turn....Break?
 
-    def you_win(self):
-        print("YOU WIN!")
+    def you_win(self, player):
+        print("*"*25)
+        print("\nYOU WIN!")
+        print("Your new $$$ total is: ${}".format(player.bank))
+        print("*"*25, "\n")
 
-    def you_lose(self):
-        print("YOU LOSE")
+    def you_lose(self, player):
+        print("Bummer, you lost")
+        print("Your new $$$ total is: ${}".format(player.bank))
+
+    def you_push(self, player):
+        print("Game is a push")
+        print("Your new $$$ total is: ${}".format(player.bank))
+
+    def no_money(self):
+        print("You're out of chips. GAME OVER")
+
+    def blackjack(self, player):
+        print("You have BLACKJACK!")
+        print("Your new $$$ total is: ${}".format(player.bank))
+
+
+    def show_player_hand(self, player):
+        print("\nYour hand is: {}".format(player.hand))
+
+    def show_player_total(self, player):
+        print("Hand Value: {}".format(player.hand_value()))
+
+    def show_dealer_upcard(self, dealer):
+        print("\nDealers up card is: {}".format(dealer.hand[1:]))
+
+    def show_dealer_hand(self, dealer):
+        print("\nDealer's hand is: {}".format(dealer.hand))
+
+    def show_dealer_total(self, dealer):
+        print("Dealer Value: {}".format(dealer.hand_value()))
+
+    def show_current(self, player, dealer):
+        self.show_player_hand(player)
+        self.show_player_total(player)
+        self.show_dealer_upcard(dealer)
+
+    def show_final(self, player, dealer):
+        self.show_player_hand(player)
+        self.show_player_total(player)
+        self.show_dealer_hand(dealer)
+        self.show_dealer_total(dealer)
+
+    def player_choice(self, player, deck):
+        choice = input("Do you want to [H]it or [S]tand?").upper()
+        if choice == "H":
+            player.take_a_hit(deck)
+            return False
+        elif choice == "S":
+            return True
+        else:
+            return self.player_choice(player, deck)
+
+    def new_hand(self, player):
+        print("="*25)
+        start = input("Would you like to play a new hand? [Y] or [N]").upper()
+        if start == "Y":
+            return True
+        elif start == "N":
+            return False#or exit()?
+        else:
+            return self.new_hand(self, player)
+
+
+#interface = Interface()
+#interface.you_push()
