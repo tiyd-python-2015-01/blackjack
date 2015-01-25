@@ -20,11 +20,10 @@ class Card:
     * Cards are collected into decks of varying sizes
     * Cards are distributed to player and dealer hands
     """
-
     suits = {"spades": "♤",
-             "hearts": "♡",
+             "hearts": "\033[.31m♡\033[.37m",
              "clubs": "♧",
-             "diamonds": "♢"}
+             "diamonds": "\033[.31m♢\033[.37m"}
 
     def __init__(self, rank, suit):
         self.rank = rank
