@@ -11,7 +11,9 @@ class Card:
     * Has a rank and a suit.
     * Has a point value. Aces point values depend on the Hand.
     * Methods:
-        Get_value() to get the value of a card
+        get_value() to get the value of a card
+        get_rank() returns the card rank
+        get_suit() returns the card suit
 
     Collaborators:
 
@@ -33,6 +35,12 @@ class Card:
             return 10
         else:
             return int(self.rank)
+
+    def get_rank(self):
+        return self.rank
+
+    def get_suit(self):
+        return self.suit
 
     def __repr__(self):
         return "'{} of {}'".format(self.rank, self.suit)
