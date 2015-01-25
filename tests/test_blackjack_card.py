@@ -22,4 +22,4 @@ def test_facecard_value():
 
 def test_ace_value():
     testcard = Card('A', '♡')
-    assert testcard.value == 11
+    assert testcard.value == 1

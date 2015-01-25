@@ -66,11 +66,11 @@ def dealer_move():
     if len(game.dealer_hand.cards) == 2 and dealer_value == 17:
         print("\nDealer hits...")
         game.dealer_hit()
-        return
+        return 'HIT'
     elif game.dealer_hand.value < 17:
         print("\nDealer hits...")
         game.dealer_hit()
-        return
+        return 'HIT'
     else:
         return 'STAND'
 
@@ -143,17 +143,18 @@ def get_bet():
     return bet
 
 
-intro()
-player = Player()
-shoe_size = get_shoe_size()
-while player.bank > 0:
-    game = Game()
-    game.shoe.set(shoe_size)
-    print("\nYou have ${}".format(player.bank))
-    bet = get_bet()
-    player.bet(bet)
-    print("\nTaking your bet...")
-    game_flow()
-    results()
-print("\n\nGet outta here!! You're broke!!")
-sys.exit()
+if __name__ == "__main__":
+    intro()
+    player = Player()
+    shoe_size = get_shoe_size()
+    while player.bank > 0:
+        game = Game()
+        game.shoe.set(shoe_size)
+        print("\nYou have ${}".format(player.bank))
+        bet = get_bet()
+        player.bet(bet)
+        print("\nTaking your bet...")
+        game_flow()
+        results()
+    print("\n\nGet outta here!! You're broke!!")
+    sys.exit()

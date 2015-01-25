@@ -43,3 +43,9 @@ def test_hand_value_blackjack():
     dummyhand = Hand()
     dummyhand.cards = [Card('A', '♡'), Card('Q', '♡')]
     assert dummyhand.get_value() == 'BLACKJACK'
+
+
+def test_more_than_one_ace():
+    dummyhand = Hand()
+    dummyhand.cards = [Card('A', '♡'), Card('A', '♡')]
+    assert dummyhand.get_value() == 12
