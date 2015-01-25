@@ -23,17 +23,36 @@ def test_get_budget():
 
 
 def test_set_budget():
-    myplayer.updates_budget(10)
+    myplayer.set_budget(10)
     assert myplayer.get_budget() == 110
-    myplayer.updates_budget(-10)
+    myplayer.set_budget(-10)
     assert myplayer.get_budget() == 100
 
-def test_get_status():
-    assert myplayer.get_status() == ''
 
-
-def test_set_status():
-    myplayer.updates_status('H')
-    assert myplayer.get_status() == 'H'
-    myplayer.updates_status('S')
+def test_get_and_set_status():
+    myplayer.set_status('S')
     assert myplayer.get_status() == 'S'
+
+
+def test_dealer_add_card():
+    assert myplayer.add_card(mycard1) == ['A of Diamonds']
+    assert myplayer.add_card(mycard2) == ['A of Diamonds', '2 of Diamonds']
+    assert myplayer.add_card(mycard3) == ['A of Diamonds', '8 of Diamonds',
+                                          '9 of Hearts']
+
+
+def test_get_hand():
+    assert myplayer.get_hand() == ['A of Diamonds', '8 of Diamonds',
+                                   '9 of Hearts']
+
+
+def test_and_get_hand_status():
+    myplayer.set_hand_status('S')
+    assert myplayer.get_hand_status() == 'S'
+
+
+def get_hand_value():
+    myplayer.set_hand_status('S')
+    assert myplayer.get_hand_value() == 16
+    myplayer.set_hand_status('H')
+    assert myplayer.get_hand_value() == 6
