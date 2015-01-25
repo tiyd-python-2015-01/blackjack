@@ -12,7 +12,6 @@ class GameOptions:
     * Rules are passed to the game during initialization
     """
 
-
     def __init__(self):
         self.number_of_decks = 1
         self.hit_soft_17 = False

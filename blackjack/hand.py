@@ -15,7 +15,6 @@ class Hand:
     * Hand objects receive card objects from the deck.
     """
 
-
     def __init__(self, bet, cards=[]):
         self.cards = cards
         self.bet = bet
@@ -49,7 +48,7 @@ class Hand:
         for card in self.cards:
             hand_value += card.value
         if ((hand_value > 21 and "A" in self.get_ranks()) or
-            hand_value <= 11 and "A" in self.get_ranks()):
+           hand_value <= 11 and "A" in self.get_ranks()):
             for card in self.cards:
                 if hand_value > 21 and card.value == 11:
                     card.swap_ace()

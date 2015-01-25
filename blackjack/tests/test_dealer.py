@@ -11,7 +11,8 @@ def test_dealer_hit():
 
     dealer.hand = hand
 
-    assert dealer.hit() == True
+    assert dealer.hit()
+
 
 def test_dealer_does_not_hit():
     hand = Hand(0, [Card("10", "clubs"), Card("7", "hearts")])
@@ -19,7 +20,8 @@ def test_dealer_does_not_hit():
 
     dealer.hand = hand
 
-    assert dealer.hit() == False
+    assert not dealer.hit()
+
 
 def test_dealer_hits_soft_17():
     hand = Hand(0, [Card("6", "clubs"), Card("A", "hearts")])
@@ -27,10 +29,11 @@ def test_dealer_hits_soft_17():
 
     dealer.hand = hand
 
-    assert dealer.hit() == True
+    assert dealer.hit()
+
 
 def test_dealer_takes_hit():
     options = GameOptions()
     new_game = Game(options, "Alan")
-    new_game.dealer.hand = Hand(10,[Card("2", "spades"), Card("J", "clubs")])
+    new_game.dealer.hand = Hand(10, [Card("2", "spades"), Card("J", "clubs")])
     new_game.dealer.takes_hit(new_game.deck.deal())

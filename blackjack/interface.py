@@ -1,7 +1,10 @@
 from game_options import GameOptions
 from random import choice
 
+
 icons = ["♡", "♧", "♢", "♤"]
+
+
 class Interface:
     """ Interface class will provide all of the methods of interacting with
     the user.  It will contain all of the methods for displaying to the
@@ -29,7 +32,7 @@ class Interface:
                     break
                 player_choice = input("Play another hand? (Y/N) {} ".format(
                                       choice(icons))).upper()
-                if player_choice in ["Y","N"]:
+                if player_choice in ["Y", "N"]:
                     break
             if player_choice == "N" or self.game.player.money < 5:
                 break
@@ -114,7 +117,7 @@ class Interface:
         elif self.game.check_push(self.game.player.hands[0],
                                   self.game.dealer.hand):
             self.game.payout(self.game.player.hands[0],
-                                       self.game.dealer.hand)
+                             self.game.dealer.hand)
             print("Push.\n")
             self.print_dealer_hand()
         else:
@@ -175,9 +178,9 @@ class Interface:
         if self.check_for_player_blackjack():
             return True
         if (self.game.dealer.get_show_card().rank == "A"
-            and len(self.game.player.hands[0].cards) == 2
-            and len(self.game.player.hands) == 1
-            and self.game.player.money >= self.game.player.hands[0].bet):
+                and len(self.game.player.hands[0].cards) == 2
+                and len(self.game.player.hands) == 1
+                and self.game.player.money >= self.game.player.hands[0].bet):
             self.offer_insurance()
             if self.game.options.early_surrender:
                 if self.offer_surrender():
@@ -202,13 +205,13 @@ class Interface:
     def check_for_player_blackjack(self):
         """Checks to see if the player has blackjack"""
         if (self.game.player.hands[0].get_value() == 21
-            and len(self.game.player.hands[0].cards) == 2
-            and len(self.game.player.hands) == 1):
+                and len(self.game.player.hands[0].cards) == 2
+                and len(self.game.player.hands) == 1):
             print("BLACKJACK!\n")
             if self.check_for_dealer_blackjack():
                 print("Dealer has BLACKJACK.  Push...\n")
                 self.game.payout(self.game.player.hands[0],
-                                           self.game.dealer.hand)
+                                 self.game.dealer.hand)
                 return True
             else:
                 print("Blackjack pays 3:2!\n")
@@ -220,7 +223,7 @@ class Interface:
     def print_hands(self):
         """Displays the dealer's and player's hands to the screen"""
         print("Dealer's Hand: [{}, [X]]".format(
-                                            self.game.dealer.get_show_card()))
+              self.game.dealer.get_show_card()))
 
         print("Player's Hand{}: ".format("s" if len(self.game.player.hands) > 1
                                          else ""), end="")
@@ -245,7 +248,7 @@ class Interface:
             new_card = self.game.deck.deal()
             print("\nReceived {}\n".format(new_card))
             self.game.player.doubles(self.game.player.hands[self.current_hand],
-                                new_card)
+                                     new_card)
         elif selection == "P" and actions["split"]:
             new_cards = [self.game.deck.deal(), self.game.deck.deal()]
             self.game.player.splits(self.game.player.hands[self.current_hand],
@@ -258,7 +261,7 @@ class Interface:
         """Prints available actions to the screen and allows user to input
         their selected action."""
         actions = self.game.get_available_actions(
-                      self.game.player.hands[self.current_hand])
+            self.game.player.hands[self.current_hand])
         valid_selection_made = False
         while not valid_selection_made:
             valid_input = ["S"]
@@ -274,7 +277,7 @@ class Interface:
             if actions["surrender"]:
                 print("Surrende(R), ", end="")
                 valid_input.append("R")
-            print ("(S)tand")
+            print("(S)tand")
             selection = input("{} ".format(choice(icons))).upper()
             valid_selection_made = selection in valid_input
 
@@ -343,9 +346,9 @@ class Interface:
                     self.game.player.money))
                 bet = int(input("{} ".format(choice(icons))))
                 if (bet % 5 is not 0
-                    or bet < 0
-                    or bet > 20
-                    or bet > self.game.player.money):
+                        or bet < 0
+                        or bet > 20
+                        or bet > self.game.player.money):
                     raise ValueError
                 else:
                     return bet
@@ -415,7 +418,7 @@ class Interface:
         if selection == "1":
             try:
                 decks = int(input("Choose number of decks (8 max){} ".format(
-                choice(icons))))
+                    choice(icons))))
                 if decks < 1 or decks > 8:
                     raise ValueError
                 options.number_of_decks = decks

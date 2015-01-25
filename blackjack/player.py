@@ -1,4 +1,6 @@
 from hand import Hand
+
+
 class Player:
     """This is the player class, it contains a list of hands controlled by the
     player and keeps track of how much money the player has won.
@@ -23,7 +25,7 @@ class Player:
     def buys_insurance(self):
         """Modifys the player's money if they choose to buy insurance when
         offered"""
-        self.modify_money( int(-.5*self.hands[0].bet))
+        self.modify_money(int(-.5*self.hands[0].bet))
         self.insured = True
 
     def modify_money(self, value):

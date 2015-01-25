@@ -23,7 +23,6 @@ class Game:
       game and initialize the dealer appropriately
     * Receives wager from player and transfers winnings to player"""
 
-
     def __init__(self, options, name):
         self.deck = Deck(options.number_of_decks)
         self.player = Player(name)
@@ -48,7 +47,7 @@ class Game:
         available if hitting split aces is disabled and player has split
         aces"""
         if not self.options.hit_split_aces and (len(self.player.hands) > 1
-            and hand.cards[0].rank == "A"):
+                                                and hand.cards[0].rank == "A"):
             return False
         else:
             return True
@@ -58,7 +57,7 @@ class Game:
         if not self.options.resplitting and len(self.player.hands) > 1:
             return False
         elif not self.options.resplit_aces and (len(self.player.hands) > 1
-            and "A" in hand.get_ranks()):
+                                                and "A" in hand.get_ranks()):
             return False
         elif self.options.split_by_rank:
             return hand.get_ranks()[0] == hand.get_ranks()[1]
@@ -100,7 +99,7 @@ class Game:
         results in a push state"""
         return player_hand.get_value() == dealer_hand.get_value()
 
-    def compare_hands(self, player_hand, dealer_hand ):
+    def compare_hands(self, player_hand, dealer_hand):
         """Compares the player and dealer hand to resolve the winner"""
         return player_hand.get_value() > dealer_hand.get_value()
 

@@ -90,6 +90,7 @@ def test_can_double_normal():
     hand.cards.append(Card("3", "diamonds"))
     assert not new_game.can_double(hand)
 
+
 def test_can_double_9_10_11():
     options = GameOptions()
     options.double_9_10_11 = True
@@ -173,62 +174,66 @@ def test_split():
     assert new_game.player.hands[1].cards[0].rank == "J"
     assert len(new_game.player.hands[1].cards) == 2
 
+
 def test_double_down():
     options = GameOptions()
     new_game = Game(options, "Alan")
-    hand = Hand(10,[Card("2", "spades"), Card("J", "clubs")])
+    hand = Hand(10, [Card("2", "spades"), Card("J", "clubs")])
     new_game.player.doubles(hand, new_game.deck.deal())
     assert len(hand.cards) == 3
     assert hand.bet == 20
     assert new_game.player.money == 90
 
+
 def test_surrender():
     options = GameOptions()
     new_game = Game(options, "Alan")
-    hand = Hand(10,[Card("2", "spades"), Card("J", "clubs")])
+    hand = Hand(10, [Card("2", "spades"), Card("J", "clubs")])
     new_game.player.surrenders(hand)
+
 
 def test_payout():
     options = GameOptions()
     new_game = Game(options, "Alan")
     new_game.create_hands(10)
-    new_game.player.hands[0] = Hand(10,[Card("4", "spades"),
-                                    Card("J", "clubs")])
-    new_game.dealer.hand = Hand(10,[Card("3", "spades"),
-                                    Card("Q", "clubs")])
+    new_game.player.hands[0] = Hand(10, [Card("4", "spades"),
+                                         Card("J", "clubs")])
+    new_game.dealer.hand = Hand(10, [Card("3", "spades"),
+                                     Card("Q", "clubs")])
     new_game.payout(new_game.player.hands[0], new_game.dealer.hand)
     assert new_game.player.money == 110
 
     new_game.create_hands(10)
-    new_game.player.hands[0] = Hand(10,[Card("A", "spades"),
-                                        Card("J", "clubs")])
+    new_game.player.hands[0] = Hand(10, [Card("A", "spades"),
+                                         Card("J", "clubs")])
     new_game.payout_blackjack(new_game.player.hands[0])
     assert new_game.player.money == 125
 
     new_game.create_hands(10)
     assert new_game.player.money == 115
-    new_game.player.hands[0] = Hand(10,[Card("2", "spades"),
-                                        Card("J", "clubs")])
-    new_game.dealer.hand = Hand(0,[Card("A", "spades"),
+    new_game.player.hands[0] = Hand(10, [Card("2", "spades"),
+                                         Card("J", "clubs")])
+    new_game.dealer.hand = Hand(0, [Card("A", "spades"),
                                     Card("J", "clubs")])
     new_game.player.insured = True
     assert new_game.dealer.hand.get_value() == 21
     new_game.payout(new_game.player.hands[0], new_game.dealer.hand)
     assert new_game.player.money == 125
 
+
 def test_get_available_actions():
     options = GameOptions()
     new_game = Game(options, "Alan")
-    new_game.player.hands.append(Hand(10,[Card("2", "spades"),
-                                          Card("J", "clubs")]))
+    new_game.player.hands.append(Hand(10, [Card("2", "spades"),
+                                           Card("J", "clubs")]))
     new_game.dealer.hand = Hand(0, [Card("J", "spades"), Card("7", "Clubs")])
     actions = new_game.get_available_actions(new_game.player.hands[0])
     assert actions["hit"]
     assert actions["double"]
     assert not actions["split"]
     assert actions["surrender"]
-    new_game.player.hands[0] = Hand(10,[Card("J", "spades"),
-                                        Card("J", "clubs")])
+    new_game.player.hands[0] = Hand(10, [Card("J", "spades"),
+                                         Card("J", "clubs")])
     new_game.dealer.hand = Hand(0, [Card("A", "spades"), Card("7", "Clubs")])
     actions = new_game.get_available_actions(new_game.player.hands[0])
 

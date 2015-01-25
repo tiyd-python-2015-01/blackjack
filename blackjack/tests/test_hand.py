@@ -58,6 +58,7 @@ def test_ace_value_incorrect():
 
     assert hand.get_value() == 20
 
+
 def test_blackjack():
     test_cards = []
     test_cards.append(Card("A", "spades"))
