@@ -66,7 +66,7 @@ while game_loop:
             game.dealer.play_out_hand(game.shoe)
             game.check_for_winner(game.dealer, game.player)
 
-        else:
+        else:  # Player surrenders
             game.player.stack += round(game.pot / 2)
 
     if player.stack < 1:  # Check to see player has money remaining

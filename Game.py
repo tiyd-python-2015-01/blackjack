@@ -24,8 +24,7 @@ class Game:
 
     def hit_or_stand_with_surrender_and_double(self):
         choice = input('[H]it, [S]tand, [D]ouble, or S[u]rrender: ').lower()
-        if (choice == 'h') or (choice == 's') or (choice == 'd')
-        or (choice == 'u'):
+        if choice in 'hsdu':
             return choice
         else:
             print("Invalid input!")
@@ -52,8 +51,7 @@ class Game:
             print("Dealer busted! You win!")
             self.player.stack += self.pot * 2
         else:
-            if self.player.hand.best_hand < self.dealer.hand.best_hand
-            or self.player.hand.bust():
+            if self.player.hand.best_hand < self.dealer.hand.best_hand or self.player.hand.bust():
                 print("You Lose")
             elif self.dealer.hand.best_hand < self.player.hand.best_hand:
                 print("You Win!")

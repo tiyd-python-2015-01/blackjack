@@ -9,7 +9,7 @@ def test_create_shoe():
 def test_shuffle():
     shoe1 = Shoe(6)
     shoe1.shuffle()
-    assert shoe1 != Shoe()
+    assert shoe1 != Shoe(6)
 
 
 def test_new_shoe_can_draw_card():
