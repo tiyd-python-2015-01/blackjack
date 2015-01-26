@@ -1,5 +1,5 @@
 import random
-import card
+from blackjack.card import Card
 
 
 class Deck:
@@ -21,7 +21,7 @@ class Deck:
         suits = ["Clubs", "Diamonds", "Spades", "Hearts"]
         ranks = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack",
                  "Queen", "King"]
-        self.cards = [card.Card(suit, rank) for suit in suits for rank in ranks]
+        self.cards = [Card(suit, rank) for suit in suits for rank in ranks]
 
     def shuffle(self):
         random.shuffle(self.cards)
