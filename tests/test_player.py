@@ -8,7 +8,7 @@ def test_hit():
     """tests the ability of the player to add a card to his/her hand"""
     shoe = Shoe()
     hand = Hand()
-    test_player = Player("Dean")
+    test_player = Player()
     print(hand)
     print(test_player.hit(hand))
     assert hand.get_hand_value() >= 1
@@ -21,6 +21,6 @@ def test_hit():
 
 
 def test_player_bet():
-    test_player = Player("Dean")
+    test_player = Player()
     test_player.bet()
     assert test_player.bank == 90
