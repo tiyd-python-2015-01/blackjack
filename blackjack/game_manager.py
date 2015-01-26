@@ -19,6 +19,12 @@ class GameManager:
     """
 
     def dealer_flipping(self, dealer_cards, card_deck, player, player_hand):
+        """Manages the dealer's turn. Decides when the user is supposed to hit,
+        stay, win, or lose.
+        dealer_cards = the dealer's hand
+        card_deck = the deck of cards you're playing with
+        player = the user
+        player_hand = the user's hand"""
 
         while True:
             dealer_cards.dealer_card_count(dealer_cards.cards)

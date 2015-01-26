@@ -30,18 +30,17 @@ class Deck:
         return len(self.card_deck)
 
     def shuffle_deck(self):
+        """shuffles the card deck"""
+
         random.shuffle(self.card_deck)
         return self.card_deck
 
     def card_count(self):
+        """ Counts how many cards are in the deck"""
+
         count = len(self)
         return count
 
     def deal_card(self):
+        """Pulls a card out of the deck and returns its value"""
         return self.card_deck.pop()
-
-
-# fresh_deck = Deck()
-# fresh_deck.shuffle_deck()
-# print(fresh_deck.deal_card())
-# Dealer gets 1st card down. Rest are face up.

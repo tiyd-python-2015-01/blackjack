@@ -8,10 +8,15 @@ import sys
 
 
 def run_game_func():
+    """Master function to run the entire game. Setup and all"""
+
     game_flow(game_setup())
 
 
 def game_setup():
+    """Pre-dealing of blackjack. This function manages the setup of the user,
+    giving them 500 chips to start with, and displays the help."""
+    
     player = User()
     player.chip_count = 500
     game_help()
@@ -20,6 +25,9 @@ def game_setup():
 
 
 def game_flow(player):
+    """Function manages the actual flow of card game itself. Dealing,
+    hitting, etc. """
+
     gm = GameManager()
     fresh_deck = Deck()
     fresh_deck.shuffle_deck()
@@ -78,6 +86,8 @@ def game_flow(player):
 
 
 def game_help():
+    """Simply displays the help for the game"""
+
     print("""Welcome to Cooper's Blackjack!
           The rules of the game are simple. They're listed below, but can
           be reached again if need be.
@@ -88,6 +98,11 @@ def game_help():
 
 
 def user_pregame_steps(user_input, player):
+    """Function's use is to determine next steps based on the user_pregame_input
+    function that is laid out in the users class.
+    user_input = result of aforementioned function
+    player = the specified player. Referring to the user class"""
+
     if user_input == 'help':
         game_help()
         user_pregame_steps(player.user_pregame_input(), player)
@@ -115,6 +130,11 @@ def user_pregame_steps(user_input, player):
 
 
 def user_in_game_steps(user_input, player):
+    """Function's use is to determine next steps based on the
+    user_in_game_input function that is laid out in the users class.
+    user_input = result of aforementioned function
+    player = the specified player. Referring to the user class"""
+
     if user_input == 'help':
         game_help()
         player.user_in_game_input()

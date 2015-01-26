@@ -25,6 +25,9 @@ class DealerHand:
         return "{}".format(self.cards)
 
     def dealer_card_count(self, cards):
+        """This function manages the card valuation process for the dealer.
+        cards = the dealer's hand """
+
         self.card_count = 0
         for card in cards:
             if card.rank in (2, 3, 4, 5, 6, 7, 8, 9, 10):
@@ -40,6 +43,9 @@ class DealerHand:
         return self.card_count
 
     def dealer_actions(self):
+        """This function gives the result of the dealer's hand valuation.
+        Results are bust, stay, or hit"""
+
         if self.card_count >= 22:
             return 'bust'
         elif self.card_count >= 17 and self.card_count <= 21:

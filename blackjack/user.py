@@ -18,10 +18,16 @@ class User:
         self.bet = bet
 
     def bet_chips(self, bet):
+        """Removes chips from the player's chip count
+        bet = integer that will be removed from the user's chip count"""
+
         self.chip_count -= int(self.bet)
         return self.chip_count
 
     def user_pregame_input(self):
+        """User is presented with a few pregame options, but will need to select
+        either quit, help, chips, or an integer. Otherwise they get an error"""
+
         user_request = input("Type 'bet' if you'd like to place a bet and"
                              " start a new hand.\n")
 
@@ -44,6 +50,10 @@ class User:
             return self.user_pregame_input()
 
     def user_in_game_input(self):
+        """User is presented with a few ingame options, but will need to select
+        either quit, help, chips, hit, stay, double or an integer.
+        Otherwise they get an error"""
+
         user_request = input("What would you like to do? You can either:\n"
                              "Type 'hit' to receive another card.\n"
                              "Type 'stay' to hold your position.\n"

@@ -57,13 +57,14 @@ def test_player_additional_cards_hit():
 
 
 def test_player_options():
-    bust_cards = PlayerHand([],count=25)
-    win_cards = PlayerHand([],count=21)
-    choice_cards = PlayerHand([],count=18)
+    bust_cards = PlayerHand([], count=25)
+    win_cards = PlayerHand([], count=21)
+    choice_cards = PlayerHand([], count=18)
 
     assert bust_cards.player_actions() == 'bust'
     assert win_cards.player_actions() == '21'
     assert choice_cards.player_actions() == 'choice'
+
 
 def test_dealer_options():
     bust_cards = DealerHand([], 25)
