@@ -1,5 +1,5 @@
-import card
-import deck
+from card import Card
+from deck import Deck
 
 
 class Hand:
