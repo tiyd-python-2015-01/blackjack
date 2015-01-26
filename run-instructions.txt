@@ -1,0 +1,1 @@
+To run the game use the command "python -m blackjack" from the main blackjack directory.

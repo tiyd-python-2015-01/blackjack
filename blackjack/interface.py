@@ -1,5 +1,5 @@
 import pickle
-from game_options import GameOptions
+from blackjack.game_options import GameOptions
 from random import choice
 
 

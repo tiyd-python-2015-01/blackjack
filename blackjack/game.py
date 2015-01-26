@@ -1,7 +1,7 @@
-from deck import Deck
-from hand import Hand
-from player import Player
-from dealer import Dealer
+from blackjack.deck import Deck
+from blackjack.hand import Hand
+from blackjack.player import Player
+from blackjack.dealer import Dealer
 
 
 class Game:

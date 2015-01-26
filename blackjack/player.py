@@ -1,4 +1,4 @@
-from hand import Hand
+from blackjack.hand import Hand
 from datetime import datetime
 import pickle
 import hashlib

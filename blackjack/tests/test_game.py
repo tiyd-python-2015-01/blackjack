@@ -1,7 +1,7 @@
-from card import Card
-from game_options import GameOptions
-from game import Game
-from hand import Hand
+from blackjack.card import Card
+from blackjack.game_options import GameOptions
+from blackjack.game import Game
+from blackjack.hand import Hand
 
 
 def test_create_hands():

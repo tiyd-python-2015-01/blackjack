@@ -1,4 +1,4 @@
-from card import Card
+from blackjack.card import Card
 """Test functions for the card class"""
 
 

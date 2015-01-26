@@ -1,5 +1,5 @@
-from hand import Hand
-from card import Card
+from blackjack.hand import Hand
+from blackjack.card import Card
 
 
 def test_card_list_holds_cards():

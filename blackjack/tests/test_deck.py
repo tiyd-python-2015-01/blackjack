@@ -1,5 +1,5 @@
-from deck import Deck
-from card import Card
+from blackjack.deck import Deck
+from blackjack.card import Card
 
 
 def test_deck_length():

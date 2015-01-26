@@ -1,8 +1,8 @@
-from dealer import Dealer
-from card import Card
-from hand import Hand
-from game_options import GameOptions
-from game import Game
+from blackjack.dealer import Dealer
+from blackjack.card import Card
+from blackjack.hand import Hand
+from blackjack.game_options import GameOptions
+from blackjack.game import Game
 
 
 def test_dealer_hit():

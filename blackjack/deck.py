@@ -1,5 +1,5 @@
 from random import shuffle
-from card import Card, ranks, suits
+from blackjack.card import Card, ranks, suits
 
 
 class Deck:

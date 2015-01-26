@@ -1,4 +1,4 @@
-from player import Player
+from blackjack.player import Player
 
 
 def test_player_creation():
