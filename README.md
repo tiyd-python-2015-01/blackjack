@@ -65,7 +65,7 @@ To Do:
 + - Add class attributes
 + - Add methods to increment or decrement remaining money
 + - Add name attribute
-/ - Add method to save player state so the game can be resumed with current
++ - Add method to save player state so the game can be resumed with current
     money amount maintained
 
 
@@ -145,13 +145,3 @@ To Do:
     the console
 + - Add method to display win/lose text after each hand
 + - Add control game flow to the interface
-
-
-/////<PyGameInterface>:  Very unlikely, but this class would replace the
-Interface class to provide a graphical game experience.  The interface
-would allow for mouse input or keyboard input corresponding to available
-menu options or avaiable actions within the game.  The rest of the
-functionality would be identical to interface.
-
-To Do:
-* - The rest of the project
