@@ -27,11 +27,13 @@ busted_hand.add(Card("King", "Hearts"))
 busted_hand.add(Card("King", "Hearts"))
 busted_hand.add(Card("King", "Hearts"))
 
+
 def test_hand_class():
     hand = Hand()
     card = Card("8", "Spades")
     hand.add(card)
     assert len(hand) == 1
+
 
 def test_hand_value():
     assert seventeen.value == 17
@@ -39,15 +41,19 @@ def test_hand_value():
     assert high_ace.value == 15
     assert ace_hand.value == 14
 
+
 def test_blackjack():
     assert blackjack_hand.blackjack() is True
+
 
 def test_clear_hand():
     seventeen.clear_hand()
     assert len(seventeen) == 0
 
+
 def test_ace_in_hand():
     assert dealer_ace.is_ace() is True
+
 
 def test_is_busted():
     assert busted_hand.check_bust() is True
