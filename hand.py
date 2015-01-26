@@ -24,7 +24,7 @@ class Hand:
 
 
     def __len__(self):
-        return len(self)    
+        return len(self)
 
 
     def add_card(self, card):
