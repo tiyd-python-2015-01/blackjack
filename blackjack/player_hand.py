@@ -51,5 +51,3 @@ class PlayerHand:
             return '21'
         else:
             return 'choice'
-        # double down
-        # split

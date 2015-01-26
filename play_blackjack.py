@@ -15,10 +15,10 @@ def run_game_func():
 
 def game_setup():
     """Pre-dealing of blackjack. This function manages the setup of the user,
-    giving them 500 chips to start with, and displays the help."""
-    
+    giving them 100 chips to start with, and displays the help."""
+
     player = User()
-    player.chip_count = 500
+    player.chip_count = 100
     game_help()
     print("You have {} chips.\n".format(player.chip_count))
     return player
@@ -46,20 +46,15 @@ def game_flow(player):
     print('Dealer has {} and an unknown card\n'.format(dealer_cards))
 
     while True:
-        # Ask user what they wants to do
         new_cards.player_card_count(new_cards.cards)
         user_next_stage = new_cards.player_actions()
 
         if user_next_stage == 'bust':
-            print("You lost\n", ("="*40))
-            if player.chip_count == 0:
-                print("You are out of chips! Goodbye.")
-                sys.exit()
+            print(gm.busted(player), '\n', ("="*40))
             game_flow(player)
 
         elif user_next_stage == '21':
-            print("You won")
-            player.chip_count += (2 * player.bet)
+            print(gm.twenty_one(player))
             game_flow(player)
 
         elif user_next_stage == 'choice':
@@ -69,6 +64,10 @@ def game_flow(player):
                 next_card = PlayerHand(fresh_deck.deal_card())
                 new_cards.cards.append(next_card.cards)
                 print('\nYou now have - ', new_cards.cards)
+
+            elif user_action == 'double':
+                player.chip_count - player.bet
+                player.bet * 2
 
             elif user_action == 'stay':
                 dealer_next_card = DealerHand([fresh_deck.deal_card()])
@@ -150,11 +149,11 @@ def user_in_game_steps(user_input, player):
         return 'chips'
 
     elif user_input == 'hit':
-        # Add in 'hit' functionality
         return 'hit'
     elif user_input == 'stay':
-        # Add in 'stay' functionality
         return 'stay'
+    elif user_input == 'double':
+        return 'double'
 
 
 if __name__ == '__main__':

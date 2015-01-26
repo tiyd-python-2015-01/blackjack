@@ -57,3 +57,14 @@ class GameManager:
                 dealer_cards.cards.extend(dealer_next_card.cards)
                 print("The dealer must hit and got "
                       "a {}.".format(dealer_next_card))
+
+
+    def busted(self, player):
+        if player.chip_count == 0:
+            print("You are out of chips! Goodbye.")
+            sys.exit()
+        return "You busted."
+
+    def twenty_one(self, player):
+        player.chip_count += (2 * player.bet)
+        return 'You won!'
