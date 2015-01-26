@@ -1,0 +1,32 @@
+Playing blackjack:  (not sure how bets work yet so I still need to include it later when I find out how that works.)
+
+The Dealer starts the game:
+  - Shuffles Cards
+  - Deals 2 cards to Player
+              Deck is updated
+    Hand is updated for Player
+  - Deals 2 cards to Dealer
+              Deck is updated
+    Hand is updated for Dealer
+
+if Player.Hand.Value() == Dealer.Hand.Value() == 21:  Blackjack Push. Game Ends. Update Game.Winner to Push
+else
+     if Player.Hand.Value() == 21 Game Ends. Update Game.Winner to Player
+     if Dealer.Hand.Value() == 21 Game Ends. Update Game.Winner to Dealer
+else   # no one got blackjack
+
+While Player wants a hit:   (determine decision point to choose hit or stand)
+    Dealer deals one Card.
+    Hand for Player is updated
+    if Player.Hand.Value()  > 21:  Player.status = bust.  Game ends. Dealer wins
+    else: Hit or Stand? make decision
+
+If Player.status == stand:
+    while Dealer.Hand.value() < 17
+         Dealer deals one Card (updates deck, updates hand)
+         if value > 21  dealer.status = bust. Game ends. Player wins
+    if dealer.status !- bust
+           if Player.Hand.Value()  == Dealer.Hand.Value() Game ends. Winner = push
+           else
+              if Player.Hand.Value()  > Dealer.Hand.Value() game ends. player wins
+               else   game ends. dealer wins.
