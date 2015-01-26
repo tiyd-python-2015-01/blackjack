@@ -4,6 +4,10 @@ from blackjack.hand import Hand
 from blackjack.player import Player
 
 
+def test_name():
+    a_player = Player(name='Card Shark')
+    assert a_player.name == 'Card Shark'
+
 def test_make_bet():
     a_player = Player()
     assert a_player.chips == 100

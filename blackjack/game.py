@@ -6,6 +6,9 @@ from blackjack.dealer import Dealer
 
 
 class Game:
+    """I kinda mucked this up, and rather than having the game run
+    through this class, it ended up just basically being a repository
+    for miscellaneous functions that were part of the game play"""
 
     def __init__(self):
         pass

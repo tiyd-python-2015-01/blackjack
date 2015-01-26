@@ -13,7 +13,9 @@ if __name__ == "__main__":
     dealer = Dealer()
 
     print("\n \n")
-    print("Let's play blackjack!")
+    player.name = input("What's your name?  ")
+    print("")
+    print("Hi {}, let's play blackjack!".format(player.name))
 
     play_game = True
     while play_game:
@@ -39,6 +41,7 @@ if __name__ == "__main__":
                 print("You have {} chips.".format(player.chips))
                 print("What is your bet?")
                 new_bet = input("> ")
+                print("")
                 player.bet = int(new_bet)
                 if player.bet <= player.chips:
                     break
@@ -53,10 +56,11 @@ if __name__ == "__main__":
             player_hand.value = player_hand.valuation()
             dealer_hand.value = dealer_hand.valuation()
 
-            print("Player hand: {} {}".format(
-                player_hand.value, player_hand.cards))
+            print("{}'s hand: {} {}".format(
+                player.name, player_hand.value, player_hand.cards))
             print("Dealer shows: {} [{}]".format(
                 dealer.shown_value(dealer_hand), dealer.shown(dealer_hand)))
+            print("")
             p_blackjack = game.blackjack_check(player_hand)
             d_blackjack = game.blackjack_check(dealer_hand)
             if p_blackjack is True:
@@ -72,8 +76,8 @@ if __name__ == "__main__":
                     print("")
                     print("{}".format(player_hand.new_card()))
                     print("")
-                    print("Player has: {} {}".format(
-                        player_hand.value, player_hand.cards))
+                    print("{} has: {} {}".format(
+                        player.name, player_hand.value, player_hand.cards))
                     print("Dealer shows: {} [{}]".format(
                         dealer.shown_value(dealer_hand), dealer.shown(
                             dealer_hand)))
@@ -105,8 +109,8 @@ if __name__ == "__main__":
                 dealer_hand.value = dealer_hand.valuation()
                 print("{}".format(dealer_hand.new_card()))
                 print("")
-                print("Player has: {} {}".format(
-                    player_hand.value, player_hand.cards))
+                print("{} has: {} {}".format(
+                    player.name, player_hand.value, player_hand.cards))
                 print("Dealer has: {} {}".format(
                     dealer_hand.value, dealer_hand.cards))
                 input("Press ENTER to continue. \n")

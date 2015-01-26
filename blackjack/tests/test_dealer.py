@@ -40,10 +40,14 @@ def test_hit_test():
     d_hand = Hand(value=16)
     e_hand = Hand(value=17)
     f_hand = Hand(value=18)
+    g_hand = Hand(value=17)
     d_hand.cards = [Card('A', 'Hearts'), Card('5', 'Diamonds')]
     e_hand.cards = [Card('A', 'Hearts'), Card('6', 'Diamonds')]
     f_hand.cards = [Card('A', 'Hearts'), Card('7', 'Diamonds')]
+    g_hand.cards = [Card('A', 'Hearts'), Card('6', 'Diamonds'),
+                    Card('Q', 'Clubs')]
 
     assert dealer.hit_test(d_hand) == "HIT"
     assert dealer.hit_test(e_hand) == "HIT"
     assert dealer.hit_test(f_hand) == "STAND"
+    assert dealer.hit_test(g_hand) == "STAND"

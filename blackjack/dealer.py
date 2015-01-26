@@ -26,8 +26,27 @@ class Dealer:
     def hit_test(self, a_hand):
         """algorithm to determine the automated actions of the dealer.
         This includes the idea of the dealer hitting on a 'soft' 17"""
+
+        value_dict = {'1': 1,
+                      '2': 2,
+                      '3': 3,
+                      '4': 4,
+                      '5': 5,
+                      '6': 6,
+                      '7': 7,
+                      '8': 8,
+                      '9': 9,
+                      '10': 10,
+                      'J': 10,
+                      'Q': 10,
+                      'K': 10,
+                      'A': 11}
+        hand_ranks = [card.rank for card in a_hand.cards]
+        values = [value_dict[x] for x in hand_ranks]
+        value = sum(values)
+
         list_of_a = [card.rank for card in a_hand.cards if card.rank == 'A']
-        if len(list_of_a) > 0:
+        if len(list_of_a) > 0 and value < 21:
             if a_hand.value < 18:
                 return "HIT"
             else:
