@@ -24,8 +24,17 @@ class Deck:
         self.deck = [Card(rank, suit) for suit in self.suits
                                       for rank in self.ranks]
 
-    def shuffle_deck(self, deck):
-        random.shuffle(deck)
+    def __len__(self):
+        """Finds number of cards left in deck"""
+        return len(self.deck)
+
+    def shuffle_deck(self):
+        """Shuffles the cards in the deck"""
+        shuffle(self.deck)
+
+    def draw(self):
+        """Take a card from the deck"""
+        return self.deck.pop()
 
     def __repr__(self):
         return [cards for card in self.deck]

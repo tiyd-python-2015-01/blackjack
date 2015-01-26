@@ -28,11 +28,17 @@ class Card:
             value = 10
             return value
 
-    def swap_ace (self):
+    def swap_ace(self):
         if self.value == 11:
             self.value = 1
         else:
             self.value = 11
 
-    def __repr__(self):
+    def __eq__(self, other):
+        return self.rank == other.rank and self.suit == other.suit
+
+    def __str__(self):
         return "{} of {}".format(self.rank, self.suit)
+
+    def __repr__(self):
+        return self.__str__()
