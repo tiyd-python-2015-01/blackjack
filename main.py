@@ -1,7 +1,5 @@
 from game import Game
-from card import Card
 from shoe import Shoe
-from hand import Hand
 from player import Player
 from dealer import Dealer
 
@@ -14,11 +12,11 @@ shoe = Shoe(6)
 game = Game(dealer, player, shoe)
 game_loop = True
 
-game.shoe.shuffle() # Intial shuffle
+game.shoe.shuffle()  # Intial shuffle
 
 while game_loop:
 
-    if len(shoe._cards) < 26: # Shoe gets shuffled when it reaches 26 cards left
+    if len(shoe._cards) < 26:  # Shoe gets shuffled when it reaches 26 cards
         shoe.shuffle()
         print("Shuffling the shoe")
 
@@ -28,7 +26,7 @@ while game_loop:
     print("How much would you like to bet?")
     bet_amount = game.place_bet(input("> "))
 
-    game.dealer.show_hand() # Initial hands are shown
+    game.dealer.show_hand()  # Initial hands are shown
     game.player.show_hand()
 
     # Ask player for insurance when dealer has ace
@@ -50,20 +48,20 @@ while game_loop:
     else:
         player_decision = game.hit_or_stand_with_surrender_and_double()
 
-        while player_decision == 'h': #player hits
+        while player_decision == 'h':  # Player hits
             game.player.hit(game.shoe)
             game.player.show_hand()
             if game.player.hand.best_hand <= 21:
                 player_decision = game.hit_or_stand()
-            else: #player bust
+            else:  # Player busts
                 print("Your hand is over 21, you lose!")
                 break
 
-        if player_decision == 's': #player stands
+        if player_decision == 's':  # Player stands
             game.dealer.play_out_hand(game.shoe)
             game.check_for_winner(game.dealer, game.player)
 
-        elif player_decision == 'd': #player doubles down
+        elif player_decision == 'd':  # Player doubles down
             game.player.hit(game.shoe)
             game.dealer.play_out_hand(game.shoe)
             game.check_for_winner(game.dealer, game.player)
@@ -71,7 +69,7 @@ while game_loop:
         else:
             game.player.stack += round(game.pot / 2)
 
-    if player.stack < 1: #check to see player has money remaining
+    if player.stack < 1:  # Check to see player has money remaining
         print("You are out of money! Game over!")
         break
 

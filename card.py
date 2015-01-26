@@ -1,5 +1,6 @@
 from collections import namedtuple
 
+
 """A playing card.
 
 Responsibilities:
@@ -12,9 +13,10 @@ Collaborators:
 * Collected into a Hand for each player and a Hand for the dealer.
 """
 
+
 class Card(namedtuple('card', ['rank', 'suit'])):
 
-    __memory__ = () #assure instance is stored as a tuple in memory
+    __memory__ = ()  # assure instance is stored as a tuple in memory
 
     def __str__(self):
         return "{}{}".format(self.rank, self.suit)

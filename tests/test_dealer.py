@@ -2,11 +2,11 @@ from dealer import Dealer
 from shoe import Shoe
 from hand import Hand
 from card import Card
-from shoe import Shoe, Clubs, Diamonds, Hearts, Spades
+from shoe import Diamonds, Spades
+
 
 def test_can_hold_hand():
     hand1 = Hand([Card(2, Diamonds), Card('A', Spades)])
-    hand2 = Hand([])
     dealer1 = Dealer(hand1)
     assert dealer1.hand.hand == hand1.hand
 

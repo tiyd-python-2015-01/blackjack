@@ -1,7 +1,8 @@
 from player import Player
 from hand import Hand
 from card import Card
-from shoe import Shoe, Clubs, Diamonds, Hearts, Spades
+from shoe import Shoe, Diamonds, Spades
+
 
 def test_can_hold_hand():
     hand1 = Hand([Card(2, Diamonds), Card('A', Spades)])

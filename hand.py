@@ -18,7 +18,6 @@ class Hand:
     def __init__(self, hand):
         self.hand = hand
 
-
     @property
     def hard_total(self):
         hard_total = 0
@@ -31,7 +30,6 @@ class Hand:
             else:
                 hard_total += card.rank
         return hard_total
-
 
     @property
     def soft_total(self):
@@ -53,30 +51,23 @@ class Hand:
         else:
             return int(self.hard_total)
 
-
-
     def bust(self):
         return self.soft_total > 21
-
 
     def draw(self, deck):
         card = deck.draw()
         self.hand.append(card)
 
-
     def new_hand(self, deck):
         self.draw(deck)
         self.draw(deck)
 
-
     def reset_hand(self):
         self.hand = []
-
 
     def __str__(self):
         hand_list = [str(card) for card in self.hand]
         return str(', '.join(hand_list))
-
 
     def __repr__(self):
         return self.__str__()

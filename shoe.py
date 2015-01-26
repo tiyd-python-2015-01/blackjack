@@ -24,16 +24,12 @@ class Shoe(Deck):
     """
     def __init__(self, number_of_decks):
         self.number_of_decks = number_of_decks
-        self._cards = [Card(rank, suit)
-                      for rank in RANKS
-                      for suit in SUITS
-                      for _ in range(number_of_decks)]
-
+        self._cards = [Card(rank, suit) for rank in RANKS for suit in SUITS
+                       for _ in range(number_of_decks)]
 
     def draw(self):
         """Take a card off the top of the deck and return it"""
         return self._cards.pop()
-
 
     def shuffle(self):
         """Shuffles cards in the deck"""
