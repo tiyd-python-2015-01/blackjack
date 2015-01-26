@@ -1,6 +1,6 @@
-from player import Player
-from hand import Hand
-from deck import Deck
+from blackjack.player import Player
+from blackjack.hand import Hand
+from blackjack.deck import Deck
 
 def test_player_loses_money():
     gordon = Player()

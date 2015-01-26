@@ -1,5 +1,5 @@
-from card import Card
-from deck import Deck
+from blackjack.card import Card
+from blackjack.deck import Deck
 
 
 class Hand:

@@ -1,5 +1,5 @@
-from deck import Deck
-from card import Card
+from blackjack.deck import Deck
+from blackjack.card import Card
 
 
 def test_deck_init():
@@ -19,5 +19,3 @@ def test_deck_draw():
     a_deck = Deck()
     a_deck.draw()
     assert len(a_deck) == 51
-
-    

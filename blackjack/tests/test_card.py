@@ -1,4 +1,4 @@
-from card import Card
+from blackjack.card import Card
 
 first_card = Card("Diamonds", "4")
 second_card = Card("Diamonds", "4")
@@ -17,6 +17,3 @@ def test_card_comparison():
 
 def test_rank_comparison():
     assert first_card.same_rank(second_card)
-
-
-    

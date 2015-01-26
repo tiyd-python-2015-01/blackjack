@@ -1,6 +1,6 @@
-from hand import Hand
-from card import Card
-from deck import Deck
+from blackjack.hand import Hand
+from blackjack.card import Card
+from blackjack.deck import Deck
 
 spade_of_eights = Card("Spades", "8")
 heart_of_eights = Card("Hearts", "8")

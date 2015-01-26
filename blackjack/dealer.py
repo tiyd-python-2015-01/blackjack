@@ -1,4 +1,4 @@
-from hand import Hand
+from blackjack.hand import Hand
 
 class Dealer:
     """The dealer is one of the two agents in the game, and plays
