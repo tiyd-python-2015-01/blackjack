@@ -85,10 +85,15 @@ class Interface:
         """ Shows current cash. """
         print("You currently have ${}".format(player.cash), "\n")
 
-    def hit_or_stand(self):
-        """ Asks user if they want another card. """
+    def hit_or_stand(self, double_ok = False):
+        """ Asks user if they want another card.
+        Use the double_ok optional variable to allow that as input"""
         print("Another Card?")
-        return self.yes_or_no()
+        hit = self.yes_or_no(double_ok)
+        if str(hit) == "double":
+            return "double"
+        else:
+            return hit
 
     def dealer_hits(self, dealer, player):
         """ Dealer hits.  Show current cards. """
@@ -184,11 +189,14 @@ class Interface:
             else:
                 return self.get_shoe_input(try_count+1)
 
-    def yes_or_no(self):
+    def yes_or_no(self, double_ok = False):
         """ Validates input for a case insensitive 'yes','y','no', or 'n'
         Recursively calls itself upon bad input. """
         print("[Y]es")
-        print("[N]o\n")
+        print("[N]o")
+        if double_ok:
+            print("[D]ouble")
+        print("")
         answer = input(">>").lower()
         if answer == "y" or answer == "yes":
             return True
@@ -196,5 +204,7 @@ class Interface:
             return False
         elif answer == "quit":
             return "quit"
+        elif (answer == "d" or answer == "double") and double_ok:
+            return "double"
         else:
             return self.yes_or_no()

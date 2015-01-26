@@ -67,12 +67,20 @@ class Game:
             self.interface.display_hands(self.user, self.dealer)
             self.user.is_blackjack()
             self.dealer.is_blackjack()
+            """ Double_down_ok boolean makes sure you can only double down
+            on your first hit. """
+            double_down_ok = True
             while (not self.user.is_blackjack()
-                    and not self.user.busted()):
-                hit = self.player_hit_or_stand()
+                    and not self.user.busted() and double_down_ok):
+                hit = self.player_hit_or_stand(double_down_ok)
+                double_down_ok = False
                 if str(hit) == "quit":
                     self.interface.farewell(self.user)
                     return False
+                elif str(hit) == "double" and (bet*2) <= self.user.cash:
+                    bet = bet * 2
+                    self.user.get_card(self.shoe.give_card())
+                    self.interface.display_hands(self.user, self.dealer)
                 elif hit:
                     self.user.get_card(self.shoe.give_card())
                     self.interface.display_hands(self.user, self.dealer)
@@ -142,9 +150,9 @@ class Game:
         """ Show user and dealer's hands.  Dealer hides one card. """
         self.interface.display_hands(self.user, self.dealer)
 
-    def player_hit_or_stand(self):
+    def player_hit_or_stand(self,double_ok = False):
         """ Prompts player to hit or stand. """
-        return self.interface.hit_or_stand()
+        return self.interface.hit_or_stand(double_ok)
 
     def dealer_hit_or_stand(self):
         """ Prints dealer's decision to hit or stand. """
