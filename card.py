@@ -5,6 +5,7 @@ card_numbers = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Ace",
 
 
 class Card:
+    """The basic card, stores only a rank (number) and a suit"""
 
     def __init__(self, number, suit):
 

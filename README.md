@@ -24,3 +24,7 @@ The rest of the program will be implemeted in a game loop.
 
 
 * [Part 2](README_2.md)
+
+How to run the game:
+  1. In terminal make the current directory the blackjack folder.
+  2. Type python game_loop.py.

@@ -1,22 +1,20 @@
 
 
 class Pot():
-
-    def __init__(self,purse):
-        self.purse= purse
+    """Makes bets, holds total money and adds and subtracts from total."""
+    
+    def __init__(self, purse):
+        self.purse = purse
         self.bet = 0
 
-
-    def make_bet(self,bet_amount):
+    def make_bet(self, bet_amount):
         """Takes ten credits from player at beggining of game for the bet."""
         self.bet = bet_amount
-        #self.purse -= self.bet
-
 
     def return_bet(self):
-        """returns double the bet"""
+        """Adds the bet amount to the purse the bet"""
         self.purse += self.bet
 
     def subtract_bet(self):
-        """returns double the bet"""
+        """Subtracts the bet from the purse"""
         self.purse -= self.bet

@@ -3,7 +3,7 @@ from deck import Deck
 from player import Player
 from player import Dealer
 from pot import Pot
-
+from shoe import Shoe
 
 
 def get_bet():
@@ -15,6 +15,7 @@ def get_bet():
 
 
 def bet_logic(pot):
+
     """Makes sure bets aren't too large or small"""
     while True:
         pot.make_bet(get_bet())
@@ -29,7 +30,9 @@ def bet_logic(pot):
         else:
             break
 
+
 def player_choice(player):
+
     """Takes player input on whether they would like to  hit or stay, and calls
     hit function if they hit"""
 
@@ -39,7 +42,7 @@ def player_choice(player):
         return player_choice(player)
 
     if move == "H":
-        player.hit()
+        player.hit(new_deck)
         print("You now have: \n")
         player.view_cards()
 
@@ -48,11 +51,13 @@ def player_choice(player):
     else:
         player.view_cards()
 
+
 def win_game(pot):
     """Gives player their bet back and prints a win statement"""
     print("You Win!")
     pot.return_bet()
     print("Your pot is now {}".format(pot.purse))
+
 
 def lose_game(pot):
     """Prints a lose statement, and players pot."""
@@ -60,10 +65,11 @@ def lose_game(pot):
     pot.subtract_bet()
     print("Your pot is now {}".format(pot.purse))
 
-def game_logic(dealer,player,pot):
+
+def game_logic(dealer, player, pot, deck):
     """Compares values of player and dealer, and determines winner"""
     if dealer.get_value() < 17:
-        dealer.hit()
+        dealer.hit(deck)
         print("The dealer hits")
 
     print("Dealer has {}".format(dealer.get_value()))
@@ -80,13 +86,21 @@ def game_logic(dealer,player,pot):
     elif abs(player.get_value()-21) > abs(dealer.get_value()-21):
         lose_game(pot)
 
-
     else:
         print("Tie!")
 
 
+def deck_type():
 
-
+    while True:
+        d_type = input("Would you like to play with a"
+                       "[S]hoe or a [D]eck").upper()
+        if d_type not in "SD":
+            continue
+        elif d_type == "D":
+            return "D"
+        elif d_type == "S":
+            return "S"
 
 
 if __name__ == '__main__':
@@ -94,10 +108,14 @@ if __name__ == '__main__':
     counter = 1
     pot = Pot(100)
 
+    if deck_type() == "D":
+        new_deck = Deck()
+    else:
+        new_deck = Shoe()
+
     print("Welcome to Blackjack! \n")
     while True:
 
-        new_deck = Deck()
         player = Player(new_deck)
         dealer = Dealer(new_deck)
         bet_logic(pot)
@@ -112,13 +130,17 @@ if __name__ == '__main__':
 
         player_choice(player)
 
-        game_logic(dealer,player,pot)
+        game_logic(dealer, player, pot, new_deck)
 
         counter += 1
 
+        if len(new_deck) <= 26:
+            new_deck.refill()
+
         if pot.purse <= 0:
             print("You're out of money. Game over.")
-            play_again = input("Would you like to play again? [Y]es, or [N]o").upper()
+            play_again = input("Would you like to play again?",
+                               "[Y]es, or [N]o").upper()
 
             if play_again == "Y":
                 counter = 0
