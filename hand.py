@@ -19,6 +19,7 @@ class Hand:
                        "7" : 7, "8" : 8, "9": 9, "10" : 10, "J" : 10, "Q" : 10,
                        "K" : 10, "A" : 1}
 
+
     def __str__(self):
         return "Hand contains {}".format(self.hand)
 
@@ -31,6 +32,7 @@ class Hand:
         """Adds a card from the shoe to the hand"""
         self.hand.append(card)
         return self.hand
+
 
     def get_card_value(self, card):
         for card in self.hand:

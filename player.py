@@ -9,9 +9,8 @@ from dealer import Dealer
 
 class Player():
 
-    def __init__(self, name):
+    def __init__(self):
 
-        self.name = name
         self.bank = 100
         self.player_hand = Hand()
 
@@ -40,6 +39,7 @@ class Player():
             game_over = "Game over"
             return game_over
 
+
     def player_turn():
         while True:
             player_hand_value = player.player_hand.get_hand_value()
@@ -66,4 +66,4 @@ class Player():
 
             else:
                 print("You have 21. Checking dealer score...")
-                return False        
+                return False
