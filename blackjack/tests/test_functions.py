@@ -27,18 +27,11 @@ blackjack_hand.add(Card("Ace", "Clubs"))
 
 
 def test_check_bust():
-    assert check_bust(over_hand)
-    assert check_bust(under_hand) == False
-    assert check_bust(blackjack_hand) == False
+    assert check_bust(over_hand) is True
+    assert check_bust(under_hand) is False
+    assert check_bust(blackjack_hand) is False
 
 
 def test_blackjack_check():
-    assert blkjck_chk(over_hand) == False
-    assert blkjck_chk(blackjack_hand)
-
-
-def test_hit():
-    hit(player_one, deck_one)
-    assert(len(player_one.hand)) == 1
-    hit(dealer_one, deck_one)
-    assert(len(dealer_one.hand)) == 1
+    assert blkjck_chk(over_hand) is False
+    assert blkjck_chk(blackjack_hand) is True

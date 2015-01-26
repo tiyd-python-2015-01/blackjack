@@ -1,8 +1,8 @@
-from deck import Shoe
-from player import Player
-from dealer import Dealer
-from functions import*
-from interface import*
+from blackjack.deck import Shoe
+from blackjack.player import Player
+from blackjack.dealer import Dealer
+from blackjack.functions import*
+from blackjack.interface import*
 
 
 class Game:
@@ -18,6 +18,7 @@ class Game:
         the game."""
         self.player = Player()
         self.dealer = Dealer()
+        self.side_bet = 0
         start_game()
 
     def game_setup(self):
@@ -25,10 +26,46 @@ class Game:
         dealing a card to the player a card to the dealer, and then another
         card to the player, and finally a facedown card to the dealer."""
         self.deck = Shoe(6)
-        self.player.take_card(self.deck)
-        self.dealer.take_card(self.deck)
-        self.player.take_card(self.deck)
-        self.dealer.put_face_down(self.deck)
+        initial_draw(self.player, self.dealer, self.deck)
+        self.pot = ask_for_bet(self.player.money)
+        self.player.make_bet(self.pot)
+        show_table(self.player, self.dealer, self.pot)
+        while True:
+            self.surrender_option = early_surrender()
+            if self.surrender_option:
+                break
+            if is_ace(self.dealer.hand):
+                if bet_insurance_choice():
+                    self.side_bet = insurance_bet(self.pot)
+                    self.player.make_bet(self.side_bet)
+            break
+
+    def check_for_blackjack(self):
+        """A phase of the game where the game checks if the dealer or player
+        has Blackjack, and to deal with insurance."""
+        if (self.dealer.hand.value + self.dealer.face_down.value) == 21:
+            if self.player.hand.value == 21:
+                won_insurance_bet(self.side_bet * 2)
+                self.player.get_money(self.side_bet)
+                self.dealer.reveal()
+                push(self.dealer.hand.value, self.player.hand.value)
+                self.player.get_money(self.pot)
+                return True
+
+            else:
+                won_insurance_bet(self.side_bet * 2)
+                self.player.money += (self.side_bet * 2)
+                self.dealer.reveal()
+                dealer_blackjack_win(self.dealer.hand, self.player.hand,
+                                     self.pot)
+                return True
+
+        if self.player.hand.value == 21:
+            lost_insurance_bet(self.side_bet)
+            player_win_text(self.pot * (2.5))
+            self.player.get_pot(self.pot * (2.5))
+            return True
+        return False
 
     def player_turn(self):
         """Goes through the player's turn. First asks the player to make
@@ -36,17 +73,7 @@ class Game:
         player is then asked to stand or hit. If he hits he is given a card,
         if he stands his turn stops. If he busts while hitting his turn ends
         and automatically loses."""
-        self.pot = ask_for_bet(self.player.money)
-        self.player.make_bet(self.pot)
-        show_table(self.player, self.dealer, self.pot)
-        self.surrender_option = early_surrender()
-        if is_ace(self.dealer.hand):
-            if bet_insurance_choice():
-                self.side_bet = insurance_bet(self.pot)
-                self.player.make_bet(self.side_bet)
         while self.player.hand.value < 22:
-            if self.surrender_option:
-                break
             choice = player_choice()
             if choice == "S":
                 break
@@ -74,28 +101,12 @@ class Game:
     def who_won(self):
         """Goes through the logic to see who won. If the player loses it will
         explain the amount """
-        if blkjck_chk(self.player.hand) and blkjck_chk(self.dealer.hand):
-            push(self.dealer.hand.value, self.player.hand.value)
-            self.player.get_money(self.pot)
-            if self.side_bet > 0:
-                self.player.get_money(self.side_bet * (2))
-
-        elif blkjck_chk(self.dealer.hand):
-            dealer_win(self.dealer.hand.value, self.player.hand.value,
-                       self.pot)
-            if self.side_bet > 0:
-                self.player.get_money(self.side_bet* (2))
-
-        elif blkjck_chk(self.player.hand):
-            player_win_text(self.pot * (2))
-            self.player.get_pot(self.pot * (2))
-
-        elif self.dealer.hand.value > 21:
+        if self.dealer.hand.value > 21:
             dealer_busts(self.pot)
             self.player.get_money(self.pot * (2))
 
         elif self.dealer.hand.value > self.player.hand.value:
-            dealer_win(self.dealer.hand.value, self.player.hand.value,
+            dealer_win(self.dealer.hand, self.player.hand,
                        self.pot)
 
         elif self.dealer.hand.value == self.player.hand.value:
@@ -105,11 +116,9 @@ class Game:
         else:
             player_win_text(self.pot * (2))
             self.player.get_money(self.pot * (2))
-        check_for_insurance(self.side_bet, self.dealer.hand,
-                            self.player.money)
 
     def reset_table(self):
-        """Clears the hands of the player and dealer, and pot and sid bet."""
+        """Clears the hands of the player and dealer, and pot and side bet."""
         self.player.hand.clear_hand()
         self.dealer.hand.clear_hand()
         self.side_bet = 0
@@ -121,11 +130,13 @@ class Game:
         while True:
             while True:
                 self.game_setup()
-                self.player_turn()
                 if self.surrender_option:
                     early_surrender_text((self.pot / 2))
                     self.player.get_money((self.pot / 2))
                     break
+                if self.check_for_blackjack():
+                    break
+                self.player_turn()
                 if self.player.hand.value > 21:
                     bust_lose_text(self.pot)
                     break
@@ -135,7 +146,8 @@ class Game:
             if self.player.money > 0:
                 if not play_again():
                     break
-            else:
+            elif self.player.money == 0:
+                no_more_money()
                 break
             self.reset_table()
 Game()

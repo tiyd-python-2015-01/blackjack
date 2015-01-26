@@ -22,5 +22,5 @@ def test_player_making_bet():
 def test_player_winning():
     new_player = Player()
     pot = 20
-    new_player.get_pot(pot)
+    new_player.get_money(pot)
     assert new_player.money == 120

@@ -1,5 +1,4 @@
-from card import Card
-from interface import*
+from blackjack.interface import*
 
 
 def checker_for_letters(prompt):
@@ -24,12 +23,21 @@ def check_bust(hand):
     return hand.value > 21
 
 
+def initial_draw(player, dealer, deck):
+    """Draws the initial cards for a game."""
+    player.take_card(deck)
+    dealer.take_card(deck)
+    player.take_card(deck)
+    dealer.put_face_down(deck)
+
+
 def blkjck_chk(hand):
     """Returns True if the hand was blackjack."""
     if hand.value == 21 and len(hand) == 2:
-         return True
+        return True
     else:
         return False
+
 
 def check_for_insurance(side_bet, dealer_hand, player_money):
     """This checks to see if the player betted for insurance. and that the
@@ -41,15 +49,7 @@ def check_for_insurance(side_bet, dealer_hand, player_money):
     elif side_bet > 0 and not blkjck_chk(dealer_hand):
         lost_insurance_bet(side_bet)
 
+
 def is_ace(dealer_hand):
+    """Just checks to see if the dealers face up card is an ace."""
     return dealer_hand.value == 11
-
-
-def hit(player_or_dealer, deck):
-    player_or_dealer.take_card(deck)
-
-# def decider(choice, player, deck):
-#     if choice = "H":
-#         return hit(player, deck)
-#     if choice = "S":
-#         return stand = True

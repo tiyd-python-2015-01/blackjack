@@ -1,4 +1,4 @@
-from hand import Hand
+from blackjack.hand import Hand
 
 
 class Dealer:
@@ -16,7 +16,8 @@ class Dealer:
         self.face_down = Hand()
 
     def reveal(self):
-        """When it becomes the dealers turn he will reveal the facedown card."""
+        """When it becomes the dealers turn he will reveal the facedown
+        card."""
         face_down_card = self.face_down.remove()
         self.hand.add(face_down_card)
 

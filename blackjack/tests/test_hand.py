@@ -22,7 +22,6 @@ fourth_hand.add(Card("Ace", "Diamonds"))
 def test_hand_class():
     hand = Hand()
     card = Card("8", "Spades")
-    other_card = Card("8", "Spades")
     hand.add(card)
     assert len(hand) == 1
 

@@ -5,7 +5,9 @@ ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen",
 
 
 class Card:
-    """Responsibilities:
+
+    """
+    Responsibilities:
     Contain a suit and rank.
 
     Rank - This will be 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King or an
@@ -22,7 +24,7 @@ class Card:
         self.rank = rank
 
     def __eq__(self, other):
-            return self.rank == other.rank and self.suit == other.suit
+        return self.rank == other.rank and self.suit == other.suit
 
     def __str__(self):
         return "{} of {}".format(self.rank, self.suit)

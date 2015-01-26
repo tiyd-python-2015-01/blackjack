@@ -1,4 +1,6 @@
-import card
+from blackjack.card import Card
+from blackjack.card import rank
+from backjack.card import suit
 import random
 
 
@@ -13,9 +15,9 @@ class Deck:
     Player, Dealer, Shoe, and Cards."""
 
     def __init__(self):
-        self.cards = [card.Card(rank, suit)
-                      for rank in card.ranks
-                      for suit in card.suits]
+        self.cards = [Card(rank, suit)
+                      for rank in ranks
+                      for suit in suits]
 
     def __str__(self):
         return str(self.cards)

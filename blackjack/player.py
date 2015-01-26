@@ -1,7 +1,8 @@
-from hand import Hand
+from blackjack.hand import Hand
 
 
 class Player:
+
     """
     Responsibilities:
     Has a hand and can accept cards into that hand.
@@ -10,12 +11,13 @@ class Player:
     Collaborates with:
     Deck.
     """
+
     def __init__(self, money=100):
         self.hand = Hand()
         self.money = money
 
     def __str__(self):
-        return "Your hand consists of {}.".format(self.hand)
+        return "Your hand consists of {}".format(self.hand)
 
     def __repr__(self):
         return self.__str__()
