@@ -312,7 +312,6 @@ class Interface:
                 and len(self.game.player.hands) == 1
                 and self.game.player.money >= self.game.player.hands[0].bet):
                     self.offer_insurance()
-                    return True
 
         if self.check_for_dealer_blackjack():
             print("Dealer has blackjack!\n")
