@@ -104,8 +104,8 @@ def dealer_blackjack_win(dealer_hand, player_hand, pot):
 def dealer_win(dealer_hand, player_hand, pot):
     """Text for if the dealer wins."""
     border_print()
-    print("""The dealers hand value of {}, was higher than the value of
-          your hand {}. You lose ${}.""".format(dealer_hand.value,
+    print("The dealers hand value of {}, was higher than the value of"
+          "your hand {}. You lose ${}.".format(dealer_hand.value,
                                                 player_hand.value,
                                                 pot))
 
@@ -113,8 +113,8 @@ def dealer_win(dealer_hand, player_hand, pot):
 def push(dealer_hand_value, player_hand_value):
     """Printed text for if there is a push."""
     border_print()
-    print("""Your hand value {}, tied with the dealers hand value {}.
-          You lose nothing.""".format(dealer_hand_value, player_hand_value))
+    print("Your hand value {}, tied with the dealers hand value {}."
+         "You lose nothing.".format(dealer_hand_value, player_hand_value))
 
 
 def dealer_busts(pot):

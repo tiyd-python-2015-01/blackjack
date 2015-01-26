@@ -42,3 +42,15 @@ class Hand:
     def clear_hand(self):
         """A way to get rid of cards inbetween games."""
         self.cards = []
+
+    def check_bust(self):
+        """A way of seeing if a hand has busted."""
+        return self.value > 21
+
+    def blackjack(self):
+        """A way of seeing if a hand has blackjack."""
+        return len(self.cards) == 2 and self.value == 21
+
+    def is_ace(self):
+        """A way of seeing if a hand has an Ace."""
+        return len(self.cards) == 1 and self.value == 11
