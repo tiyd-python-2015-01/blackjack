@@ -1,5 +1,6 @@
 from player import Player
 from dealer import Dealer
+import sys
 
 class Interface:
     """The prompts for displaying of input & output
@@ -24,7 +25,7 @@ class Interface:
         if start == "Y":
             return True
         elif start == "N":
-            return False#or exit()?
+            return sys.exit()
         else:
             return self.welcome_message()
 
@@ -32,12 +33,14 @@ class Interface:
     def you_win(self, player):
         print("*"*25)
         print("\nYOU WIN!")
-        print("Your new $$$ total is: ${}".format(player.bank))
+        print("Your new $$$ total is: ${}\n".format(player.bank))
         print("*"*25, "\n")
 
     def you_lose(self, player):
+        print("*"*25)
         print("Bummer, you lost")
-        print("Your new $$$ total is: ${}".format(player.bank))
+        print("Your new $$$ total is: ${}\n".format(player.bank))
+        print("*"*25)
 
     def you_push(self, player):
         print("Game is a push")
@@ -58,13 +61,13 @@ class Interface:
         print("Hand Value: {}".format(player.hand_value()))
 
     def show_dealer_upcard(self, dealer):
-        print("\nDealers up card is: {}".format(dealer.hand[1:]))
+        print("Dealers up card is: {}\n".format(dealer.hand[1:]))
 
     def show_dealer_hand(self, dealer):
         print("\nDealer's hand is: {}".format(dealer.hand))
 
     def show_dealer_total(self, dealer):
-        print("Dealer Value: {}".format(dealer.hand_value()))
+        print("Dealer Value: {}\n".format(dealer.hand_value()))
 
     def show_current(self, player, dealer):
         self.show_player_hand(player)
@@ -93,10 +96,6 @@ class Interface:
         if start == "Y":
             return True
         elif start == "N":
-            return False#or exit()?
+            return sys.exit()
         else:
-            return self.new_hand(self, player)
-
-
-#interface = Interface()
-#interface.you_push()
+            return self.new_hand(player)
