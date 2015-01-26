@@ -1,8 +1,9 @@
 from blackjack.card import Card
-from blackjack.card import rank
-from backjack.card import suit
 import random
 
+suits = ["Clubs", "Diamonds", "Hearts", "Spades"]
+ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen",
+         "King", "Ace"]
 
 class Deck:
 

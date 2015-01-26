@@ -18,6 +18,7 @@ class Game:
         the game."""
         self.player = Player()
         self.dealer = Dealer()
+        self.pot = 0
         self.side_bet = 0
         start_game()
 
@@ -63,7 +64,7 @@ class Game:
         if self.player.hand.value == 21:
             lost_insurance_bet(self.side_bet)
             player_win_text(self.pot * (2.5))
-            self.player.get_pot(self.pot * (2.5))
+            self.player.get_money(self.pot * (2.5))
             return True
         return False
 
@@ -150,4 +151,3 @@ class Game:
                 no_more_money()
                 break
             self.reset_table()
-Game()
