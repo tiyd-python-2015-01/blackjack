@@ -2,6 +2,18 @@ Jason Aylward
 Homework 6 - Blackjack Game
 
 
+To run:
+
+At the terminal:
+>> python blackjack
+
+The game will ask you if you would like to quit at the end of every round.
+If you would like to end the game sooner, simply enter 'quit'
+
+
+
+
+
 The Blackjack Game is divided into quite a number of classes. Most perform
 fairly unique operations but a few share enough similarity that I am not sure
 if they will make it to the final stage.
