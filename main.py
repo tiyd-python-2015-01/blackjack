@@ -43,7 +43,7 @@ if __name__ == "__main__":
                 game.player.stack += game.pot
             else:
                 print("Blackjack! you win!")
-                game.player.stack += game.pot * 3
+                game.player.stack += game.pot * 2.5
 
         else:
             player_decision = game.hit_or_stand_with_surrender_and_double()
