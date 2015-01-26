@@ -61,9 +61,7 @@ class Game:
             print("Dealer busted! You win!")
             self.player.stack += self.pot * 2
         else:
-            if self.dealer_has_blackjack():
-                print("Dealer has blackjack!")
-            elif self.player.hand.best_hand < self.dealer.hand.best_hand or self.player.hand.bust():
+            if self.player.hand.best_hand < self.dealer.hand.best_hand or self.player.hand.bust():
                 print("You Lose")
             elif self.dealer.hand.best_hand < self.player.hand.best_hand:
                 print("You Win!")
@@ -97,7 +95,6 @@ class Game:
     def insurance(self, amount, bet):
         try:
             amount = int(amount)
-            bet = int(bet)
             if amount != 0:
                 if amount > (bet / 2):
                     print("Insurance may not be more than half the bet")
