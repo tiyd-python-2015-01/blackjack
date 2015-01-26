@@ -31,44 +31,51 @@ while game_loop:
     game.dealer.show_hand() #initial hands are shown
     game.player.show_hand()
 
-    hit = game.hit_or_stand_with_surrender_and_double()
+    if game.dealer.hand.hand[1].rank == 'A':
+        print("insurance wager?(type 0 for none): ")
+        insurance = game.insurance(input("> "), bet_amount)
+        while insurance == "more than half":
+            insurance = game.insurance(input("> "), bet_amount)
 
-    while hit == 'h' and not game.player.hand.bust(): #player hits
-        game.player.hit(game.shoe)
-        game.player.show_hand()
-        if game.player.hand.best_hand < 21:
-            hit = game.hit_or_stand()
+    if dealer.hand.best_hand != 21:
+        hit = game.hit_or_stand_with_surrender_and_double()
 
-    if hit == 'd': #player doubles down
-        game.player.bet(bet_amount)
-        game.player.hit(game.shoe)
+        while hit == 'h': #player hits
+            game.player.hit(game.shoe)
+            game.player.show_hand()
+            if game.player.hand.best_hand < 21:
+                hit = game.hit_or_stand()
 
-    if hit == 'u': #player surrenders
-        game.player.stack += round(game.pot / 2)
+        if hit == 'd': #player doubles down
+            game.player.bet(bet_amount)
+            game.player.hit(game.shoe)
 
-    #the hand is played out
-    if player.hand.best_hand <= 21 and dealer.hand.best_hand != 21 and not hit == 'u':
-        game.dealer.play_out_hand(game.shoe)
+        if hit == 'u': #player surrenders
+            game.player.stack += round(game.pot / 2)
+
+        #the hand is played out
+        if not hit == 'u' and game.player.bust:
+            game.dealer.play_out_hand(game.shoe)
+            game.dealer.reveal_hand()
+            game.player.show_hand()
+            if game.dealer.hand.best_hand > 21:
+                print("Dealer busts!, you win!")
+                game.player.stack += game.pot * 2
+            else:
+                game.check_for_winner(game.dealer, game.player)
+
+
+    else: #dealer has 21
         game.dealer.reveal_hand()
-        game.player.show_hand()
-        if game.dealer.hand.best_hand > 21:
-            print("Dealer busts!, you win!")
-            game.player.stack += game.pot * 2
-        else:
-            game.check_for_winner(game.dealer, game.player)
-
-    #game
-    elif not hit == 'u':
-        game.dealer.reveal_hand()
-        if dealer.hand.best_hand == 21:
+        if player.hand.best_hand == 21 and dealer.hand.best_hand == 21:
+            print("push!")
+            game.player.stack += game.pot
+        elif dealer.hand.best_hand == 21: #dealer blackjack
             print("Dealer has blackjack! You lose!")
-        else:
+        else: #player busts
             print("Your hand is over 21, you lose!!")
 
-    else:
-        print("You wimp! You get half of your bet back")
-
-    if player.stack < 1:
+    if player.stack < 1: #check to see player has money remaining
         print("You are out of money! Game over!")
         break
 

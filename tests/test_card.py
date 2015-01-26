@@ -1,5 +1,5 @@
 from card import Card
-from deck import Clubs, Diamonds, Hearts, Spades
+from shoe import Clubs, Diamonds, Hearts, Spades
 
 
 def test_create_card():

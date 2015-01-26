@@ -48,12 +48,12 @@ class Game:
 
 
     def check_for_winner(self, dealer, player):
-        if self.player.hand.best_hand < self.dealer.hand.best_hand:
+        if self.player.hand.best_hand < self.dealer.hand.best_hand or self.player.hand.bust():
             print("You Lose")
         elif self.dealer.hand.best_hand < self.player.hand.best_hand:
             print("You Win!")
             self.player.stack += self.pot * 2
-        elif self.dealer.hand.best_hand == self.player.hand.best_hand:
+        else:
             print("Push!")
             self.player.stack += self.pot
 
@@ -67,13 +67,30 @@ class Game:
 
     def place_bet(self, amount):
         try:
-            int(amount)
-            if int(amount) <= self.player.stack:
-                self.player.stack -= int(amount)
-                self.pot += int(amount)
+            amount = int(amount)
+            if amount <= self.player.stack:
+                self.player.stack -= amount
+                self.pot += amount
                 return amount
             else:
                 self.place_bet(input("Not enough funds! You have {} dollars. "
                                      "Place a bet: ".format(self.player.stack)))
         except ValueError:
             self.place_bet(input("Place a bet: "))
+
+
+    def insurance(self, amount, bet):
+        try:
+            amount = int(amount)
+            bet = int(bet)
+            if amount != 0:
+                if amount > (bet / 2):
+                    print("Insurance may not be more than half the bet")
+                    return "more than half"
+                self.player.stack -= amount
+                if self.dealer.hand.hard_total == 21:
+                    print("dealer has blackjack")
+                    self.player.stack += (amount * 3)
+                return amount
+        except ValueError:
+            return "more than half"

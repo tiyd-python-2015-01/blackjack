@@ -56,10 +56,7 @@ class Hand:
 
 
     def bust(self):
-        if self.soft_total > 21:
-            return True
-        else:
-            return False
+        return self.soft_total > 21
 
 
     def draw(self, deck):
