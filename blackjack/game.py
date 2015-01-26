@@ -122,3 +122,6 @@ class Game:
                 self.clear_hands()
                 self.check_bank(self.player)
                 break
+
+if __name__ == "__main__":
+    main_game()
