@@ -10,15 +10,17 @@ import sys
 def run_game_func():
     game_flow(game_setup())
 
+
 def game_setup():
     player = User()
+    player.chip_count = 500
     game_help()
     print("You have {} chips.\n".format(player.chip_count))
-
-
     return player
 
+
 def game_flow(player):
+    gm = GameManager()
     fresh_deck = Deck()
     fresh_deck.shuffle_deck()
 
@@ -42,6 +44,9 @@ def game_flow(player):
 
         if user_next_stage == 'bust':
             print("You lost\n", ("="*40))
+            if player.chip_count == 0:
+                print("You are out of chips! Goodbye.")
+                sys.exit()
             game_flow(player)
 
         elif user_next_stage == '21':
@@ -62,19 +67,14 @@ def game_flow(player):
                 dealer_cards.cards.extend(dealer_next_card.cards)
 
                 print("You've elected to stay. The dealer flipped their"
-                      " second card and it was a {}. The dealer now has"
-                      ":\n{}".format(dealer_next_card, dealer_cards))
-                gm = GameManager()
+                      " second card and it was a {}.".format(dealer_next_card))
+
                 response = gm.dealer_flipping(dealer_cards,
                                               fresh_deck,
                                               player,
                                               new_cards)
                 if response == 'gameflow':
                     game_flow(player)
-
-
-
-# Account for a push occurring
 
 
 def game_help():
@@ -86,10 +86,11 @@ def game_help():
           Type 'help' to access this help menu again.
           Type 'chips' to see how many chips you have remaining.\n""")
 
+
 def user_pregame_steps(user_input, player):
     if user_input == 'help':
         game_help()
-        player.user_pregame_input()
+        user_pregame_steps(player.user_pregame_input(), player)
         return 'game_help()'
 
     elif user_input == 'quit':
@@ -98,12 +99,12 @@ def user_pregame_steps(user_input, player):
 
     elif user_input == 'chips':
         print(player.chip_count)
-        player.user_pregame_input()
+        user_pregame_steps(player.user_pregame_input(), player)
         return 'chips'
 
     elif type(user_input) == int:
-        print(("="*40) , "\nYou've bet {} chips "
-               "on this hand.".format(user_input))
+        print(("="*40), "\nYou've bet {} chips "
+              "on this hand.".format(user_input))
         player.bet_chips(user_input)
         return user_input
 
@@ -111,6 +112,7 @@ def user_pregame_steps(user_input, player):
         print("That is not a valid entry.")
         player.user_pregame_input()
         return 'player.user_pregame_input()'
+
 
 def user_in_game_steps(user_input, player):
     if user_input == 'help':

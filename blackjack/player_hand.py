@@ -17,7 +17,7 @@ class PlayerHand:
         *Recieves card from deck
         *Gives actionable choices to player"""
 
-    def __init__(self, cards, count = 0):
+    def __init__(self, cards, count=0):
         self.cards = cards
         self.count = count
 

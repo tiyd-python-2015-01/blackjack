@@ -1,6 +1,6 @@
 from blackjack.dealer_hand import DealerHand
 from blackjack.player_hand import PlayerHand
-
+import sys
 
 
 class GameManager:
@@ -18,21 +18,22 @@ class GameManager:
     * Initiate next game to User
     """
 
-
     def dealer_flipping(self, dealer_cards, card_deck, player, player_hand):
 
         while True:
             dealer_cards.dealer_card_count(dealer_cards.cards)
             dealer_next_steps = dealer_cards.dealer_actions()
+            print('The dealer now has', dealer_cards)
 
             if dealer_next_steps == 'stay':
                 if dealer_cards.card_count > player_hand.count:
-                    #Change above 20 value to player count
                     print("You lost\n", ("="*40))
+                    if player.chip_count == 0:
+                        print("You are out of chips! Goodbye.")
+                        sys.exit()
                     return 'gameflow'
 
                 elif dealer_cards.card_count == player_hand.count:
-                    #change above 17 value to player count
                     print("You tied the dealer. Your bet "
                           "will be refunded.")
                     player.chip_count += player.bet

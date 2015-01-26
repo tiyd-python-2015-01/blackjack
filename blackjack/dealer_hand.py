@@ -1,5 +1,6 @@
 from blackjack.card import Card
 
+
 class DealerHand:
     """Current card count.
 
@@ -16,7 +17,7 @@ class DealerHand:
     * Receives Card from Deck
     * Sends results to Game_manager class"""
 
-    def __init__(self, cards, card_count = 0):
+    def __init__(self, cards, card_count=0):
         self.cards = cards
         self.card_count = card_count
 
