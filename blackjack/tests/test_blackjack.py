@@ -57,25 +57,29 @@ def test_player_additional_cards_hit():
 
 
 def test_player_options():
-    new_cards = PlayerHand([])
-    assert new_cards.player_actions(25) == 'bust'
-    assert new_cards.player_actions(21) == '21'
-    assert new_cards.player_actions(20) == ('hit', 'stay')
+    bust_cards = PlayerHand([],count=25)
+    win_cards = PlayerHand([],count=21)
+    choice_cards = PlayerHand([],count=18)
 
+    assert bust_cards.player_actions() == 'bust'
+    assert win_cards.player_actions() == '21'
+    assert choice_cards.player_actions() == 'choice'
 
 def test_dealer_options():
-    new_cards = DealerHand([])
-    assert new_cards.dealer_actions(25) == 'bust'
-    assert new_cards.dealer_actions(21) == '21'
-    assert new_cards.dealer_actions(17) == 'stay'
-    assert new_cards.dealer_actions(5) == 'hit'
+    bust_cards = DealerHand([], 25)
+    win_cards = DealerHand([], 17)
+    choice_cards = DealerHand([], 16)
+
+    assert bust_cards.dealer_actions() == 'bust'
+    assert win_cards.dealer_actions() == 'stay'
+    assert choice_cards.dealer_actions() == 'hit'
 
 
 def test_user_pot_generation():
-    user_chips = User()
+    user_chips = User(chip_count=500)
     assert user_chips.chip_count == 500
 
 
 def test_user_bet_removes_money():
-    user_chips = User()
+    user_chips = User(bet=20, chip_count=500)
     assert user_chips.bet_chips(20) == 480
