@@ -47,15 +47,30 @@ class Game:
             return self.hit_or_stand()
 
 
+    def dealer_has_blackjack(self):
+        return self.dealer.hand.hard_total == 21
+
+    def player_has_blackjack(self):
+        return self.player.hand.hard_total == 21
+
+
     def check_for_winner(self, dealer, player):
-        if self.player.hand.best_hand < self.dealer.hand.best_hand or self.player.hand.bust():
-            print("You Lose")
-        elif self.dealer.hand.best_hand < self.player.hand.best_hand:
-            print("You Win!")
+        self.dealer.reveal_hand()
+        self.player.show_hand()
+        if self.dealer.hand.bust():
+            print("Dealer busted! You win!")
             self.player.stack += self.pot * 2
         else:
-            print("Push!")
-            self.player.stack += self.pot
+            if self.dealer_has_blackjack():
+                print("Dealer has blackjack!")
+            elif self.player.hand.best_hand < self.dealer.hand.best_hand or self.player.hand.bust():
+                print("You Lose")
+            elif self.dealer.hand.best_hand < self.player.hand.best_hand:
+                print("You Win!")
+                self.player.stack += self.pot * 2
+            else:
+                print("Push!")
+                self.player.stack += self.pot
 
     def new_turn(self):
         self.dealer.hand.reset_hand()
