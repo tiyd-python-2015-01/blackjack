@@ -22,7 +22,7 @@ class Player:
     def __repr__(self):
         return self.__str__()
 
-    def make_bet(self, amount):
+    def pay_out(self, amount):
         """Subtracts the amount a player bets."""
         self.money -= amount
 
@@ -36,3 +36,7 @@ class Player:
         card = deck.deal_card()
         self.hand.add(card)
         return self.hand
+
+    def double_down(self, pot, deck):
+        self.take_card(deck)
+        pot += pot

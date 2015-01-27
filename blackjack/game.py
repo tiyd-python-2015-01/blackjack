@@ -35,7 +35,6 @@ class Game:
         if self.dealer.hand.is_ace():
             if bet_insurance_choice():
                 self.side_bet = insurance_bet(self.pot)
-                self.player.make_bet(self.side_bet)
 
     def game_setup(self):
         """Sets the board for each game by creating a new shoe, and then
@@ -44,29 +43,27 @@ class Game:
         self.deck = Shoe(6)
         self.initial_draw()
         self.pot = ask_for_bet(self.player.money)
-        self.player.make_bet(self.pot)
         show_table(self.player, self.dealer, self.pot)
         self.surrender_and_insurance()
 
     def blackjack_push(self):
         won_insurance_bet(self.side_bet * 2)
-        self.player.get_money(self.side_bet)
+        self.player.get_money(self.side_bet * 2)
         self.dealer.reveal()
         push(self.dealer.hand.value, self.player.hand.value)
-        self.player.get_money(self.pot)
         return True
 
     def blackjack_dealer_win(self):
         won_insurance_bet(self.side_bet * 2)
-        self.player.money += (self.side_bet * 2)
+        self.player.get_money(self.side_bet * 2)
         self.dealer.reveal()
         dealer_blackjack_win(self.dealer.hand, self.player.hand, self.pot)
         return True
 
     def blackjack_player_win(self):
         lost_insurance_bet(self.side_bet)
-        player_win_text(self.pot * (2.5))
-        self.player.get_money(self.pot * (2.5))
+        player_win_jackblack(self.pot * (3 / 2))
+        self.player.get_money(self.pot * (3 / 2))
         return True
 
     def check_for_blackjack(self):
@@ -77,13 +74,14 @@ class Game:
                 return self.blackjack_push()
             else:
                 return self.blackjack_dealer_win()
+
         if self.player.hand.blackjack():
             return self.blackjack_player_win()
+        lost_insurance_bet(self.side_bet)
         return False
 
     def double_down(self):
         self.player.take_card(self.deck)
-        self.player.make_bet(self.pot)
         self.pot += self.pot
 
     def player_turn(self):
@@ -97,7 +95,7 @@ class Game:
             if choice == "S":
                 break
             elif choice == "D":
-                self.double_down()
+                self.player.double_down(self.pot, self.deck)
                 break
             else:
                 self.player.take_card(self.deck)
@@ -108,7 +106,6 @@ class Game:
         card and then the checks to see if the dealer has blackjack. Checks to
         see if the value of the hand is less than 17, if so the dealer draws
         a card."""
-        print("DOES THIS WORK")
         self.dealer.reveal()
         show_table_later(self.player, self.dealer, self.pot)
         while self.dealer.hand.value < 17:
@@ -120,15 +117,15 @@ class Game:
         tell them how much money they lost. """
         if self.dealer.hand.value > 21:
             dealer_busts(self.pot)
-            self.player.get_money(self.pot * (2))
+            self.player.get_money(self.pot)
         elif self.dealer.hand.value > self.player.hand.value:
             dealer_win(self.dealer.hand, self.player.hand, self.pot)
+            self.player.pay_out(self.pot)
         elif self.dealer.hand.value == self.player.hand.value:
             push(self.dealer.hand.value, self.player.hand.value)
-            self.player.get_money(self.pot)
         else:
-            player_win_text(self.pot * (2))
-            self.player.get_money(self.pot * (2))
+            player_win_text(self.pot)
+            self.player.get_money(self.pot)
 
     def reset_table(self):
         """Clears the hands of the player and dealer, and pot and side bet."""
@@ -142,13 +139,14 @@ class Game:
             self.game_setup()
             if self.surrender_option:
                 early_surrender_text((self.pot / 2))
-                self.player.get_money((self.pot / 2))
+                self.player.pay_out((self.pot / 2))
                 break
             if self.check_for_blackjack():
                 break
             self.player_turn()
             if self.player.hand.value > 21:
                 bust_lose_text(self.pot)
+                self.player.pay_out(self.pot)
                 break
             self.dealer_turn()
             self.who_won()

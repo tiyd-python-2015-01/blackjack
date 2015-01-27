@@ -25,7 +25,7 @@ def start_game():
 def early_surrender_text(pot):
     """Losing because of early surrender text."""
     border_print()
-    print("You chose to surrender early, you lost ${}".format((pot / 2)))
+    print("You chose to surrender early, you lost ${}".format((pot)))
 
 
 def ask_for_bet(players_money):
@@ -84,13 +84,13 @@ def bust_lose_text(pot):
 def player_win_text(pot):
     """Text for if the player wins."""
     border_print()
-    print("You win!!! You win, ${}".format(pot * (1/2)))
+    print("You win!!! You win, ${}".format(pot))
 
 
 def player_win_jackblack(pot):
     """Text for if the player wins with blackjack."""
     border_print()
-    print("You got Blackjack!!! You win, ${}".format(pot * (1/2)))
+    print("You got Blackjack!!! You win, ${}".format(pot))
 
 
 def dealer_blackjack_win(dealer_hand, player_hand, pot):
@@ -104,23 +104,23 @@ def dealer_blackjack_win(dealer_hand, player_hand, pot):
 def dealer_win(dealer_hand, player_hand, pot):
     """Text for if the dealer wins."""
     border_print()
-    print("The dealers hand value of {}, was higher than the value of"
-          "your hand {}. You lose ${}.".format(dealer_hand.value,
-                                               player_hand.value,
-                                               pot))
+    print("The dealers hand value of {}, was higher than the value of "
+          "your hand, {}. You lose ${}.".format(dealer_hand.value,
+                                                player_hand.value,
+                                                pot))
 
 
 def push(dealer_hand_value, player_hand_value):
     """Printed text for if there is a push."""
     border_print()
     print("Your hand value {}, tied with the dealers hand value {}."
-          "You lose nothing.".format(dealer_hand_value, player_hand_value))
+          " You lose nothing.".format(dealer_hand_value, player_hand_value))
 
 
 def dealer_busts(pot):
     """Printed text for if the dealer goes bust."""
     border_print()
-    print("The Dealer has bust, you win ${}!".format(pot * (1/2)))
+    print("The Dealer has bust, you win ${}!".format(pot))
 
 
 def insurance_bet(pot):
@@ -137,16 +137,16 @@ def insurance_bet(pot):
 
 def won_insurance_bet(side_bet):
     """Text if player wins insurance side bet."""
-    border_print()
     if side_bet > 0:
+        border_print()
         print("The dealer had blackjack, you won the insurance bet.")
         print("You win ${}.".format(side_bet))
 
 
 def lost_insurance_bet(side_bet):
     """Text if player loses insurance side bet."""
-    border_print()
     if side_bet > 0:
+        border_print()
         print("The dealer did not have blackjack, you lose the insurance bet.")
         print("You lose ${}".format(side_bet))
 
