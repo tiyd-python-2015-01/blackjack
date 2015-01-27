@@ -38,5 +38,6 @@ class Player:
         return self.hand
 
     def double_down(self, pot, deck):
+        """Lets player double down during their turn."""
         self.take_card(deck)
         pot += pot

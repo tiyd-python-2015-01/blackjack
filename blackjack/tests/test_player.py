@@ -13,9 +13,9 @@ def test_player_class():
 
 def test_player_making_bet():
     new_player = Player()
-    new_player.make_bet(10)
+    new_player.pay_out(10)
     assert new_player.money == 90
-    new_player.make_bet(80)
+    new_player.pay_out(80)
     assert new_player.money == 10
 
 
