@@ -36,52 +36,37 @@ def game_flow(player):
 
     print("Let's deal the hand now.\n")
 
-    # Initial deal to player
-    new_cards = PlayerHand([fresh_deck.deal_card(), fresh_deck.deal_card()])
-    new_cards.player_card_count(new_cards.cards)
-    print('Player has {} --A total of {}'.format(new_cards, new_cards.count))
+    player_cards = PlayerHand([fresh_deck.deal_card(), fresh_deck.deal_card()])
+    player_cards.player_card_count(player_cards.cards)
+    print('Player has {} --A total of {}'.format(player_cards,
+                                                 player_cards.count))
 
-    # Initial dealing to dealer (1 card for now only)
     dealer_cards = DealerHand([fresh_deck.deal_card()])
     print('Dealer has {} and an unknown card\n'.format(dealer_cards))
 
     while True:
-        new_cards.player_card_count(new_cards.cards)
-        user_next_stage = new_cards.player_actions()
+        print(player_cards)
+        player_cards.player_card_count(player_cards.cards)
+        user_next_stage = player_cards.player_actions()
 
-        if user_next_stage == 'bust':
+        if user_next_stage == 'help':
+            game_help()
+        elif user_next_stage == 'quit':
+            sys.exit()
+        elif user_next_stage == 'chips':
+            print(player.chip_count)
+        elif user_next_stage == 'bust':
             print(gm.busted(player), '\n', ("="*40))
             game_flow(player)
-
         elif user_next_stage == '21':
-            print(gm.twenty_one(player))
+            print(gm.twenty_one(player), ' You got 21!')
             game_flow(player)
-
         elif user_next_stage == 'choice':
-            user_action = user_in_game_steps(player.user_in_game_input(),
-                                             player)
-            if user_action == 'hit':
-                next_card = PlayerHand(fresh_deck.deal_card())
-                new_cards.cards.append(next_card.cards)
-                print('\nYou now have - ', new_cards.cards)
-
-            elif user_action == 'double':
-                player.chip_count - player.bet
-                player.bet * 2
-
-            elif user_action == 'stay':
-                dealer_next_card = DealerHand([fresh_deck.deal_card()])
-                dealer_cards.cards.extend(dealer_next_card.cards)
-
-                print("You've elected to stay. The dealer flipped their"
-                      " second card and it was a {}.".format(dealer_next_card))
-
-                response = gm.dealer_flipping(dealer_cards,
-                                              fresh_deck,
-                                              player,
-                                              new_cards)
-                if response == 'gameflow':
-                    game_flow(player)
+            user_action = player.user_in_game_input()
+            result = gm.player_options(player, user_action, fresh_deck,
+                                       player_cards, dealer_cards)
+            if result == 'gameflow':
+                game_flow(player)
 
 
 def game_help():
@@ -126,34 +111,6 @@ def user_pregame_steps(user_input, player):
         print("That is not a valid entry.")
         player.user_pregame_input()
         return 'player.user_pregame_input()'
-
-
-def user_in_game_steps(user_input, player):
-    """Function's use is to determine next steps based on the
-    user_in_game_input function that is laid out in the users class.
-    user_input = result of aforementioned function
-    player = the specified player. Referring to the user class"""
-
-    if user_input == 'help':
-        game_help()
-        player.user_in_game_input()
-        return 'game_help()'
-
-    elif user_input == 'quit':
-        sys.exit()
-        return 'sys.exit()'
-
-    elif user_input == 'chips':
-        print(player.chip_count)
-        player.user_in_game_input()
-        return 'chips'
-
-    elif user_input == 'hit':
-        return 'hit'
-    elif user_input == 'stay':
-        return 'stay'
-    elif user_input == 'double':
-        return 'double'
 
 
 if __name__ == '__main__':

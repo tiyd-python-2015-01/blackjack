@@ -27,6 +27,7 @@ class GameManager:
         player_hand = the user's hand"""
 
         while True:
+            self.hit_hand(dealer_cards, card_deck)
             dealer_cards.dealer_card_count(dealer_cards.cards)
             dealer_next_steps = dealer_cards.dealer_actions()
             print('The dealer now has', dealer_cards)
@@ -53,11 +54,7 @@ class GameManager:
                 player.chip_count += (2 * player.bet)
                 return 'gameflow'
             else:
-                dealer_next_card = DealerHand([card_deck.deal_card()])
-                dealer_cards.cards.extend(dealer_next_card.cards)
-                print("The dealer must hit and got "
-                      "a {}.".format(dealer_next_card))
-
+                print("The dealer must hit.")
 
     def busted(self, player):
         if player.chip_count == 0:
@@ -68,3 +65,27 @@ class GameManager:
     def twenty_one(self, player):
         player.chip_count += (2 * player.bet)
         return 'You won!'
+
+    def hit_hand(self, persons_hand, deck):
+        persons_hand.cards.extend([deck.deal_card()])
+        return persons_hand
+
+    def player_options(self, player, user_action, fresh_deck, player_hand,
+                       dealer_cards):
+
+        if user_action == 'double':
+            player.bet_chips(player.bet)
+            player.bet = player.bet * 2
+            print('You have ', self.hit_hand(player_hand, fresh_deck))
+            print('Dealer has ', self.hit_hand(dealer_cards, fresh_deck))
+            self.dealer_flipping(dealer_cards, fresh_deck, player, player_hand)
+            return 'over'
+
+        elif user_action == 'hit':
+            self.hit_hand(player_hand, fresh_deck)
+            return 'hit'
+
+        elif user_action == 'stay':
+            over = self.dealer_flipping(dealer_cards, fresh_deck,
+                                        player, player_hand)
+            return over
