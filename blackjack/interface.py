@@ -142,7 +142,7 @@ class Interface:
         self.dealers_turn = False
         self.continue_hand = True
 
-        if len(self.game.deck.cards) < 30:
+        if len(self.game.deck) < 30:
             self.game.reshuffle()
 
     def offer_actions(self):
