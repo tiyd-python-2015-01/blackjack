@@ -221,10 +221,8 @@ class Interface:
                             choice(icons))).upper()
                 if save_choice == "Y":
                     self.game.player.save_player_state(self.game.options)
-                    break
-                else:
-                    break
-
+                break
+                
     def play_hand(self):
         """Hand loop.  Continues until the end of the hand.  Prints updates
         about the status of the hand to the screen and makes method calls
