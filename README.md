@@ -9,6 +9,9 @@ Python Development - Cohort 3
        ? - Unsure if should be included in class
        \ - Planned But Low Priority
 ]
+
+Run Instructions:  Run from the main blackjack directory using the command "python -m blackjack"
+
 Blackjack Project
 
 The goal of this project is to complete a fully functional console based

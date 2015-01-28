@@ -26,6 +26,9 @@ class Player:
         self.doubled = False
         self.player_hash = None
 
+    def get_player_hands(self):
+        return self.hands
+
     def buys_insurance(self):
         """Modifys the player's money if they choose to buy insurance when
         offered"""

@@ -22,22 +22,22 @@ class Interface:
 
     def check_for_dealer_blackjack(self):
         """Checks the dealer's hand for blackjack"""
-        return self.game.dealer.hand.get_value() == 21
+        return self.game.dealer_hand.get_value() == 21
 
     def check_for_player_blackjack(self):
         """Checks to see if the player has blackjack"""
-        if (self.game.player.hands[0].get_value() == 21
-                and len(self.game.player.hands[0].cards) == 2
-                and len(self.game.player.hands) == 1):
+        if (self.game.player_hands[0].get_value() == 21
+                and len(self.game.player_hands[0].cards) == 2
+                and len(self.game.player_hands) == 1):
             print("BLACKJACK!\n")
             if self.check_for_dealer_blackjack():
                 print("Dealer has BLACKJACK.  Push...\n")
-                self.game.payout(self.game.player.hands[0],
-                                 self.game.dealer.hand)
+                self.game.payout(self.game.player_hands[0],
+                                 self.game.dealer_hand)
                 return True
             else:
                 print("Blackjack pays 3:2!\n")
-                self.game.payout_blackjack(self.game.player.hands[0])
+                self.game.payout_blackjack(self.game.player_hands[0])
                 return True
         else:
             return False
@@ -51,11 +51,11 @@ class Interface:
             print("Dealer hits, and recieves {}.\n".format(str(new_card)))
             self.game.dealer.takes_hit(new_card)
 
-        if self.game.check_bust(self.game.dealer.hand):
+        if self.game.check_bust(self.game.dealer_hand):
             print("Dealer busts!\n")
-            for hand in self.game.player.hands:
-                if hand.get_value() <= 21:
-                    self.game.payout(hand, self.game.dealer.hand)
+            for hand in self.game.player_hands:
+                if not self.game.check_bust(hand):
+                    self.game.payout(hand, self.game.dealer_hand)
             return False
         else:
             return True
@@ -63,39 +63,49 @@ class Interface:
     def evaluate_hands(self):
         """Evaluates the final hands of the player and dealer and makes
         the appropriate calls the the playout method of the Game class"""
-        if len(self.game.player.hands) > 1:
+        if len(self.game.player_hands) > 1:
             self.evaluate_split_hands()
-        elif self.game.check_push(self.game.player.hands[0],
-                                  self.game.dealer.hand):
-            self.game.payout(self.game.player.hands[0],
-                             self.game.dealer.hand)
+        elif self.game.check_push(self.game.player_hands[0],
+                                  self.game.dealer_hand):
+            self.game.payout(self.game.player_hands[0],
+                             self.game.dealer_hand)
             print("Push.\n")
             self.print_dealer_hand()
         else:
-            if self.game.compare_hands(self.game.player.hands[0],
-                                       self.game.dealer.hand):
-                print("You win!\n")
-                self.game.payout(self.game.player.hands[0],
-                                 self.game.dealer.hand)
-                self.print_dealer_hand()
-            else:
-                print("Dealer wins.\n")
-                self.print_dealer_hand()
+            self.win_lose()
+
+    def win_lose(self):
+        """Prints win lose message determined by player and dealer hands"""
+        if self.game.compare_hands(self.game.player_hands[0],
+                                   self.game.dealer_hand):
+            print("You win!\n")
+            self.game.payout(self.game.player_hands[0],
+                             self.game.dealer_hand)
+            self.print_dealer_hand()
+        else:
+            print("Dealer wins.\n")
+            self.print_dealer_hand()
+
+    def split_hand_win_lose(self, hand):
+        """Win_lose method that iterates through all active player hands and
+        displays appropriate message for each hand.  Takes an enumerated
+        hand as argument"""
+        if self.game.compare_hands(hand[1], self.game.dealer_hand):
+            print("Hand {} wins!".format(hand[0]+1))
+            self.game.payout(hand[1], self.game.dealer_hand)
+        else:
+            print("Hand {} loses!".format(hand[0]+1))
 
     def evaluate_split_hands(self):
         """Method for evaluating multiple hands after a split."""
-        for hand in enumerate(self.game.player.hands):
+        for hand in enumerate(self.game.player_hands):
             if self.game.check_bust(hand[1]):
                 print("Hand {} busted.".format(hand[0]+1))
-            elif self.game.check_push(hand[1], self.game.dealer.hand):
+            elif self.game.check_push(hand[1], self.game.dealer_hand):
                 print("Push on hand {}.".format(hand[0]+1))
-                self.game.payout(hand[1], self.game.dealer.hand)
+                self.game.payout(hand[1], self.game.dealer_hand)
             else:
-                if self.game.compare_hands(hand[1], self.game.dealer.hand):
-                    print("Hand {} wins!".format(hand[0]+1))
-                    self.game.payout(hand[1], self.game.dealer.hand)
-                else:
-                    print("Hand {} loses!".format(hand[0]+1))
+                self.split_hand_win_lose(hand)
         self.print_dealer_hand()
 
     def execute_selection(self, selection, actions):
@@ -103,20 +113,20 @@ class Interface:
         if selection == "H" and actions["hit"]:
             new_card = self.game.deck.deal()
             print("\nReceived {}\n".format(new_card))
-            self.game.player.takes_hit(self.game.player.hands[
+            self.game.player.takes_hit(self.game.player_hands[
                                        self.current_hand],
                                        new_card)
         elif selection == "D" and actions["double"]:
             new_card = self.game.deck.deal()
             print("\nReceived {}\n".format(new_card))
-            self.game.player.doubles(self.game.player.hands[self.current_hand],
+            self.game.player.doubles(self.game.player_hands[self.current_hand],
                                      new_card)
         elif selection == "P" and actions["split"]:
             new_cards = [self.game.deck.deal(), self.game.deck.deal()]
-            self.game.player.splits(self.game.player.hands[self.current_hand],
+            self.game.player.splits(self.game.player_hands[self.current_hand],
                                     new_cards)
         elif selection == "R" and actions["surrender"]:
-            self.game.player.surrenders(self.game.player.hands[
+            self.game.player.surrenders(self.game.player_hands[
                                         self.current_hand])
 
     def initialize_hand(self):
@@ -139,7 +149,7 @@ class Interface:
         """Prints available actions to the screen and allows user to input
         their selected action."""
         actions = self.game.get_available_actions(
-            self.game.player.hands[self.current_hand])
+            self.game.player_hands[self.current_hand])
         valid_selection_made = False
         while not valid_selection_made:
             valid_input = ["S"]
@@ -165,20 +175,19 @@ class Interface:
         """Method that allows the user to buy insurace if the dealer's upcard
         is an Ace"""
         print("Dealer has an Ace showing.  Buy insurance?")
-        while True:
+        player_choice = ""
+        while player_choice not in ["Y", "N"]:
             player_choice = input("(Y/N) {} ".format(choice(icons))).upper()
             if player_choice == "Y":
                 self.game.player.buys_insurance()
-                break
-            elif player_choice == "N":
-                break
             else:
                 print("Please enter Y or N.")
 
     def offer_surrender(self):
         """Used on early surrender games.  Gives the player the option to
         surrender before the dealer checks for blackjack."""
-        while True:
+        player_choice = ""
+        while player_choice not in ["Y", "N"]:
             player_choice = input("Surrender? (Y/N) {} ".format(
                 choice(icons))).upper()
             if player_choice == "Y":
@@ -195,15 +204,15 @@ class Interface:
 
         while self.game.player.money >= 5:
             self.play_hand()
-            while True:
+            player_choice = ""
+            while player_choice not in ["Y", "N"]:
                 if self.game.player.money < 5:
                     print("You don't have enough money to play!")
                     input()
                     break
                 player_choice = input("Play another hand? (Y/N) {} ".format(
                                       choice(icons))).upper()
-                if player_choice in ["Y", "N"]:
-                    break
+
             if player_choice == "N" and self.game.player.money > 5:
                 save_choice = ""
                 while save_choice not in ["Y", "N"]:
@@ -248,14 +257,14 @@ class Interface:
         """Allows the player to make game selections and determines if the
         dealer will need to take a turn"""
         dealers_turn = False
-        if self.game.check_bust(self.game.player.hands[self.current_hand]):
-            if len(self.game.player.hands) == 1:
+        if self.game.check_bust(self.game.player_hands[self.current_hand]):
+            if len(self.game.player_hands) == 1:
                 print("You bust!\n")
                 self.continue_hand = False
                 return False
-            elif len(self.game.player.hands) == self.current_hand + 1:
+            elif len(self.game.player_hands) == self.current_hand + 1:
                 print("You bust!\n")
-                for hand in self.game.player.hands:
+                for hand in self.game.player_hands:
                     if hand.get_value() <= 21:
                         dealers_turn = True
                 return dealers_turn
@@ -267,7 +276,7 @@ class Interface:
             self.continue_hand = False
             return False
         elif selection == "S" or selection == "D":
-            if len(self.game.player.hands) > self.current_hand + 1:
+            if len(self.game.player_hands) > self.current_hand + 1:
                 self.current_hand += 1
             else:
                 return True
@@ -275,17 +284,17 @@ class Interface:
     def print_dealer_hand(self):
         """Prints the dealer's hand to the screen"""
         print("Dealer's final hand: {}\n".format(
-            self.game.dealer.hand.get_card_strings()))
+            self.game.dealer_hand.get_card_strings()))
 
     def print_hands(self):
         """Displays the dealer's and player's hands to the screen"""
         print("Dealer's Hand: [{}, [X]]".format(
               self.game.dealer.get_show_card()))
 
-        print("Player's Hand{}: ".format("s" if len(self.game.player.hands) > 1
+        print("Player's Hand{}: ".format("s" if len(self.game.player_hands) > 1
                                          else ""), end="")
         card_string = ""
-        for hand in enumerate(self.game.player.hands):
+        for hand in enumerate(self.game.player_hands):
             card_string += "{}{} ".format("*" if hand[0] == self.current_hand
                                           else "",
                                           hand[1].get_card_strings(), end="")
@@ -302,21 +311,21 @@ class Interface:
             return True
         if self.game.options.early_surrender:
             if self.offer_surrender():
-                self.game.player.surrenders(self.game.player.hands[0])
+                self.game.player.surrenders(self.game.player_hands[0])
                 print("You surrendered.\n")
                 print("Dealer had: {}\n".format(
-                    self.game.dealer.hand.get_card_strings()))
+                    self.game.dealer_hand.get_card_strings()))
                 return True
         elif (self.game.dealer.get_show_card().rank == "A"
-                and len(self.game.player.hands[0].cards) == 2
-                and len(self.game.player.hands) == 1
-                and self.game.player.money >= self.game.player.hands[0].bet):
+                and len(self.game.player_hands[0].cards) == 2
+                and len(self.game.player_hands) == 1
+                and self.game.player.money >= self.game.player_hands[0].bet):
                     self.offer_insurance()
 
         if self.check_for_dealer_blackjack():
             print("Dealer has blackjack!\n")
-            self.game.payout(self.game.player.hands[0],
-                             self.game.dealer.hand)
+            self.game.payout(self.game.player_hands[0],
+                             self.game.dealer_hand)
             return True
 
         return False

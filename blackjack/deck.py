@@ -31,6 +31,9 @@ class Deck:
                       for deck in range(self.decks)]
         shuffle(self.cards)
 
+    def __len__(self):
+        return len(self.cards)
+        
     def deal(self):
         """Pops a single card from the end of the card list and returns
         it to the calling function"""

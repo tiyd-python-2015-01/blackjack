@@ -29,6 +29,10 @@ class Dealer:
             else:
                 return False
 
+    def get_dealer_hand(self):
+        """Returns the dealer's current hand object"""
+        return self.hand
+
     def get_show_card(self):
         """Returns the dealer's show card for display in the game"""
         return self.hand.cards[0]

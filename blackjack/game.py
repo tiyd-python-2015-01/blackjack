@@ -134,3 +134,13 @@ class Game:
     def reshuffle(self):
         """Creates a new deck for use by the game"""
         self.deck = Deck(self.options.number_of_decks)
+
+    @property
+    def dealer_hand(self):
+        """Returns the dealer's hand object."""
+        return self.dealer.get_dealer_hand()
+
+    @property
+    def player_hands(self):
+        """Returns the list of players Hand objects."""
+        return self.player.get_player_hands()
