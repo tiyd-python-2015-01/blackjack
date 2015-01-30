@@ -31,7 +31,6 @@ class Game:
         self.dealer.dump_cards()
         print("You have: {}".format(self.player.show_money()))
 
-
     def play(self):
         continue_game = True
         print("Welcome to Blackjack!")
@@ -54,7 +53,7 @@ class Game:
                         break
             else:
                 blackjack = True
-                print ("You have blackjack!")
+                print("You have blackjack!")
             if self.player.is_bust():
                 print("You bust!")
                 self.player.lose_money()

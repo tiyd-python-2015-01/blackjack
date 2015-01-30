@@ -1,5 +1,6 @@
 from blackjack.hand import Hand
 
+
 class Player:
     """The player posesses a hand (or more, depending on the rules), and makes
     decisions to bet, to draw cards, and to stand, (among other possibilities)
@@ -48,7 +49,7 @@ class Player:
     def is_broke(self):
         """Checks to see if the player still has money. Might change to
            check if the player has enough to bet."""
-        #print("Has {}, so isbroke is {}".format(self.money, self.money <= 0))
+        # print("Has {}, so isbroke is {}".format(self.money, self.money <= 0))
         return self.money <= 0
 
     def is_bust(self):

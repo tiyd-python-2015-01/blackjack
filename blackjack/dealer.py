@@ -1,5 +1,6 @@
 from blackjack.hand import Hand
 
+
 class Dealer:
     """The dealer is one of the two agents in the game, and plays
     deterministically against the player.

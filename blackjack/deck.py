@@ -35,5 +35,5 @@ class Deck:
     def draw(self):
         return self.cards.pop()
 
-    def __str__():
+    def __str__(self):
         return str(self.cards)

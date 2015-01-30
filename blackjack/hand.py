@@ -1,7 +1,3 @@
-from blackjack.card import Card
-from blackjack.deck import Deck
-
-
 class Hand:
     """A hand is a collection of cards held by a player or dealer.
 
