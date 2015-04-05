@@ -46,5 +46,5 @@ class Deck:
 class Shoe(Deck):
 
     def __init__(self, number_of_decks):
-        super().__init__()
+        super.__init__()
         self.cards = self.cards * number_of_decks
