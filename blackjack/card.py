@@ -12,6 +12,7 @@ class Card:
     Cards are initially contained in a deck.
     Cards are also put into hands.
     """
+
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = str(rank)

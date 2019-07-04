@@ -61,8 +61,7 @@ def test_hand_is_splittable():
 
 
 def test_hand_is_bust():
-    busted_hand = Hand(spade_of_eights, heart_of_eights, a_card,
-                       a_second_card)
+    busted_hand = Hand(spade_of_eights, heart_of_eights, a_card, a_second_card)
     assert busted_hand.is_bust()
 
 

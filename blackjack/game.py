@@ -91,6 +91,6 @@ class Game:
                 continue_game = False
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     game = Game()
     game.play()

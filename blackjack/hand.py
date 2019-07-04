@@ -10,6 +10,7 @@ class Hand:
     Hands recieve cards from decks.
     Hands are possesed and played by the player or the dealer.
     """
+
     def __init__(self, *args):
         self.cards = []
         for arg in args:
@@ -35,19 +36,21 @@ class Hand:
     def value(self):
         """Returns the most favorable interpretation of the scoring of a
            hand's cards."""
-        value_dict = {"1": 1,
-                      "2": 2,
-                      "3": 3,
-                      "4": 4,
-                      "5": 5,
-                      "6": 6,
-                      "7": 7,
-                      "8": 8,
-                      "9": 9,
-                      "10": 10,
-                      "Jack": 10,
-                      "Queen": 10,
-                      "King": 10}
+        value_dict = {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "Jack": 10,
+            "Queen": 10,
+            "King": 10,
+        }
 
         hand_value = 0
         ace_list = [card.is_ace() for card in self.cards]

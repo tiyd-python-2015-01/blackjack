@@ -14,6 +14,7 @@ class Dealer:
     The dealer posesses a hand.
     The dealer is one of the two agents in the game.
     """
+
     def __init__(self):
         self.hand = Hand()
 

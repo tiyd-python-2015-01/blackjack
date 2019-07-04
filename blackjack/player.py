@@ -15,6 +15,7 @@ class Player:
     Is one of two agents contained in the game.
     Has at least one hand.
     """
+
     def __init__(self, bet=10):
         self.money = 100
         self.hands = []
@@ -33,7 +34,7 @@ class Player:
     def win_blackjack(self):
         """When called, increases the player's winnings by the special
            blackjack multipier of the bet"""
-        self.money += (self.bet * 1.5)
+        self.money += self.bet * 1.5
 
     def win_money(self):
         """When called, increases the player's winnings by the bet."""

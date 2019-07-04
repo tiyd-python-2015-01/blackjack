@@ -17,10 +17,24 @@ class Deck:
     A deck holds cards.
     A deck sends cards to various hands.
     """
+
     def __init__(self):
         suits = ["Clubs", "Diamonds", "Spades", "Hearts"]
-        ranks = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack",
-                 "Queen", "King"]
+        ranks = [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "Jack",
+            "Queen",
+            "King",
+        ]
         self.cards = [Card(suit, rank) for suit in suits for rank in ranks]
 
     def shuffle(self):
